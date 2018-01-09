@@ -68,8 +68,8 @@ npm install --save-dev gulp-browserify
 gulp.task('browserify', function() {
 	// Single entry point to browserify
 	gulp.src('public/javascripts/index.js')
-		.pipe(browserify())
-		.pipe(gulp.dest('public/dist'))
+	  .pipe(browserify())
+	  .pipe(gulp.dest('public/dist'))
 });
 ```
 ## 扩展：前端优化方向
@@ -112,18 +112,18 @@ define(id?, dependencies?, factory);
 #### 定义模块
 ```
 define("alpha", [ "require", "exports", "beta" ], function( require, exports, beta ){
-    export.verb = function(){
-        return beta.verb();
-        // or:
-        return require("beta").verb();
-    }
+	export.verb = function(){
+		// return beta.verb();
+		// or:
+		return require("beta").verb();
+	}
 });
 ```
 
 #### 加载模块
 ```
 require(['math'], function(math) {
-　math.add(2, 3);
+	math.add(2, 3);
 });
 ```
 
@@ -134,23 +134,23 @@ CMD推崇依赖就近，AMD推崇依赖前置。
 ```
 //AMD
 define(['./a','./b'], function (a, b) {
-    //依赖一开始就写好
-    a.test();
-    b.test();
+	//依赖一开始就写好
+	a.test();
+	b.test();
 });
 ```
 ```
 //CMD
 define(function (requie, exports, module) {
-    //依赖可以就近书写
-    var a = require('./a');
-    a.test();
-    ...
-    //软依赖
-    if (status) {
-        var b = requie('./b');
-        b.test();
-    }
+	//依赖可以就近书写
+	var a = require('./a');
+	a.test();
+	...
+	//软依赖
+	if (status) {
+    var b = requie('./b');
+    b.test();
+  }
 });
 ```
 ## UMD
@@ -162,18 +162,15 @@ UMD先判断是否支持Node.js的模块（exports）是否存在，存在则使
 在判断是否支持AMD（define是否存在），存在则使用AMD方式加载模块。  
 ```
 (function (window, factory) {
-if (typeof exports === 'object') {
-
-        module.exports = factory();
-} else if (typeof define === 'function' && define.amd) {
-
-        define(factory);
-} else {
-
-        window.eventUtil = factory();
-    }
+	if (typeof exports === 'object') {
+		module.exports = factory();
+	} else if (typeof define === 'function' && define.amd) {
+		define(factory);
+	} else {
+		window.eventUtil = factory();
+	}
 })(this, function () {
-    //module ...
+  //module ...
 });
 ```
 
