@@ -128,7 +128,7 @@ plugins: [
 ],
 ```
 ### except断言语言链
-[Chai.js断言库API中文文档](http://www.jianshu.com/p/f200a75a15d2)  
+[Chai.js断言库API中文文档](http://chaijs.com/api/)  
 单纯作为语言链提供以期提高断言的可读性，它们一般不提供测试功能。  
 1. to
 * be
@@ -233,8 +233,9 @@ exports.config = {
 ```
 beforeEach(module('CCPApp')); //载入模块
 ```
+
 ## 测试service
-自定义的service引入：使用（_）包含服务名称，如 _commonServices_。  
+自定义的service引入：使用（_）包含服务名称，如commonServices
 内置service引入：直接使用，也可以使用（_）包含服务名称。  
 ```
 beforeEach(inject(function(_commonServices_,_$filter_,$injector) {
