@@ -37,23 +37,32 @@ c. 抛出 "not found"
 * --require, -r  
 >通过模块名或文件路径指定需要打包到bundle中的其他模块打包到bundle中后可以被其他文件调用  
 注意事项：打包路径必须和你require(‘./../../service/calculate’)中的路径名称一致  
+
 * --entry, -e  
 >入口文件  
+
 * --ignore, -i  
 >打包过程中忽略依赖的某个文件，当成空模块打包，引用它不会报错，多个文件需要依次忽略  
+
 * --exclude, -u  
 >打包过程中排除依赖的某个文件，比忽略选项更严格，引用它会报错  
+
 * --external, -x  
 >指定某个文件不要打包到bundle，它可能会打包在其他的bundle中，比如jquery会打包到公共的bundle中  
+
 * --transform, -t  
 >指定打包过程中使用的转换模块  
 如browserify -t coffeeify main.coffee > bundle.js  
+
 * --command, -c  
 >指定打包过程中使用的命令行转换  
+
 * --standalone -s  
 >生成UMD模式的bundle模块，可以在AMD、CMD中使用  
+
 * --debug -d  
 >生成source maps，并被注释到bundle.js的尾部  
+
 * --help, -h  
 >显示帮助  
 
