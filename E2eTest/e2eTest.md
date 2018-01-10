@@ -24,12 +24,12 @@
 ## karma单元测试
 ### 安装
 ```
-$ npm install -g karma-cli		--全局安装karma
-$ npm install karma --save-dev		--安装karma
-$ npm install karma-jasmine karma-chrome-launcher karma-phantomjs-launcher --save-dev				--安装插件(科学上网或者使用淘宝镜像)
-$ npm install jasmine-core --save-dev	--安装jasmine
-$ karma init				--初始化karma
-$ karma start karma.conf.js		--启动karma
+shell> npm install -g karma-cli		--全局安装karma
+shell> npm install karma --save-dev		--安装karma
+shell> npm install karma-jasmine karma-chrome-launcher karma-phantomjs-launcher --save-dev				--安装插件(科学上网或者使用淘宝镜像)
+shell> npm install jasmine-core --save-dev	--安装jasmine
+shell> karma init				--初始化karma
+shell> karma start karma.conf.js		--启动karma
 ```
 
 ### 配置启动文件
@@ -115,9 +115,9 @@ module.exports = function(config) {
 ## mocha单元测试
 安装
 ```
-$ npm install -g mocha			--全局安装mocha(摩卡)
-$ npm install –g chai			--全局安装chai(断言库)
-$ npm install –g karma-mocha karma-chai 	--安装karma插件
+shell> npm install -g mocha			--全局安装mocha(摩卡)
+shell> npm install –g chai			--全局安装chai(断言库)
+shell> npm install –g karma-mocha karma-chai 	--安装karma插件
 ```
 配置karma，添加以下内容
 ```
@@ -193,9 +193,9 @@ expect(null).to.be.null
 ## E2E测试(protractor)
 安装和启动protractor
 ```
-$ npm install -g protractor	--全局安装protractor
-$ webdriver-manager update	--更新webdriver(科学上网或者使用淘宝镜像)
-$ webdriver-manager start		--启动webdriver
+shell> npm install -g protractor	--全局安装protractor
+shell> webdriver-manager update	--更新webdriver(科学上网或者使用淘宝镜像)
+shell> webdriver-manager start		--启动webdriver
 ```
 配置启动文件
 e2e_tests\protractor.conf.js

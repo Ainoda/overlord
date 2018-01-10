@@ -3,7 +3,7 @@ Browserify 可以让你使用类似于 node 的 require() 的方式来组织浏�
 
 ## 安装
 ```
-npm install -g browserify  
+shell> npm install -g browserify  
 ```
 ### CommonJS 格式
 ![Commonjs](commonJS.png)
@@ -67,9 +67,9 @@ c. 抛出 "not found"
 >显示帮助  
 
 ## gulp中的browserify
-```
 安装gulp-browserify
-npm install --save-dev gulp-browserify
+```
+shell> npm install --save-dev gulp-browserify
 ```
 [gulp-browserify](https://github.com/deepak1556/gulp-browserify)  
 ```
