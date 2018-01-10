@@ -20,9 +20,9 @@ shell> sudo service jenkins stop
 1. 解锁jenkins  
 管理员密码位置(/var/lib/jenkins/secrets/initialAdminPassword)
 >如果没有/var/lib/jenkins/secrets目录的权限执行  
-    ```
-    shell> sudo chmod 755 /var/lib/jenkins/secrets
-    ```
+```
+shell> sudo chmod 755 /var/lib/jenkins/secrets
+```
 
 * 安装插件  
 默认安装了社区推荐插件
