@@ -29,7 +29,7 @@ shell> npm install -g jasmine
 shell> npm install --save-dev jasmine
 ```
 
-### 初始化Jasmine
+## 初始化Jasmine
 ```
 shell> jasmine init     //全局安装
 ##shell> ./node_modules/.bin/jasmine init //项目安装
@@ -58,7 +58,7 @@ shell> jasmine init     //全局安装
 一旦你初始化成功，你可以从项目的根目录运行jasmine来启动Jasmine。
 将spec文件的相对路径传递给jasmine命令，执行单个测试文件。
 
-### CLI options
+## CLI options
 JASMINE_CONFIG_PATH=  
 >指定配置文件的相对路径或绝对路径。 可以用作选项或设置为环境变量。
 
@@ -97,7 +97,7 @@ shell> jasmine --random=true
 shell> jasmine --seed=4321
 ```
 
-### Using the library
+## Using the library
 如果你想对jasmine配置进行更精细的控制，Jasmine也可以当作库引用在你的项目中。  
 这么做将允许你加载多个配置文件或以不同的方式控制你的配置。
 ```
@@ -117,7 +117,7 @@ jasmine.loadConfig({
 });
 ```
 
-### 自定义onComplete
+## 自定义onComplete
 可以指定一个自定义的onComplete回调(所有的specs都通过时返回true)。
 ```
 jasmine.onComplete(function(passed) {
@@ -129,7 +129,7 @@ jasmine.onComplete(function(passed) {
 });
 ```
 
-### Reporters
+## Reporters
 ConsoleReporter是默认的Reporters，也可以添加一个自定义的Reporters。
 ```
 jasmine.configureDefaultReporter({
@@ -335,7 +335,7 @@ it("The 'toThrowError' matcher is for testing a specific thrown exception", func
   expect(foo).toThrowError(TypeError, "foo bar baz");
 });
 ```
-### spies
+## spies
 jasmine可以跟踪任何方法的调用，包括他调用时传入的参数
 1. toHaveBeenCalled
 * toHaveBeenCalledWith
@@ -387,7 +387,7 @@ spyOn(foo, 'setBar').and.returnValue(987);
 
 所有的调用都存放在 calls 属性中。
 
-### 测试 setTimeout 或者 setInterval
+## 测试 setTimeout 或者 setInterval
 使用方法参考代码
 ```
 beforeEach(function() {
@@ -419,14 +419,14 @@ it("causes an interval to be called synchronously", function() {
   expect(timerCallback.calls.count()).toEqual(2);
 });
 ```
-### jasmine异步代码支持
+## jasmine异步代码支持
 Jasmine还支持异步代码的测试。传递给beforeAll，afterAll，beforeEach，afterEach，it的函数可以是异步的。
 有三种不同的方式来表示一个函数是异步的：
 1. 通过获取一个可选的回调参数
 * 通过返回一个promise
 * 在支持它的环境中使用async关键字
 
-#### callback
+### callback
 beforeAll，afterAll，beforeEach，afterEach，it可以有一个可选的参数，这个参数可以在异步代码完成后调用。
 ```
 describe("Asynchronous specs", function() {
@@ -447,7 +447,7 @@ describe("Asynchronous specs", function() {
 ```
 done.fail 这个方法可以表示测试用例没有通过。
 
-#### promise
+### promise
 beforeAll，afterAll，beforeEach，afterEach，it可以返回一个promise。
 ```
 describe("Using promises", function() {
@@ -470,5 +470,5 @@ describe("Using promises", function() {
 });
 ```
 
-#### async/await
+### async/await
 beforeAll，afterAll，beforeEach，afterEach，it可以使用await/async来表明异步，但是await/async需要环境(ES7)来支撑。
