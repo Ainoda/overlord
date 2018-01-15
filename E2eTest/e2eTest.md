@@ -185,7 +185,18 @@ expect(null).to.be.null
 >目标为undefined
 
 ## Jasmine语法
-语法练习中。。。。。。待补充
+四个核心概念：分组，用例，期望，匹配  
+describe(description, specDefinitions): 定义分组，看作一组测试用例  
+it(description, testFunctionopt, timeoutopt): 定单个测试用例  
+expect(actual) → {matchers}: 表示期望expression这个表达式具有某个值或者具有某种行为  
+to**(arg): 表示匹配
+```
+describe('applicationApp', () => {
+  it('', () => {
+    expect('Hello World').toEqual('Hello World');
+  });
+});
+```
 
 ### jasmine测试异步代码测试
 默认Jasmine的超时时间是5s，可以通过全局的jasmine.DEFAULTTIMEOUTINTERVAL 设置。
