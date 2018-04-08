@@ -1,28 +1,28 @@
 var express = require('express');
 var router = express.Router();
-const petService = require('../src/pet/petService');
+const qualityService = require('../src/quality/qualityService');
 
-/* GET pet listing. */
+/* GET quality listing. */
 router.post('/insert', (req, res, next) => {
-  // petService.insert(pet).then(result => {
+  // qualityService.insert(quality).then(result => {
   //   res.send(result);
   // });
   res.send({ok:1});
 });
 router.delete('/delete', (req, res, next) => {
-  // petService.delete({name:1}).then(result => {
+  // qualityService.delete({name:1}).then(result => {
   //   res.send(result);
   // });
   res.send({ok:1});
 });
 router.put('/update', (req, res, next) => {
-  // petService.update({name:1},{code:2}).then(result => {
+  // qualityService.update({name:1},{code:2}).then(result => {
   //   res.send(result);
-  res.send({ok:1});
   // });
+  res.send({ok:1});
 });
 router.get('/find', (req, res, next) => {
-  // petService.find({name:1}).then(result => {
+  // qualityService.find({name:1}).then(result => {
   //   res.send(result);
   // });
   res.send({ok:1});

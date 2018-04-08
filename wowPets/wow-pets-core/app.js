@@ -7,6 +7,11 @@ var ejs = require('ejs');
 
 var indexRouter = require('./routes/index');
 var petRouter = require('./routes/pet');
+var petDimensionRouter = require('./routes/petDimension');
+var qualityRouter = require('./routes/quality');
+var skillRouter = require('./routes/skill');
+var speciesRouter = require('./routes/species');
+var weatherRouter = require('./routes/weather');
 
 var app = express();
 
@@ -23,6 +28,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/pet', petRouter);
+app.use('/petDimension', petDimensionRouter);
+app.use('/quality', qualityRouter);
+app.use('/skill', skillRouter);
+app.use('/species', speciesRouter);
+app.use('/weather', weatherRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

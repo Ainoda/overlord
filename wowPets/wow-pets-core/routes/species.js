@@ -1,28 +1,28 @@
 var express = require('express');
 var router = express.Router();
-const petService = require('../src/pet/petService');
+const speciesService = require('../src/species/speciesService');
 
-/* GET pet listing. */
+/* GET species listing. */
 router.post('/insert', (req, res, next) => {
-  // petService.insert(pet).then(result => {
+  // speciesService.insert(species).then(result => {
   //   res.send(result);
   // });
   res.send({ok:1});
 });
 router.delete('/delete', (req, res, next) => {
-  // petService.delete({name:1}).then(result => {
+  // speciesService.delete({name:1}).then(result => {
   //   res.send(result);
   // });
   res.send({ok:1});
 });
 router.put('/update', (req, res, next) => {
-  // petService.update({name:1},{code:2}).then(result => {
+  // speciesService.update({name:1},{code:2}).then(result => {
   //   res.send(result);
-  res.send({ok:1});
   // });
+  res.send({ok:1});
 });
 router.get('/find', (req, res, next) => {
-  // petService.find({name:1}).then(result => {
+  // speciesService.find({name:1}).then(result => {
   //   res.send(result);
   // });
   res.send({ok:1});
