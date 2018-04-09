@@ -3,9 +3,19 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import { withStyles } from "material-ui";
+
 import appRoutes from "../../routes/app.js";
+import appStyle from "./appStyle.js";
+import Sidebar from "../../components/Sidebar/Sidebar.js";
+import image from "../../asset/img/sidebar.jpg";
 
 class App extends Component {
+  state = {
+    mobileOpen:false
+  };
+  handleDrawerToggle = () => {
+    this.setState({ mobileOpen: !this.state.mobileOpen });
+  };
   componentDidMount() {
     if(navigator.platform.indexOf('Win') > -1){
       // eslint-disable-next-line
@@ -13,12 +23,23 @@ class App extends Component {
     }
   }
   render() {
+    const { classes, ...rest } = this.props;
     return (
-      <div>
-
+      <div className={classes.wrapper}>
+        <Sidebar
+          routes={appRoutes}
+          logoText={"宠物数据库"}
+          image={image}
+          handleDrawerToggle={this.handleDrawerToggle}
+          open={this.state.mobileOpen}
+          color="blue"
+          {...rest}
+        />
+        <div className={classes.mainPanel} refs="mainPanel">
+        </div>
       </div>
     );
   }
 }
 
-export default withStyles()(App);
+export default withStyles(appStyle)(App);

@@ -1,7 +1,12 @@
 import App from "../containers/App/App.js";
 
 import {
-  Pets
+  Pets,
+  Accessibility,
+  Grade,
+  Build,
+  Extension,
+  WbSunny
 } from "material-ui-icons";
 
 const appRoutes = [
@@ -16,35 +21,35 @@ const appRoutes = [
     path: "/dimension",
     sidebarName: "属性",
     navbarName: "属性",
-    icon: Pets,
+    icon: Accessibility,
     component: App
   },
   {
     path: "/quality",
     sidebarName: "品质",
     navbarName: "品质",
-    icon: Pets,
+    icon: Grade,
     component: App
   },
   {
     path: "/skill",
     sidebarName: "技能",
     navbarName: "技能",
-    icon: Pets,
+    icon: Build,
     component: App
   },
   {
     path: "/species",
     sidebarName: "类型",
     navbarName: "类型",
-    icon: Pets,
+    icon: Extension,
     component: App
   },
   {
     path: "/weather",
     sidebarName: "天气",
     navbarName: "天气",
-    icon: Pets,
+    icon: WbSunny,
     component: App
   },
   { redirect: true, path: "/", to: "/pet", navbarName: "Redirect" }
