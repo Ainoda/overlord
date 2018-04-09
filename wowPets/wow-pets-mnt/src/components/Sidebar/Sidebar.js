@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import cx from "classnames";
 import sidebarStyle from "./sidebarStyle.js"
@@ -18,7 +17,7 @@ const Sidebar = ({ ...props }) => {
   function activeRoute(routeName) {
     return props.location.pathname.indexOf(routeName) > -1 ? true : false;
   }
-  const { classes, color, logo, image, logoText, routes } = props;
+  const { classes, color, image, logoText, routes } = props;
   var links = (
     <List className={classes.list}>
       {routes.map((prop, key) => {
@@ -53,7 +52,7 @@ const Sidebar = ({ ...props }) => {
   );
   var brand = (
     <div className={classes.logo}>
-      <a href="#" className={classes.logoLink}>
+      <a className={classes.logoLink}>
         {logoText}
       </a>
     </div>
@@ -106,10 +105,6 @@ const Sidebar = ({ ...props }) => {
       </Hidden>
     </div>
   );
-};
-
-Sidebar.propTypes = {
-  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(sidebarStyle)(Sidebar);

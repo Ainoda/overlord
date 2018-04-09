@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import { withStyles } from "material-ui";
 
 import appRoutes from "../../routes/app.js";
 import appStyle from "./appStyle.js";
-import Sidebar from "../../components/Sidebar/Sidebar.js";
 import image from "../../asset/img/sidebar.jpg";
+import Sidebar from "../../components/Sidebar/Sidebar.js";
+import Header from "../../components/Header/Header.js";
 
 class App extends Component {
   state = {
@@ -36,6 +36,11 @@ class App extends Component {
           {...rest}
         />
         <div className={classes.mainPanel} refs="mainPanel">
+          <Header
+            routes={appRoutes}
+            handleDrawerToggle={this.handleDrawerToggle}
+            {...rest}
+          />
         </div>
       </div>
     );
