@@ -1,4 +1,4 @@
-import { drawerWidth, transition, container } from "../../components/styles.js";
+import { drawerWidth, transition, container } from "../../components/styles";
 
 const appStyle = theme => ({
   wrapper: {
@@ -19,14 +19,11 @@ const appStyle = theme => ({
     overflowScrolling: 'touch'
   },
   content: {
-    marginTop: "70px",
+    marginTop:"70px",
     padding: "30px 15px",
     minHeight: "calc(100% - 123px)"
   },
-  container,
-  map: {
-    marginTop: "70px"
-  }
+  container
 });
 
 export default appStyle;

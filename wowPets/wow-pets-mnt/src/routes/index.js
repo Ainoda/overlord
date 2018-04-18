@@ -1,4 +1,4 @@
-import App from "../containers/App/App.js";
+import App from "../containers/App/App";
 
 const indexRoutes = [{ path: "/", component: App }];
 

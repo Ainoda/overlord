@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import cx from "classnames";
-import sidebarStyle from "./sidebarStyle.js"
+import sidebarStyle from "./sidebarStyle"
 import {
   withStyles,
   Drawer,

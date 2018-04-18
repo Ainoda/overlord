@@ -8,7 +8,7 @@ import {
   Button
 } from "material-ui";
 import cx from "classnames";
-import headerStyle from "./headerStyle.js";
+import headerStyle from "./headerStyle";
 
 function Header({ ...props }) {
   function makeBrand(){
@@ -22,11 +22,20 @@ function Header({ ...props }) {
     });
     return name;
   }
-  const { classes, routes } = props;
+  const { classes, color, routes } = props;
+  const appBarClasses = cx({
+    [" " + classes[color]]: color
+  });
   return (
-    <div>
-      { makeBrand() }
-    </div>
+    <AppBar className={classes.appBar + appBarClasses}>
+      <Toolbar className={classes.container}>
+        <div className={classes.flex}>
+          <Button href="#" className={classes.title}>
+            { makeBrand() }
+          </Button>
+        </div>
+      </Toolbar>
+    </AppBar>
   );
 }
 

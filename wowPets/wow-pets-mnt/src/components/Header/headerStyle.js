@@ -41,6 +41,7 @@ const headerStyle = theme => ({
     fontSize: "18px",
     borderRadius: "3px",
     textTransform: "none",
+    height:"90px",
     color: "inherit",
     top: "10px",
     "&:hover,&:focus": {

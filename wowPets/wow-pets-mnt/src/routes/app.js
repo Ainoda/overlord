@@ -1,4 +1,5 @@
-import App from "../containers/App/App.js";
+import App from "../containers/App/App";
+import Pet from "../containers/Pet/Pet";
 
 import {
   Pets,
@@ -15,7 +16,7 @@ const appRoutes = [
     sidebarName: "宠物",
     navbarName: "宠物",
     icon: Pets,
-    component: App
+    component: Pet
   },
   {
     path: "/dimension",

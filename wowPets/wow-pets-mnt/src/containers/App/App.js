@@ -1,14 +1,24 @@
 import React, { Component } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
+
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import { withStyles } from "material-ui";
-
-import appRoutes from "../../routes/app.js";
+import appRoutes from "../../routes/app";
 import appStyle from "./appStyle.js";
 import image from "../../asset/img/sidebar.jpg";
-import Sidebar from "../../components/Sidebar/Sidebar.js";
-import Header from "../../components/Header/Header.js";
+import { Sidebar,Header } from "../../components";
 
+
+const switchRoutes = (
+  <Switch>
+    {appRoutes.map((prop, key) => {
+      if (prop.redirect)
+        return <Redirect from={prop.path} to={prop.to} key={key} />;
+      return <Route path={prop.path} component={prop.component} key={key} />;
+    })}
+  </Switch>
+);
 class App extends Component {
   state = {
     mobileOpen:false
@@ -21,6 +31,9 @@ class App extends Component {
       // eslint-disable-next-line
       const ps = new PerfectScrollbar(this.refs.mainPanel);
     }
+  }
+  componentDidUpdate() {
+    this.refs.mainPanel.scrollTop = 0;
   }
   render() {
     const { classes, ...rest } = this.props;
@@ -35,12 +48,15 @@ class App extends Component {
           color="blue"
           {...rest}
         />
-        <div className={classes.mainPanel} refs="mainPanel">
+        <div className={classes.mainPanel} ref="mainPanel">
           <Header
             routes={appRoutes}
             handleDrawerToggle={this.handleDrawerToggle}
             {...rest}
           />
+          <div className={classes.content}>
+            <div className={classes.container}>{switchRoutes}</div>
+          </div>
         </div>
       </div>
     );
