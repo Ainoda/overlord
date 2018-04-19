@@ -4,7 +4,9 @@ import { createBrowserHistory } from "history";
 import { Router, Route, Switch } from "react-router-dom";
 import "./asset/css/index.css"
 import indexRoutes from "./routes/index";
+import httpInterceptor from "./httpInterceptor"
 
+httpInterceptor.init();
 const hist = createBrowserHistory();
 
 ReactDOM.render(

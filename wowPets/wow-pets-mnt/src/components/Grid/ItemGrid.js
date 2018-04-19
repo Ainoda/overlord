@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { withStyles, Grid } from "material-ui";
 
 const style = {
@@ -7,13 +7,15 @@ const style = {
   }
 };
 
-function ItemGrid({ ...props }) {
-  const { classes, children, ...rest } = props;
-  return (
-    <Grid item {...rest} className={classes.grid}>
+class ItemGrid extends Component {
+  render() {
+    const { classes, children, ...rest } = this.props;
+    return (
+      <Grid item {...rest} className={classes.grid}>
       {children}
-    </Grid>
-  );
+      </Grid>
+    );
+  }
 }
 
 export default withStyles(style)(ItemGrid);

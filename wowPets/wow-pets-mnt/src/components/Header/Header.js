@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   withStyles,
   AppBar,
@@ -10,33 +10,34 @@ import {
 import cx from "classnames";
 import headerStyle from "./headerStyle";
 
-function Header({ ...props }) {
-  function makeBrand(){
-    console.log(props);
+class Header extends Component {
+  makeBrand() {
     let name = "";
-    props.routes.map((prop, key) => {
-      if (prop.path === props.location.pathname) {
+    this.props.routes.map((prop, key) => {
+      if (prop.path === this.props.location.pathname) {
         name = prop.navbarName;
       }
       return null;
     });
     return name;
   }
-  const { classes, color, routes } = props;
-  const appBarClasses = cx({
-    [" " + classes[color]]: color
-  });
-  return (
-    <AppBar className={classes.appBar + appBarClasses}>
-      <Toolbar className={classes.container}>
-        <div className={classes.flex}>
-          <Button href="#" className={classes.title}>
-            { makeBrand() }
-          </Button>
-        </div>
-      </Toolbar>
-    </AppBar>
-  );
+  render() {
+    const { classes, color, routes } = this.props;
+    const appBarClasses = cx({
+      [" " + classes[color]]: color
+    });
+    return (
+      <AppBar className={classes.appBar + appBarClasses}>
+        <Toolbar className={classes.container}>
+          <div className={classes.flex}>
+            <Button href="#" className={classes.title}>
+              {this.makeBrand()}
+            </Button>
+          </div>
+        </Toolbar>
+      </AppBar>
+    );
+  }
 }
 
 export default withStyles(headerStyle)(Header);

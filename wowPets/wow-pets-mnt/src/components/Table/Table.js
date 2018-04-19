@@ -1,56 +1,90 @@
-import React from "react";
+import React, {Component} from "react";
 import {
   withStyles,
   Table,
   TableHead,
   TableRow,
   TableBody,
-  TableCell
+  TablePagination,
+  TableCell,
+  Checkbox
 } from "material-ui";
 
 import PropTypes from "prop-types";
 
 import tableStyle from "./tableStyle";
 
-function CustomTable({ ...props }) {
-  const { classes, tableHead, tableData, tableHeaderColor } = props;
-  return (
-    <div className={classes.tableResponsive}>
-      <Table className={classes.table}>
-        {tableHead !== undefined ? (
-          <TableHead className={classes[tableHeaderColor + "TableHeader"]}>
-            <TableRow>
-              {tableHead.map((prop, key) => {
-                return (
-                  <TableCell
-                    className={classes.tableCell + " " + classes.tableHeadCell}
-                    key={key}
-                  >
-                    {prop}
-                  </TableCell>
-                );
-              })}
-            </TableRow>
-          </TableHead>
-        ) : null}
-        <TableBody>
-          {tableData.map((prop, key) => {
-            return (
-              <TableRow key={key}>
-                {prop.map((prop, key) => {
+class CustomTable extends Component {
+  render() {
+    const { classes, tableHead, tableDataKey, tableData, tableHeaderColor, selected, handleClick, handleChangePage, handleChangeRowsPerPage, page, rowsPerPage } = this.props;
+    const rowsPerPageOptions = [10,20,30];
+    const emptyRows = rowsPerPage ? rowsPerPage - Math.min(rowsPerPage, tableData.length - page * rowsPerPage) : 0;
+    return (
+      <div>
+        <div className={classes.tableResponsive}>
+        { this.props.children }
+        <Table className={classes.table}>
+          {tableHead !== undefined ? (
+            <TableHead className={classes[tableHeaderColor + "TableHeader"]}>
+              <TableRow>
+                {handleClick ? <TableCell padding="checkbox">
+                  <Checkbox disabled={true}/>
+                </TableCell> : null}
+                {tableHead.map((prop, key) => {
                   return (
-                    <TableCell className={classes.tableCell} key={key}>
+                    <TableCell className={classes.tableCell + " " + classes.tableHeadCell} key={key}>
                       {prop}
                     </TableCell>
                   );
                 })}
               </TableRow>
+            </TableHead>
+          ) : null}
+          <TableBody>
+          {tableData.slice(page*rowsPerPage,page*rowsPerPage+rowsPerPage).map((prop, key) => {
+            const isSelected = prop._id === selected;
+            return (
+              <TableRow hover key={key} onClick={e => handleClick ? handleClick(e, prop._id, key) : null} aria-checked={isSelected} selected={isSelected}>
+                { handleClick ? <TableCell padding="checkbox">
+                  <Checkbox checked={isSelected}/>
+                </TableCell> : null }
+                {tableDataKey.map((attr,key) => {
+                  return (
+                    <TableCell className={classes.tableCell} key={key}>
+                      {prop[attr]}
+                    </TableCell>
+                  )
+                })}
+              </TableRow>
             );
           })}
-        </TableBody>
-      </Table>
-    </div>
-  );
+          {emptyRows > 0 && (
+            <TableRow style={{ height: 49 * emptyRows }}>
+              <TableCell colSpan={tableDataKey.length + (handleClick?1:0)} />
+            </TableRow>
+          )}
+          </TableBody>
+        </Table>
+        </div>
+        {handleChangePage ? <TablePagination
+          component="div"
+          count={tableData.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          labelRowsPerPage="每页"
+          backIconButtonProps={{
+            'aria-label': 'Previous Page',
+          }}
+          nextIconButtonProps={{
+            'aria-label': 'Next Page',
+          }}
+          rowsPerPageOptions={rowsPerPageOptions}
+          onChangePage={handleChangePage ? handleChangePage : null}
+          onChangeRowsPerPage={handleChangeRowsPerPage ? handleChangeRowsPerPage : null}
+        /> : null}
+      </div>
+    );
+  }
 }
 
 CustomTable.defaultProps = {

@@ -20,10 +20,16 @@ const switchRoutes = (
   </Switch>
 );
 class App extends Component {
-  state = {
-    mobileOpen:false
-  };
-  handleDrawerToggle = () => {
+  constructor(props){
+    super(props);
+    this.state = {
+      mobileOpen:false
+    };
+
+    this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
+  }
+  
+  handleDrawerToggle() {
     this.setState({ mobileOpen: !this.state.mobileOpen });
   };
   componentDidMount() {
