@@ -1,5 +1,5 @@
-import App from "../containers/App/App";
+import App from "../containers/App/App"
 
-const indexRoutes = [{ path: "/", component: App }];
+const indexRoutes = [{ path: "/", component: App }]
 
-export default indexRoutes;
+export default indexRoutes

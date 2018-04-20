@@ -9,7 +9,7 @@ import {
   successColor,
   warningColor,
   dangerColor
-} from "../styles";
+} from "../styles"
 
 const sidebarStyle = theme => ({
   drawerPaper: {
@@ -210,6 +210,6 @@ const sidebarStyle = theme => ({
     zIndex: "4",
     overflowScrolling: 'touch'
   }
-});
+})
 
-export default sidebarStyle;
+export default sidebarStyle

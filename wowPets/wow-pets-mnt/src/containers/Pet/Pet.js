@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import { withStyles,Grid,Button } from "material-ui";
-import axios from "axios";
+import React, { Component } from "react"
+import { withStyles,Grid,Button } from "material-ui"
+import axios from "axios"
 import {
   Add,
   Edit,
   Delete
-} from "material-ui-icons";
+} from "material-ui-icons"
 
-import { RegularCard,Table,ItemGrid } from "../../components";
+import { RegularCard,Table,ItemGrid } from "../../components"
 import petStyle from "./petStyle"
 
 class Pet extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       tableData:[],
       tableHead:["名称", "编码", "类型", "获取方式", "技能1", "技能2", "技能3", "技能4", "技能5", "技能6"],
@@ -20,34 +20,34 @@ class Pet extends Component {
       page:0,
       rowsPerPage:10,
       selected:''
-    };
+    }
 
     // This binding is necessary to make `this` work in the callback
-    this.handleClick = this.handleClick.bind(this);
-    this.handleChangePage = this.handleChangePage.bind(this);
-    this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this);
+    this.handleClick = this.handleClick.bind(this)
+    this.handleChangePage = this.handleChangePage.bind(this)
+    this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this)
   }
   
   componentDidMount() {
     axios.get('/pet/find').then(result => {
-      this.setState({tableData:result});
-    });
+      this.setState({tableData:result})
+    })
   }
   handleClick(e, id, index) {
     if(this.state.selected !== id){
-      this.setState({selected:id});
+      this.setState({selected:id})
     }else {
-      this.setState({selected:''});
+      this.setState({selected:''})
     }
   }
   handleChangePage(e, page){
-    this.setState({page});
+    this.setState({page})
   }
   handleChangeRowsPerPage(e){
-    this.setState({rowsPerPage:e.target.value});
+    this.setState({rowsPerPage:e.target.value})
   }
   render() {
-    const { classes, ...rest } = this.props;
+    const { classes, ...rest } = this.props
     return (
       <Grid container>
         <ItemGrid xs={12} sm={12} md={12}>
@@ -84,8 +84,8 @@ class Pet extends Component {
           />
         </ItemGrid>
       </Grid>
-    );
+    )
   }
 }
 
-export default withStyles(petStyle)(Pet);
+export default withStyles(petStyle)(Pet)

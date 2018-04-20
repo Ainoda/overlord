@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component} from "react"
 import {
   withStyles,
   Table,
@@ -8,17 +8,16 @@ import {
   TablePagination,
   TableCell,
   Checkbox
-} from "material-ui";
+} from "material-ui"
+import PropTypes from "prop-types"
 
-import PropTypes from "prop-types";
-
-import tableStyle from "./tableStyle";
+import tableStyle from "./tableStyle"
 
 class CustomTable extends Component {
   render() {
-    const { classes, tableHead, tableDataKey, tableData, tableHeaderColor, selected, handleClick, handleChangePage, handleChangeRowsPerPage, page, rowsPerPage } = this.props;
-    const rowsPerPageOptions = [10,20,30];
-    const emptyRows = rowsPerPage ? rowsPerPage - Math.min(rowsPerPage, tableData.length - page * rowsPerPage) : 0;
+    const { classes, tableHead, tableDataKey, tableData, tableHeaderColor, selected, handleClick, handleChangePage, handleChangeRowsPerPage, page, rowsPerPage } = this.props
+    const rowsPerPageOptions = [10,20,30]
+    const emptyRows = rowsPerPage ? rowsPerPage - Math.min(rowsPerPage, tableData.length - page * rowsPerPage) : 0
     return (
       <div>
         <div className={classes.tableResponsive}>
@@ -35,14 +34,14 @@ class CustomTable extends Component {
                     <TableCell className={classes.tableCell + " " + classes.tableHeadCell} key={key}>
                       {prop}
                     </TableCell>
-                  );
+                  )
                 })}
               </TableRow>
             </TableHead>
           ) : null}
           <TableBody>
           {tableData.slice(page*rowsPerPage,page*rowsPerPage+rowsPerPage).map((prop, key) => {
-            const isSelected = prop._id === selected;
+            const isSelected = prop._id === selected
             return (
               <TableRow hover key={key} onClick={e => handleClick ? handleClick(e, prop._id, key) : null} aria-checked={isSelected} selected={isSelected}>
                 { handleClick ? <TableCell padding="checkbox">
@@ -56,7 +55,7 @@ class CustomTable extends Component {
                   )
                 })}
               </TableRow>
-            );
+            )
           })}
           {emptyRows > 0 && (
             <TableRow style={{ height: 49 * emptyRows }}>
@@ -83,13 +82,13 @@ class CustomTable extends Component {
           onChangeRowsPerPage={handleChangeRowsPerPage ? handleChangeRowsPerPage : null}
         /> : null}
       </div>
-    );
+    )
   }
 }
 
 CustomTable.defaultProps = {
   tableHeaderColor: "gray"
-};
+}
 
 CustomTable.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -104,6 +103,6 @@ CustomTable.propTypes = {
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string))
-};
+}
 
-export default withStyles(tableStyle)(CustomTable);
+export default withStyles(tableStyle)(CustomTable)

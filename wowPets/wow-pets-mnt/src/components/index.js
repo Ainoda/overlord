@@ -2,7 +2,7 @@
 // // // Cards
 // #############################
 
-import RegularCard from "./Cards/RegularCard.js";
+import RegularCard from "./Cards/RegularCard.js"
 
 // ##############################
 // // // CustomButtons
@@ -20,19 +20,19 @@ import RegularCard from "./Cards/RegularCard.js";
 // // // Grid
 // #############################
 
-import ItemGrid from "./Grid/ItemGrid.js";
+import ItemGrid from "./Grid/ItemGrid.js"
 
 // ##############################
 // // // Header
 // #############################
 
-import Header from "./Header/Header.js";
+import Header from "./Header/Header.js"
 
 // ##############################
 // // // Sidebar
 // #############################
 
-import Sidebar from "./Sidebar/Sidebar.js";
+import Sidebar from "./Sidebar/Sidebar.js"
 
 // ##############################
 // // // Snackbar
@@ -42,7 +42,7 @@ import Sidebar from "./Sidebar/Sidebar.js";
 // // // Table
 // #############################
 
-import Table from "./Table/Table.js";
+import Table from "./Table/Table.js"
 
 // ##############################
 // // // Tasks
@@ -69,4 +69,4 @@ export {
   Table,
   // Tasks
   // Typography
-};
+}

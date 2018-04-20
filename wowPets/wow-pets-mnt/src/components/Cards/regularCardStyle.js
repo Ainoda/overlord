@@ -7,7 +7,7 @@ import {
   redCardHeader,
   blueCardHeader,
   purpleCardHeader
-} from "../styles";
+} from "../styles"
 
 const regularCardStyle = {
   card,
@@ -46,6 +46,6 @@ const regularCardStyle = {
     display: "block",
     height: "auto"
   }
-};
+}
 
-export default regularCardStyle;
+export default regularCardStyle

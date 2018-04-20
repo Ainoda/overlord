@@ -1,4 +1,4 @@
-import { drawerWidth, transition, container } from "../../components/styles";
+import { drawerWidth, transition, container } from "../../components/styles"
 
 const appStyle = theme => ({
   wrapper: {
@@ -24,6 +24,6 @@ const appStyle = theme => ({
     minHeight: "calc(100% - 123px)"
   },
   container
-});
+})
 
-export default appStyle;
+export default appStyle

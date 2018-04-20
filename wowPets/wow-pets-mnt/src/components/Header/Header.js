@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
 import {
   withStyles,
   AppBar,
@@ -6,26 +6,26 @@ import {
   IconButton,
   Hidden,
   Button
-} from "material-ui";
-import cx from "classnames";
-import headerStyle from "./headerStyle";
+} from "material-ui"
+import cx from "classnames"
+import headerStyle from "./headerStyle"
 
 class Header extends Component {
   makeBrand() {
-    let name = "";
+    let name = ""
     this.props.routes.map((prop, key) => {
       if (prop.path === this.props.location.pathname) {
-        name = prop.navbarName;
+        name = prop.navbarName
       }
-      return null;
-    });
-    return name;
+      return null
+    })
+    return name
   }
   render() {
-    const { classes, color, routes } = this.props;
+    const { classes, color, routes } = this.props
     const appBarClasses = cx({
       [" " + classes[color]]: color
-    });
+    })
     return (
       <AppBar className={classes.appBar + appBarClasses}>
         <Toolbar className={classes.container}>
@@ -36,8 +36,8 @@ class Header extends Component {
           </div>
         </Toolbar>
       </AppBar>
-    );
+    )
   }
 }
 
-export default withStyles(headerStyle)(Header);
+export default withStyles(headerStyle)(Header)

@@ -7,7 +7,7 @@ import {
   roseColor,
   grayColor,
   defaultFont
-} from "../styles";
+} from "../styles"
 
 const tableStyle = theme => ({
   warningTableHeader: {
@@ -55,6 +55,6 @@ const tableStyle = theme => ({
     marginTop: theme.spacing.unit * 3,
     overflowX: "auto"
   }
-});
+})
 
-export default tableStyle;
+export default tableStyle

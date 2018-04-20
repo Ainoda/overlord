@@ -1,54 +1,63 @@
-import React, { Component } from "react";
-import { withStyles,Grid,Button } from "material-ui";
-import axios from "axios";
+import React, { Component } from "react"
+import { withStyles,Grid,Button,Slide } from "material-ui"
+import axios from "axios"
 import {
   Add,
   Edit,
   Delete
-} from "material-ui-icons";
+} from "material-ui-icons"
 
-import { RegularCard,Table,ItemGrid } from "../../components";
+import { RegularCard,Table,ItemGrid } from "../../components"
 import speciesStyle from "./speciesStyle"
 
 class Species extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       tableData:[],
       tableHead:["名称", "编码", "猎物", "天敌"],
       tableDataKey:["name","code","prey","hunter"],
       page:0,
       rowsPerPage:10,
-      selected:''
-    };
+      selected:'',
+      showModal:false
+    }
     
     // This binding is necessary to make `this` work in the callback
-    this.handleClick = this.handleClick.bind(this);
-    this.handleChangePage = this.handleChangePage.bind(this);
-    this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this);
+    this.handleClick = this.handleClick.bind(this)
+    this.handleChangePage = this.handleChangePage.bind(this)
+    this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this)
+    this.add = this.add.bind(this)
   }
 
   componentDidMount() {
     axios.get('/species/find').then(result => {
-      this.setState({tableData:result});
-    });
+      this.setState({tableData:result})
+    })
   }
 
   handleClick(e, id, index) {
     if(this.state.selected !== id){
-      this.setState({selected:id});
+      this.setState({selected:id})
     }else {
-      this.setState({selected:''});
+      this.setState({selected:''})
     }
   }
-  handleChangePage(e, page){
-    this.setState({page});
+
+  handleChangePage(e, page) {
+    this.setState({page})
   }
-  handleChangeRowsPerPage(e){
-    this.setState({rowsPerPage:e.target.value});
+
+  handleChangeRowsPerPage(e) {
+    this.setState({rowsPerPage:e.target.value})
   }
+
+  add() {
+    this.setState({showModal:true})
+  }
+
   render() {
-    const { classes, ...rest } = this.props;
+    const { classes, ...rest } = this.props
     return (
       <Grid container>
         <ItemGrid xs={12} sm={12} md={12}>
@@ -68,7 +77,7 @@ class Species extends Component {
             page={this.state.page}
             rowsPerPage={this.state.rowsPerPage}
             >
-              <Button variant="raised" className={classes.button}>
+              <Button variant="raised" className={classes.button} onClick={this.add}>
                 <Add/>
                 新增
               </Button>
@@ -84,9 +93,18 @@ class Species extends Component {
           }
           />
         </ItemGrid>
+        <Slide direction="up" in={this.state.showModal} mountOnEnter unmountOnExit>
+          <RegularCard
+            cardTitle="新增类型"
+            cardSubtitle=""
+            content={
+              
+            }
+          />
+        </Slide>
       </Grid>
-    );
+    )
   }
 }
 
-export default withStyles(speciesStyle)(Species);
+export default withStyles(speciesStyle)(Species)

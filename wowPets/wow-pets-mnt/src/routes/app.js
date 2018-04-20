@@ -1,6 +1,6 @@
-import App from "../containers/App/App";
-import Pet from "../containers/Pet/Pet";
-import Species from "../containers/Species/Species";
+import App from "../containers/App/App"
+import Pet from "../containers/Pet/Pet"
+import Species from "../containers/Species/Species"
 
 import {
   Pets,
@@ -9,7 +9,7 @@ import {
   Build,
   Extension,
   WbSunny
-} from "material-ui-icons";
+} from "material-ui-icons"
 
 const appRoutes = [
   {
@@ -55,6 +55,6 @@ const appRoutes = [
     component: App
   },
   { redirect: true, path: "/", to: "/pet", navbarName: "Redirect" }
-];
+]
 
-export default appRoutes;
+export default appRoutes

@@ -1,6 +1,6 @@
-import React, {Component} from "react";
-import {NavLink} from "react-router-dom";
-import cx from "classnames";
+import React, {Component} from "react"
+import {NavLink} from "react-router-dom"
+import cx from "classnames"
 import sidebarStyle from "./sidebarStyle"
 import {
   withStyles,
@@ -10,31 +10,31 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText
-} from "material-ui";
+} from "material-ui"
 
 class Sidebar extends Component {
   constructor(props){
-    super(props);
+    super(props)
   }
   // verifies if routeName is the one active (in browser input)
   activeRoute(routeName) {
     return this.props.location.pathname.indexOf(routeName) > -1
       ? true
-      : false;
+      : false
   }
   render() {
-    const {classes, color, image, logoText, routes} = this.props;
+    const {classes, color, image, logoText, routes} = this.props
     var links = (<List className={classes.list}>
       {
         routes.map((prop, key) => {
           if (prop.redirect)
-            return null;
+            return null
           const listItemClasses = cx({
             [" " + classes[color]]: this.activeRoute(prop.path)
-          });
+          })
           const whiteFontClasses = cx({
             [" " + classes.whiteFont]: this.activeRoute(prop.path)
-          });
+          })
           return (<NavLink to={prop.path} className={classes.item} activeClassName="active" key={key}>
             <ListItem button="button" className={classes.itemLink + listItemClasses}>
               <ListItemIcon className={classes.itemIcon + whiteFontClasses}>
@@ -42,15 +42,15 @@ class Sidebar extends Component {
               </ListItemIcon>
               <ListItemText primary={prop.sidebarName} className={classes.itemText + whiteFontClasses} disableTypography={true}/>
             </ListItem>
-          </NavLink>);
+          </NavLink>)
         })
       }
-    </List>);
+    </List>)
     var brand = (<div className={classes.logo}>
       <a className={classes.logoLink}>
         {logoText}
       </a>
-    </div>);
+    </div>)
     return (<div>
       <Hidden mdUp="mdUp">
         <Drawer variant="temporary" anchor="right" open={this.props.open} classes={{
@@ -86,9 +86,9 @@ class Sidebar extends Component {
           }
         </Drawer>
       </Hidden>
-    </div>);
+    </div>)
   }
 
-};
+}
 
-export default withStyles(sidebarStyle)(Sidebar);
+export default withStyles(sidebarStyle)(Sidebar)

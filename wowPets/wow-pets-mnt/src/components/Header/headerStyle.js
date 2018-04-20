@@ -7,7 +7,7 @@ import {
   successColor,
   warningColor,
   dangerColor
-} from "../styles";
+} from "../styles"
 
 const headerStyle = theme => ({
   appBar: {
@@ -76,6 +76,6 @@ const headerStyle = theme => ({
     color: "#FFFFFF",
     ...defaultBoxShadow
   }
-});
+})
 
-export default headerStyle;
+export default headerStyle

@@ -1,48 +1,48 @@
-import React, { Component } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-import PerfectScrollbar from "perfect-scrollbar";
+import React, { Component } from "react"
+import { Switch, Route, Redirect } from "react-router-dom"
+import PerfectScrollbar from "perfect-scrollbar"
 
-import "perfect-scrollbar/css/perfect-scrollbar.css";
-import { withStyles } from "material-ui";
-import appRoutes from "../../routes/app";
-import appStyle from "./appStyle.js";
-import image from "../../asset/img/sidebar.jpg";
-import { Sidebar,Header } from "../../components";
+import "perfect-scrollbar/css/perfect-scrollbar.css"
+import { withStyles } from "material-ui"
+import appRoutes from "../../routes/app"
+import appStyle from "./appStyle.js"
+import image from "../../asset/img/sidebar.jpg"
+import { Sidebar,Header } from "../../components"
 
 
 const switchRoutes = (
   <Switch>
     {appRoutes.map((prop, key) => {
       if (prop.redirect)
-        return <Redirect from={prop.path} to={prop.to} key={key} />;
-      return <Route path={prop.path} component={prop.component} key={key} />;
+        return <Redirect from={prop.path} to={prop.to} key={key} />
+      return <Route path={prop.path} component={prop.component} key={key} />
     })}
   </Switch>
-);
+)
 class App extends Component {
   constructor(props){
-    super(props);
+    super(props)
     this.state = {
       mobileOpen:false
-    };
+    }
 
-    this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
+    this.handleDrawerToggle = this.handleDrawerToggle.bind(this)
   }
   
   handleDrawerToggle() {
-    this.setState({ mobileOpen: !this.state.mobileOpen });
-  };
+    this.setState({ mobileOpen: !this.state.mobileOpen })
+  }
   componentDidMount() {
     if(navigator.platform.indexOf('Win') > -1){
       // eslint-disable-next-line
-      const ps = new PerfectScrollbar(this.refs.mainPanel);
+      const ps = new PerfectScrollbar(this.refs.mainPanel)
     }
   }
   componentDidUpdate() {
-    this.refs.mainPanel.scrollTop = 0;
+    this.refs.mainPanel.scrollTop = 0
   }
   render() {
-    const { classes, ...rest } = this.props;
+    const { classes, ...rest } = this.props
     return (
       <div className={classes.wrapper}>
         <Sidebar
@@ -65,8 +65,8 @@ class App extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default withStyles(appStyle)(App);
+export default withStyles(appStyle)(App)

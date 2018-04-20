@@ -1,9 +1,9 @@
-import React, {Component} from "react";
-import {withStyles, Card, CardContent, CardHeader, CardActions} from "material-ui";
-import PropTypes from "prop-types";
-import cx from "classnames";
+import React, {Component} from "react"
+import {withStyles, Card, CardContent, CardHeader, CardActions} from "material-ui"
+import PropTypes from "prop-types"
+import cx from "classnames"
 
-import regularCardStyle from "./regularCardStyle";
+import regularCardStyle from "./regularCardStyle"
 
 class RegularCard extends Component {
   render() {
@@ -15,13 +15,13 @@ class RegularCard extends Component {
       cardSubtitle,
       content,
       footer
-    } = this.props;
+    } = this.props
     const plainCardClasses = cx({
       [" " + classes.cardPlain]: plainCard
-    });
+    })
     const cardPlainHeaderClasses = cx({
       [" " + classes.cardPlainHeader]: plainCard
-    });
+    })
     return (
       <Card className={classes.card + plainCardClasses}>
         <CardHeader classes={{
@@ -36,13 +36,13 @@ class RegularCard extends Component {
             : null
         }
       </Card>
-    );
+    )
   }
 }
 
 RegularCard.defaultProps = {
   headerColor: "purple"
-};
+}
 
 RegularCard.propTypes = {
   plainCard: PropTypes.bool,
@@ -52,6 +52,6 @@ RegularCard.propTypes = {
   cardSubtitle: PropTypes.node,
   content: PropTypes.node,
   footer: PropTypes.node
-};
+}
 
-export default withStyles(regularCardStyle)(RegularCard);
+export default withStyles(regularCardStyle)(RegularCard)
