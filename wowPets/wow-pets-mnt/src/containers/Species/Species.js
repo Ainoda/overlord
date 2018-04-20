@@ -53,7 +53,7 @@ class Species extends Component {
   }
 
   add() {
-    this.setState({showModal:true})
+    this.setState({showModal:!this.state.showModal})
   }
 
   render() {
@@ -98,7 +98,10 @@ class Species extends Component {
             cardTitle="新增类型"
             cardSubtitle=""
             content={
-              
+              <Button variant="raised" className={classes.button} onClick={this.add}>
+                <Add/>
+                新增
+              </Button>
             }
           />
         </Slide>

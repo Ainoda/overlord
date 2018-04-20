@@ -12,6 +12,8 @@ import RegularCard from "./Cards/RegularCard.js"
 // // // CustomInput
 // #############################
 
+import CustomInput from "./Input/CustomInput.js"
+
 // ##############################
 // // // Footer
 // #############################
@@ -57,6 +59,7 @@ export {
   RegularCard,
   // CustomButtons
   // CustomInput
+  CustomInput,
   // Footer
   // Grid
   ItemGrid,
