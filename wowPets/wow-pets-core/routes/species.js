@@ -22,10 +22,10 @@ router.put('/update', (req, res, next) => {
   res.send({ok:1});
 });
 router.get('/find', (req, res, next) => {
-  // speciesService.find({name:1}).then(result => {
-  //   res.send(result);
-  // });
-  res.send({ok:1});
+  speciesService.find().then(result => {
+    res.send(result);
+  });
+  // res.send({ok:1});
 });
 
 module.exports = router;

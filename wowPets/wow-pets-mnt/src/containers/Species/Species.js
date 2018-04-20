@@ -8,31 +8,32 @@ import {
 } from "material-ui-icons";
 
 import { RegularCard,Table,ItemGrid } from "../../components";
-import petStyle from "./petStyle"
+import speciesStyle from "./speciesStyle"
 
-class Pet extends Component {
+class Species extends Component {
   constructor(props) {
     super(props);
     this.state = {
       tableData:[],
-      tableHead:["名称", "编码", "类型", "获取方式", "技能1", "技能2", "技能3", "技能4", "技能5", "技能6"],
-      tableDataKey:["name","code","dimension","get","firstsk","sencondsk","thirdsk","fourthsk","fifthsk","sixthsk"],
+      tableHead:["名称", "编码", "猎物", "天敌"],
+      tableDataKey:["name","code","prey","hunter"],
       page:0,
       rowsPerPage:10,
       selected:''
     };
-
+    
     // This binding is necessary to make `this` work in the callback
     this.handleClick = this.handleClick.bind(this);
     this.handleChangePage = this.handleChangePage.bind(this);
     this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this);
   }
-  
+
   componentDidMount() {
-    axios.get('/pet/find').then(result => {
+    axios.get('/species/find').then(result => {
       this.setState({tableData:result});
     });
   }
+
   handleClick(e, id, index) {
     if(this.state.selected !== id){
       this.setState({selected:id});
@@ -52,7 +53,7 @@ class Pet extends Component {
       <Grid container>
         <ItemGrid xs={12} sm={12} md={12}>
           <RegularCard
-          cardTitle="宠物列表"
+          cardTitle="类型列表"
           cardSubtitle=""
           content={
             <Table
@@ -88,4 +89,4 @@ class Pet extends Component {
   }
 }
 
-export default withStyles(petStyle)(Pet);
+export default withStyles(speciesStyle)(Species);

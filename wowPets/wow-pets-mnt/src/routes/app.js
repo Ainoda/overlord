@@ -1,5 +1,6 @@
 import App from "../containers/App/App";
 import Pet from "../containers/Pet/Pet";
+import Species from "../containers/Species/Species";
 
 import {
   Pets,
@@ -44,7 +45,7 @@ const appRoutes = [
     sidebarName: "类型",
     navbarName: "类型",
     icon: Extension,
-    component: App
+    component: Species
   },
   {
     path: "/weather",
