@@ -54,6 +54,18 @@ import Table from "./Table/Table.js"
 // // // Typography
 // #############################
 
+// ##############################
+// // // Modal
+// #############################
+
+import Modal from "./Modal/Modal.js"
+
+// ##############################
+// // // form
+// #############################
+
+import FormFooter from "./Form/FormFooter.js"
+
 export {
   // Cards
   RegularCard,
@@ -72,4 +84,8 @@ export {
   Table,
   // Tasks
   // Typography
+  // Modal
+  Modal,
+  // Form
+  FormFooter
 }

@@ -7,7 +7,7 @@ import {
   Delete
 } from "material-ui-icons"
 
-import { RegularCard,Table,ItemGrid } from "../../components"
+import { RegularCard,Table,ItemGrid,Modal,FormFooter } from "../../components"
 import speciesStyle from "./speciesStyle"
 
 class Species extends Component {
@@ -22,7 +22,7 @@ class Species extends Component {
       selected:'',
       showModal:false
     }
-    
+
     // This binding is necessary to make `this` work in the callback
     this.handleClick = this.handleClick.bind(this)
     this.handleChangePage = this.handleChangePage.bind(this)
@@ -93,18 +93,16 @@ class Species extends Component {
           }
           />
         </ItemGrid>
-        <Slide direction="up" in={this.state.showModal} mountOnEnter unmountOnExit>
-          <RegularCard
-            cardTitle="新增类型"
-            cardSubtitle=""
-            content={
-              <Button variant="raised" className={classes.button} onClick={this.add}>
-                <Add/>
-                新增
-              </Button>
-            }
-          />
-        </Slide>
+        <Modal
+          title="新增类型"
+          showModal={this.state.showModal}
+          cancel={this.add}
+          content={
+            <Button variant="raised" className={classes.button} onClick={this.add}>取消</Button>
+          }
+          footer={
+            <FormFooter className={classes.formFooter} cancel={this.add} ok={this.add} />
+          }/>
       </Grid>
     )
   }
