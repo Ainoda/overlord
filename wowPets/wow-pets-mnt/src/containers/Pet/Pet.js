@@ -27,7 +27,7 @@ class Pet extends Component {
     this.handleChangePage = this.handleChangePage.bind(this)
     this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this)
   }
-  
+
   componentDidMount() {
     axios.get('/pet/find').then(result => {
       this.setState({tableData:result})
@@ -49,7 +49,7 @@ class Pet extends Component {
   render() {
     const { classes, ...rest } = this.props
     return (
-      <Grid container>
+      <Grid container {...rest}>
         <ItemGrid xs={12} sm={12} md={12}>
           <RegularCard
           cardTitle="宠物列表"

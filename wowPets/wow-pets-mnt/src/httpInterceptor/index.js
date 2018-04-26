@@ -13,7 +13,7 @@ function init() {
   })
   // Add a response interceptor
   axios.interceptors.response.use(function(response) {
-    if (response.status == 200) {
+    if (response.status === 200) {
       return response.data
     }else {
       return Promise.reject(response)

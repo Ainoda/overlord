@@ -13,9 +13,6 @@ import {
 } from "material-ui"
 
 class Sidebar extends Component {
-  constructor(props){
-    super(props)
-  }
   // verifies if routeName is the one active (in browser input)
   activeRoute(routeName) {
     return this.props.location.pathname.indexOf(routeName) > -1

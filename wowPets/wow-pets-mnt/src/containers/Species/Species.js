@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { withStyles,Grid,Button,Slide } from "material-ui"
+import { withStyles,Grid,Button } from "material-ui"
 import axios from "axios"
 import {
   Add,
@@ -9,6 +9,7 @@ import {
 
 import { RegularCard,Table,ItemGrid,Modal,FormFooter } from "../../components"
 import speciesStyle from "./speciesStyle"
+import SpeciesContent from "./FormContent/SpeciesContent"
 
 class Species extends Component {
   constructor(props) {
@@ -59,7 +60,7 @@ class Species extends Component {
   render() {
     const { classes, ...rest } = this.props
     return (
-      <Grid container>
+      <Grid container {...rest}>
         <ItemGrid xs={12} sm={12} md={12}>
           <RegularCard
           cardTitle="类型列表"
@@ -98,7 +99,7 @@ class Species extends Component {
           showModal={this.state.showModal}
           cancel={this.add}
           content={
-            <Button variant="raised" className={classes.button} onClick={this.add}>取消</Button>
+            <SpeciesContent />
           }
           footer={
             <FormFooter className={classes.formFooter} cancel={this.add} ok={this.add} />

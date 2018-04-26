@@ -3,8 +3,6 @@ import {
   withStyles,
   AppBar,
   Toolbar,
-  IconButton,
-  Hidden,
   Button
 } from "material-ui"
 import cx from "classnames"
@@ -22,7 +20,7 @@ class Header extends Component {
     return name
   }
   render() {
-    const { classes, color, routes } = this.props
+    const { classes, color } = this.props
     const appBarClasses = cx({
       [" " + classes[color]]: color
     })
