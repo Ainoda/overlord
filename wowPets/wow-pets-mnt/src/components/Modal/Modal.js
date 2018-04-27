@@ -6,7 +6,7 @@ import modalStyle from "./modalStyle"
 
 class CustomModal extends Component {
   render() {
-    const { classes,title,subTitle,showModal,content,footer } = this.props
+    const { classes,title,subTitle,showModal,content,footer,headerColor } = this.props
 
     return (
       <Modal open={showModal} className={classes.modal}>
@@ -16,6 +16,7 @@ class CustomModal extends Component {
               <RegularCard
               cardTitle={title}
               cardSubtitle={subTitle?subTitle:""}
+              headerColor={headerColor}
               content={content}
               footer={footer}
               />

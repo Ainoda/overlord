@@ -98,6 +98,7 @@ class Species extends Component {
           title="新增类型"
           showModal={this.state.showModal}
           cancel={this.add}
+          headerColor="blue"
           content={
             <SpeciesContent />
           }
