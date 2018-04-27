@@ -1,5 +1,5 @@
 import React,{ Component } from "react"
-import { withStyles, FormControl, InputLabel, Input } from "material-ui"
+import { withStyles, FormControl, InputLabel, Input, FormHelperText } from "material-ui"
 import { Clear, Check } from "material-ui-icons"
 import PropTypes from "prop-types"
 import cx from "classnames"
@@ -16,12 +16,13 @@ class CustomInput extends Component {
       labelProps,
       inputProps,
       error,
-      success
+      success,
+      errorText
     } = this.props
-  
+
     const labelClasses = cx({
-      [" " + classes.labelRootError]: error,
-      [" " + classes.labelRootSuccess]: success && !error
+      [` ${classes.labelRootError}`]: error,
+      [` ${classes.labelRootSuccess}`]: success && !error
     })
     const inkbarClasses = cx({
       [classes.inkbarError]: error,
@@ -34,7 +35,7 @@ class CustomInput extends Component {
     return (
       <FormControl
         {...formControlProps}
-        className={formControlProps.className + " " + classes.formControl}
+        className={`${formControlProps.className} ${classes.formControl}`}
       >
         {labelText !== undefined ? (
           <InputLabel
@@ -56,10 +57,13 @@ class CustomInput extends Component {
           {...inputProps}
         />
         {error ? (
-          <Clear className={classes.feedback + " " + classes.labelRootError} />
+          <Clear className={`${classes.feedback} ${classes.labelRootError}`} />
         ) : success ? (
-          <Check className={classes.feedback + " " + classes.labelRootSuccess} />
+          <Check className={`${classes.feedback} ${classes.labelRootSuccess}`} />
         ) : null}
+        {errorText ? (
+          <FormHelperText className={classes.labelRootError}>{errorText}</FormHelperText>
+        ):null}
       </FormControl>
     )
   }

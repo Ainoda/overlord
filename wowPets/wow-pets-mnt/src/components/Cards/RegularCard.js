@@ -17,15 +17,15 @@ class RegularCard extends Component {
       footer
     } = this.props
     const plainCardClasses = cx({
-      [" " + classes.cardPlain]: plainCard
+      [` ${classes.cardPlain}`]: plainCard
     })
     const cardPlainHeaderClasses = cx({
-      [" " + classes.cardPlainHeader]: plainCard
+      [` ${classes.cardPlainHeader}`]: plainCard
     })
     return (
       <Card className={classes.card + plainCardClasses}>
         <CardHeader classes={{
-            root: classes.cardHeader + " " + classes[headerColor + "CardHeader"] + cardPlainHeaderClasses,
+            root: `${classes.cardHeader} ${classes[headerColor + "CardHeader"]}${cardPlainHeaderClasses}`,
             title: classes.cardTitle,
             subheader: classes.cardSubtitle
           }} title={cardTitle} subheader={cardSubtitle}/>

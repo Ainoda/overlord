@@ -22,7 +22,7 @@ class Header extends Component {
   render() {
     const { classes, color } = this.props
     const appBarClasses = cx({
-      [" " + classes[color]]: color
+      [` ${classes[color]}`]: color
     })
     return (
       <AppBar className={classes.appBar + appBarClasses}>

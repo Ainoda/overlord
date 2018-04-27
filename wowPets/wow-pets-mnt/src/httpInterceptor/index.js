@@ -1,8 +1,8 @@
 import axios from "axios"
 
 function init() {
-  axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
-  axios.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded'
+  axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded"
+  axios.defaults.headers.put["Content-Type"] = "application/x-www-form-urlencoded"
   // Add a request interceptor
   axios.interceptors.request.use(function(config) {
     // Do something before request is sent

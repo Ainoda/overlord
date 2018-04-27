@@ -24,14 +24,14 @@ class CustomTable extends Component {
         { this.props.children }
         <Table className={classes.table}>
           {tableHead !== undefined ? (
-            <TableHead className={classes[tableHeaderColor + "TableHeader"]}>
+            <TableHead className={classes[`${tableHeaderColor}TableHeader`]}>
               <TableRow>
                 {handleClick ? <TableCell padding="checkbox">
                   <Checkbox disabled={true}/>
                 </TableCell> : null}
                 {tableHead.map((prop, key) => {
                   return (
-                    <TableCell className={classes.tableCell + " " + classes.tableHeadCell} key={key}>
+                    <TableCell className={`${classes.tableCell} ${classes.tableHeadCell}`} key={key}>
                       {prop}
                     </TableCell>
                   )

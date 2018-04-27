@@ -27,10 +27,10 @@ class Sidebar extends Component {
           if (prop.redirect)
             return null
           const listItemClasses = cx({
-            [" " + classes[color]]: this.activeRoute(prop.path)
+            [` ${classes[color]}`]: this.activeRoute(prop.path)
           })
           const whiteFontClasses = cx({
-            [" " + classes.whiteFont]: this.activeRoute(prop.path)
+            [` ${classes.whiteFont}`]: this.activeRoute(prop.path)
           })
           return (<NavLink to={prop.path} className={classes.item} activeClassName="active" key={key}>
             <ListItem button="button" className={classes.itemLink + listItemClasses}>
@@ -62,7 +62,7 @@ class Sidebar extends Component {
           {
             image !== undefined
               ? (<div className={classes.background} style={{
-                  backgroundImage: "url(" + image + ")"
+                  backgroundImage: `url(${image})`
                 }}/>)
               : null
           }
@@ -77,7 +77,7 @@ class Sidebar extends Component {
           {
             image !== undefined
               ? (<div className={classes.background} style={{
-                  backgroundImage: "url(" + image + ")"
+                  backgroundImage: `url(${image})`
                 }}/>)
               : null
           }

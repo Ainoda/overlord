@@ -7,7 +7,7 @@ import {
   Delete
 } from "material-ui-icons"
 
-import { RegularCard,Table,ItemGrid,Modal,FormFooter } from "../../components"
+import { RegularCard,Table,ItemGrid,Modal } from "../../components"
 import speciesStyle from "./speciesStyle"
 import SpeciesContent from "./FormContent/SpeciesContent"
 
@@ -29,6 +29,8 @@ class Species extends Component {
     this.handleChangePage = this.handleChangePage.bind(this)
     this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this)
     this.add = this.add.bind(this)
+    this.ok = this.ok.bind(this)
+    this.cancel = this.cancel.bind(this)
   }
 
   componentDidMount() {
@@ -56,6 +58,12 @@ class Species extends Component {
   add() {
     this.setState({showModal:!this.state.showModal})
   }
+  ok(model) {
+    console.log(model)
+  }
+  cancel(){
+    this.setState({showModal:false})
+  }
 
   render() {
     const { classes, ...rest } = this.props
@@ -68,13 +76,13 @@ class Species extends Component {
           content={
             <Table
             tableHeaderColor="primary"
-            tableHead={ this.state.tableHead }
-            tableDataKey={ this.state.tableDataKey }
-            tableData={ this.state.tableData }
-            selected={ this.state.selected }
-            handleClick={ this.handleClick }
-            handleChangePage={ this.handleChangePage }
-            handleChangeRowsPerPage={ this.handleChangeRowsPerPage }
+            tableHead={this.state.tableHead}
+            tableDataKey={this.state.tableDataKey}
+            tableData={this.state.tableData}
+            selected={this.state.selected}
+            handleClick={this.handleClick}
+            handleChangePage={this.handleChangePage}
+            handleChangeRowsPerPage={this.handleChangeRowsPerPage}
             page={this.state.page}
             rowsPerPage={this.state.rowsPerPage}
             >
@@ -97,13 +105,9 @@ class Species extends Component {
         <Modal
           title="新增类型"
           showModal={this.state.showModal}
-          cancel={this.add}
           headerColor="blue"
           content={
-            <SpeciesContent />
-          }
-          footer={
-            <FormFooter className={classes.formFooter} cancel={this.add} ok={this.add} />
+            <SpeciesContent cancel={this.cancel} ok={this.ok}/>
           }/>
       </Grid>
     )
