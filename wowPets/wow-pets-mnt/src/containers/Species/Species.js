@@ -31,11 +31,11 @@ class Species extends Component {
     this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this)
     this.handleModalState = this.handleModalState.bind(this)
     this.handleValueChange = this.handleValueChange.bind(this)
-
+    this.handleClickAdd = this.handleClickAdd.bind(this)
+    this.handleClickEdit = this.handleClickEdit.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
     this.handleSave = this.handleSave.bind(this)
   }
-
   componentDidMount() {
     this.handleSearch()
   }
@@ -44,31 +44,32 @@ class Species extends Component {
       this.setState({tableData:result})
     })
   }
-
   handleClick(e, index) {
     if(this.state.selected === index){
       this.setState({selected:''})
-      this.setState({model:{name:'',code:'',prey:'',hunter:''}})
     }else {
-      this.setState({model:this.state.tableData[index]})
       this.setState({selected:index})
     }
   }
-
   handleChangePage(e, page) {
     this.setState({page})
   }
-
   handleChangeRowsPerPage(e) {
     this.setState({rowsPerPage:e.target.value})
   }
-
   handleModalState(state=true) {
     this.setState({showModal:state})
   }
-
   handleValueChange(key,value){
     this.setState({model:Object.assign(this.state.model,{[key]:value})})
+  }
+  handleClickAdd(){
+    this.setState({model:{name:'',code:'',prey:'',hunter:''}})
+    this.handleModalState();
+  }
+  handleClickEdit(){
+    this.setState({model:this.state.tableData[this.state.selected]})
+    this.handleModalState();
   }
   handleSave() {
     if(this.state.model._id){
@@ -81,7 +82,6 @@ class Species extends Component {
       })
     }
   }
-
   render() {
     const { classes, ...rest } = this.props
     return (
@@ -103,11 +103,11 @@ class Species extends Component {
             page={this.state.page}
             rowsPerPage={this.state.rowsPerPage}
             >
-              <Button variant="raised" className={classes.button} onClick={this.handleModalState}>
+              <Button variant="raised" className={classes.button} onClick={this.handleClickAdd}>
                 <Add/>
                 新增
               </Button>
-              <Button variant="raised" color="primary" onClick={this.handleModalState} className={classes.button}>
+              <Button variant="raised" color="primary" onClick={this.handleClickEdit} className={classes.button}>
                 <Edit/>
                 修改
               </Button>
@@ -124,7 +124,6 @@ class Species extends Component {
           />
         </ItemGrid>
         <SpeciesContent handleModalState={this.handleModalState} handleValueChange={this.handleValueChange} showModal={this.state.showModal} model={this.state.model} ok={this.handleSave} />
-
       </Grid>
     )
   }

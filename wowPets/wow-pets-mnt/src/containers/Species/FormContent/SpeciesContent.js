@@ -10,7 +10,7 @@ class SpeciesContent extends Component {
     const { classes,handleModalState,handleValueChange,showModal,model,ok,...rest} = this.props
     return (
       <Modal
-        title={model ? '编辑类型' : '新增类型'}
+        title={model._id ? '编辑类型' : '新增类型'}
         showModal={showModal}
         headerColor="blue"
         content={

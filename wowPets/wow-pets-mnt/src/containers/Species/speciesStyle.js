@@ -3,7 +3,8 @@ const speciesStyle = theme => ({
     margin: theme.spacing.unit,
   },
   searchButton:{
-    textAlign:'right'
+    margin: theme.spacing.unit,
+    float: 'right'
   }
 })
 
