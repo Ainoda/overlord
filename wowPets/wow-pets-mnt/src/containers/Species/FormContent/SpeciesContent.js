@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import { withStyles,Grid } from "material-ui"
-import axios from "axios"
 
 import { CustomInput,ItemGrid,FormFooter,Modal } from "../../../components"
 import speciesContentStyle from "./speciesContentStyle"
@@ -10,6 +9,7 @@ class SpeciesContent extends Component {
     const { classes,handleModalState,handleValueChange,showModal,model,ok,...rest} = this.props
     return (
       <Modal
+        {...rest}
         title={model._id ? '编辑类型' : '新增类型'}
         showModal={showModal}
         headerColor="blue"
@@ -30,7 +30,7 @@ class SpeciesContent extends Component {
           </Grid>
         }
         footer={
-          <FormFooter className={classes.formFooter} cancel={e => handleModalState(false)} ok={ok} />
+          <FormFooter className={classes.formFooter} summitable={model.name && model.code} cancel={e => handleModalState(false)} ok={ok} />
         }/>
     )
   }

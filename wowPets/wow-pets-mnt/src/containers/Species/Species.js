@@ -8,7 +8,7 @@ import {
   Search
 } from "material-ui-icons"
 
-import { RegularCard,Table,ItemGrid,Modal,CustomInput,FormFooter } from "../../components"
+import { RegularCard,Table,ItemGrid } from "../../components"
 import speciesStyle from "./speciesStyle"
 import SpeciesContent from "./FormContent/SpeciesContent"
 
@@ -115,7 +115,7 @@ class Species extends Component {
                 <Delete/>
                 删除
               </Button>
-              <Button variant="raised" color="secondary" onClick={this.handleSearch} className={classes.searchButton}>
+              <Button variant="raised" color="primary" onClick={this.handleSearch} className={classes.searchButton}>
                 <Search/>
                 搜索
               </Button>

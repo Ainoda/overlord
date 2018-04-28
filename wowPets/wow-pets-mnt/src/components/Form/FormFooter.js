@@ -5,13 +5,13 @@ import formFooterStyle from "./formFooterStyle"
 
 class FormFooter extends Component {
   render() {
-    const { classes, cancel, ok, ...rest} = this.props
+    const { classes, cancel, ok, summitable, ...rest} = this.props
     return (
       <div {...rest}>
         <Button variant="raised" color="secondary" className={classes.button} onClick={cancel}>
           取消
         </Button>
-        <Button variant="raised" color="primary" className={classes.button} onClick={ok}>
+        <Button variant="raised" color="primary" disabled={!summitable} className={classes.button} onClick={ok}>
           保存
         </Button>
       </div>
