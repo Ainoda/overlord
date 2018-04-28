@@ -18,6 +18,7 @@ class CustomModal extends Component {
               cardSubtitle={subTitle?subTitle:""}
               headerColor={headerColor}
               content={content}
+              footer={footer}
               />
             </Slide>
           </ItemGrid>

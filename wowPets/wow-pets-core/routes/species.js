@@ -4,10 +4,9 @@ const speciesService = require('../src/species/speciesService');
 
 /* GET species listing. */
 router.post('/insert', (req, res, next) => {
-  // speciesService.insert(species).then(result => {
-  //   res.send(result);
-  // });
-  res.send({ok:1});
+  speciesService.insert(req.body).then(result => {
+    res.send(result);
+  });
 });
 router.delete('/delete', (req, res, next) => {
   // speciesService.delete({name:1}).then(result => {

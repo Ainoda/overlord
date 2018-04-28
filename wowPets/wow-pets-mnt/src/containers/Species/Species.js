@@ -4,10 +4,11 @@ import axios from "axios"
 import {
   Add,
   Edit,
-  Delete
+  Delete,
+  Search
 } from "material-ui-icons"
 
-import { RegularCard,Table,ItemGrid,Modal } from "../../components"
+import { RegularCard,Table,ItemGrid,Modal,CustomInput,FormFooter } from "../../components"
 import speciesStyle from "./speciesStyle"
 import SpeciesContent from "./FormContent/SpeciesContent"
 
@@ -21,29 +22,36 @@ class Species extends Component {
       page:0,
       rowsPerPage:10,
       selected:'',
-      showModal:false
+      showModal:false,
+      model:{name:'',code:'',prey:'',hunter:''}
     }
-
     // This binding is necessary to make `this` work in the callback
     this.handleClick = this.handleClick.bind(this)
     this.handleChangePage = this.handleChangePage.bind(this)
     this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this)
-    this.add = this.add.bind(this)
-    this.ok = this.ok.bind(this)
-    this.cancel = this.cancel.bind(this)
+    this.handleModalState = this.handleModalState.bind(this)
+    this.handleValueChange = this.handleValueChange.bind(this)
+
+    this.handleSearch = this.handleSearch.bind(this)
+    this.handleSave = this.handleSave.bind(this)
   }
 
   componentDidMount() {
+    this.handleSearch()
+  }
+  handleSearch() {
     axios.get('/species/find').then(result => {
       this.setState({tableData:result})
     })
   }
 
-  handleClick(e, id, index) {
-    if(this.state.selected !== id){
-      this.setState({selected:id})
-    }else {
+  handleClick(e, index) {
+    if(this.state.selected === index){
       this.setState({selected:''})
+      this.setState({model:{name:'',code:'',prey:'',hunter:''}})
+    }else {
+      this.setState({model:this.state.tableData[index]})
+      this.setState({selected:index})
     }
   }
 
@@ -55,14 +63,23 @@ class Species extends Component {
     this.setState({rowsPerPage:e.target.value})
   }
 
-  add() {
-    this.setState({showModal:!this.state.showModal})
+  handleModalState(state=true) {
+    this.setState({showModal:state})
   }
-  ok(model) {
-    console.log(model)
+
+  handleValueChange(key,value){
+    this.setState({model:Object.assign(this.state.model,{[key]:value})})
   }
-  cancel(){
-    this.setState({showModal:false})
+  handleSave() {
+    if(this.state.model._id){
+      console.log('修改')
+    }else {
+      console.log('保存')
+      axios.post('/species/insert',this.state.model).then(result => {
+        this.handleSearch()
+        this.handleModalState(false)
+      })
+    }
   }
 
   render() {
@@ -86,11 +103,11 @@ class Species extends Component {
             page={this.state.page}
             rowsPerPage={this.state.rowsPerPage}
             >
-              <Button variant="raised" className={classes.button} onClick={this.add}>
+              <Button variant="raised" className={classes.button} onClick={this.handleModalState}>
                 <Add/>
                 新增
               </Button>
-              <Button variant="raised" color="primary" className={classes.button}>
+              <Button variant="raised" color="primary" onClick={this.handleModalState} className={classes.button}>
                 <Edit/>
                 修改
               </Button>
@@ -98,17 +115,16 @@ class Species extends Component {
                 <Delete/>
                 删除
               </Button>
+              <Button variant="raised" color="secondary" onClick={this.handleSearch} className={classes.searchButton}>
+                <Search/>
+                搜索
+              </Button>
             </Table>
           }
           />
         </ItemGrid>
-        <Modal
-          title="新增类型"
-          showModal={this.state.showModal}
-          headerColor="blue"
-          content={
-            <SpeciesContent cancel={this.cancel} ok={this.ok}/>
-          }/>
+        <SpeciesContent handleModalState={this.handleModalState} handleValueChange={this.handleValueChange} showModal={this.state.showModal} model={this.state.model} ok={this.handleSave} />
+
       </Grid>
     )
   }
