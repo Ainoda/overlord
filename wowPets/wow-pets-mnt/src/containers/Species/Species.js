@@ -8,7 +8,7 @@ import {
   Search
 } from "material-ui-icons"
 
-import { RegularCard,Table,ItemGrid } from "../../components"
+import { RegularCard,Table,ItemGrid,Snackbar } from "../../components"
 import speciesStyle from "./speciesStyle"
 import SpeciesContent from "./FormContent/SpeciesContent"
 
@@ -21,16 +21,16 @@ class Species extends Component {
       tableDataKey:["name","code","prey","hunter"],
       page:0,
       rowsPerPage:10,
-      selected:'',
+      selected:-1,
       showModal:false,
-      model:{name:'',code:'',prey:'',hunter:''}
+      model:{name:'',code:'',prey:'',hunter:''},
+      notification:{status:'',message:''}
     }
     // This binding is necessary to make `this` work in the callback
     this.handleClick = this.handleClick.bind(this)
     this.handleChangePage = this.handleChangePage.bind(this)
     this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this)
     this.handleModalState = this.handleModalState.bind(this)
-    this.handleValueChange = this.handleValueChange.bind(this)
     this.handleClickAdd = this.handleClickAdd.bind(this)
     this.handleClickEdit = this.handleClickEdit.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
@@ -46,7 +46,7 @@ class Species extends Component {
   }
   handleClick(e, index) {
     if(this.state.selected === index){
-      this.setState({selected:''})
+      this.setState({selected:-1})
     }else {
       this.setState({selected:index})
     }
@@ -60,27 +60,35 @@ class Species extends Component {
   handleModalState(state=true) {
     this.setState({showModal:state})
   }
-  handleValueChange(key,value){
-    this.setState({model:Object.assign(this.state.model,{[key]:value})})
-  }
-  handleClickAdd(){
+  handleClickAdd() {
     this.setState({model:{name:'',code:'',prey:'',hunter:''}})
     this.handleModalState();
   }
-  handleClickEdit(){
-    this.setState({model:this.state.tableData[this.state.selected]})
-    this.handleModalState();
-  }
-  handleSave() {
-    if(this.state.model._id){
-      console.log('修改')
+  handleClickEdit() {
+    if(this.state.selected >= 0){
+      this.setState({model:this.state.tableData[this.state.selected]})
+      this.handleModalState();
     }else {
-      console.log('保存')
-      axios.post('/species/insert',this.state.model).then(result => {
+      this.notification('warning','请选择一条记录')
+    }
+  }
+  handleSave(model) {
+    if(this.state.model._id){
+      this.handleModalState(false)
+      this.notification('success','修改成功')
+    }else {
+      axios.post('/species/insert',model).then(result => {
         this.handleSearch()
         this.handleModalState(false)
       })
     }
+  }
+  notification(status,message) {
+    this.setState({notificationOpen:true})
+    this.setState({notification:{status,message}})
+    setTimeout(()=>{
+      this.setState({notificationOpen:false})
+    },6000)
   }
   render() {
     const { classes, ...rest } = this.props
@@ -123,7 +131,15 @@ class Species extends Component {
           }
           />
         </ItemGrid>
-        <SpeciesContent handleModalState={this.handleModalState} handleValueChange={this.handleValueChange} showModal={this.state.showModal} model={this.state.model} ok={this.handleSave} />
+        <SpeciesContent handleModalState={this.handleModalState} showModal={this.state.showModal} model={this.state.model} ok={this.handleSave} />
+        <Snackbar
+          place="tr"
+          color={this.state.notification.status}
+          message={this.state.notification.message}
+          open={this.state.notificationOpen}
+          closeNotification={() => this.setState({ notificationOpen: false })}
+          close
+        />
       </Grid>
     )
   }
