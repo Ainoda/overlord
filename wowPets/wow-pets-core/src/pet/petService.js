@@ -3,9 +3,9 @@ const petDao = require('./petDao');
 const petService = {
   insert(pet) {
     let result;
-    if(Array.isArray(pet)){
+    if (Array.isArray(pet)) {
       result = petDao.insertMany(pet);
-    }else {
+    } else {
       result = petDao.insertOne(pet);
     }
     return result;

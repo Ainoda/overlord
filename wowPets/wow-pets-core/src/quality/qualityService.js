@@ -3,9 +3,9 @@ const qualityDao = require('./qualityDao');
 const qualityService = {
   insert(quality) {
     let result;
-    if(Array.isArray(quality)){
+    if (Array.isArray(quality)) {
       result = qualityDao.insertMany(quality);
-    }else {
+    } else {
       result = qualityDao.insertOne(quality);
     }
     return result;

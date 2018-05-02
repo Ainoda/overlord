@@ -15,13 +15,13 @@ const petDao = {
     return await database.deleteMany(PET_COLLECTION, where);
   },
   async updateOne(where, update) {
-    return await database.updateOne(PET_COLLECTION,where, update);
+    return await database.updateOne(PET_COLLECTION, where, update);
   },
   async updateMany(where, update) {
-    return await database.updateMany(PET_COLLECTION,where, update);
+    return await database.updateMany(PET_COLLECTION, where, update);
   },
-  async find(where){
-    return await database.find(PET_COLLECTION,where);
+  async find(where) {
+    return await database.find(PET_COLLECTION, where);
   }
 }
 

@@ -15,13 +15,13 @@ const petDimensionDao = {
     return await database.deleteMany(PET_DIMENSION_COLLECTION, where);
   },
   async updateOne(where, update) {
-    return await database.updateOne(PET_DIMENSION_COLLECTION,where, update);
+    return await database.updateOne(PET_DIMENSION_COLLECTION, where, update);
   },
   async updateMany(where, update) {
-    return await database.updateMany(PET_DIMENSION_COLLECTION,where, update);
+    return await database.updateMany(PET_DIMENSION_COLLECTION, where, update);
   },
-  async find(where){
-    return await database.find(PET_DIMENSION_COLLECTION,where);
+  async find(where) {
+    return await database.find(PET_DIMENSION_COLLECTION, where);
   }
 }
 

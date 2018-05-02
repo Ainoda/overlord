@@ -3,9 +3,9 @@ const weatherDao = require('./weatherDao');
 const weatherService = {
   insert(weather) {
     let result;
-    if(Array.isArray(weather)){
+    if (Array.isArray(weather)) {
       result = weatherDao.insertMany(weather);
-    }else {
+    } else {
       result = weatherDao.insertOne(weather);
     }
     return result;

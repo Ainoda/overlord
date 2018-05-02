@@ -1,4 +1,3 @@
-
 class petDimension {
   // pet三维
   constructor(code, hp, attack, speed) {

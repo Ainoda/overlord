@@ -3,9 +3,9 @@ const speciesDao = require('./speciesDao');
 const speciesService = {
   insert(species) {
     let result;
-    if(Array.isArray(species)){
+    if (Array.isArray(species)) {
       result = speciesDao.insertMany(species);
-    }else {
+    } else {
       result = speciesDao.insertOne(species);
     }
     return result;

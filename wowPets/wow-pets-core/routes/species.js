@@ -12,13 +12,12 @@ router.delete('/delete', (req, res, next) => {
   // speciesService.delete({name:1}).then(result => {
   //   res.send(result);
   // });
-  res.send({ok:1});
+  res.send({ok: 1});
 });
 router.put('/update', (req, res, next) => {
-  // speciesService.update({name:1},{code:2}).then(result => {
-  //   res.send(result);
-  // });
-  res.send({ok:1});
+  speciesService.update(req.body).then(result => {
+    res.send(result);
+  });
 });
 router.get('/find', (req, res, next) => {
   speciesService.find().then(result => {

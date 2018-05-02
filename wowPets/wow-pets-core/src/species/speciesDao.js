@@ -15,13 +15,13 @@ const speciesDao = {
     return await database.deleteMany(SPECIES_COLLECTION, where);
   },
   async updateOne(where, update) {
-    return await database.updateOne(SPECIES_COLLECTION,where, update);
+    return await database.updateOne(SPECIES_COLLECTION, where, update);
   },
   async updateMany(where, update) {
-    return await database.updateMany(SPECIES_COLLECTION,where, update);
+    return await database.updateMany(SPECIES_COLLECTION, where, update);
   },
-  async find(where){
-    return await database.find(SPECIES_COLLECTION,where);
+  async find(where) {
+    return await database.find(SPECIES_COLLECTION, where);
   }
 }
 

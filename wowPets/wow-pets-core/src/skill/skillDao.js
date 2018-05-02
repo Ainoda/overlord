@@ -15,13 +15,13 @@ const skillDao = {
     return await database.deleteMany(WEATHER_COLLECTION, where);
   },
   async updateOne(where, update) {
-    return await database.updateOne(WEATHER_COLLECTION,where, update);
+    return await database.updateOne(WEATHER_COLLECTION, where, update);
   },
   async updateMany(where, update) {
-    return await database.updateMany(WEATHER_COLLECTION,where, update);
+    return await database.updateMany(WEATHER_COLLECTION, where, update);
   },
-  async find(where){
-    return await database.find(WEATHER_COLLECTION,where);
+  async find(where) {
+    return await database.find(WEATHER_COLLECTION, where);
   }
 }
 

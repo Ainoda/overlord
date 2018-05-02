@@ -3,9 +3,9 @@ const skillDao = require('./skillDao');
 const skillService = {
   insert(skill) {
     let result;
-    if(Array.isArray(skill)){
+    if (Array.isArray(skill)) {
       result = skillDao.insertMany(skill);
-    }else {
+    } else {
       result = skillDao.insertOne(skill);
     }
     return result;

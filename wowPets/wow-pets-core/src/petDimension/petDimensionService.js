@@ -3,9 +3,9 @@ const petDimensionDao = require('./petDimensionDao');
 const petDimensionService = {
   insert(petDimension) {
     let result;
-    if(Array.isArray(petDimension)){
+    if (Array.isArray(petDimension)) {
       result = petDimensionDao.insertMany(petDimension);
-    }else {
+    } else {
       result = petDimensionDao.insertOne(petDimension);
     }
     return result;
