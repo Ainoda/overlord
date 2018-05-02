@@ -43,7 +43,7 @@ class CustomTable extends Component {
           {tableData.slice(page*rowsPerPage,page*rowsPerPage+rowsPerPage).map((prop, key) => {
             const isSelected = key === selected
             return (
-              <TableRow hover key={key} onClick={e => handleClick ? handleClick(e, key) : null} aria-checked={isSelected} selected={isSelected}>
+              <TableRow hover key={prop._id} onClick={e => handleClick ? handleClick(e, key) : null} aria-checked={isSelected} selected={isSelected}>
                 { handleClick ? <TableCell padding="checkbox">
                   <Checkbox checked={isSelected}/>
                 </TableCell> : null }
