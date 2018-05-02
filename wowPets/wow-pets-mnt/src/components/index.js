@@ -40,6 +40,8 @@ import Sidebar from "./Sidebar/Sidebar.js"
 // // // Snackbar
 // #############################
 
+import Snackbar from "./Snackbar/Snackbar.js"
+
 // ##############################
 // // // Table
 // #############################
@@ -80,6 +82,7 @@ export {
   // Sidebar
   Sidebar,
   //Snackbar
+  Snackbar,
   // Table
   Table,
   // Tasks
@@ -87,5 +90,5 @@ export {
   // Modal
   Modal,
   // Form
-  FormFooter
+  FormFooter,
 }
