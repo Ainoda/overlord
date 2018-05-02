@@ -43,7 +43,7 @@ class SpeciesContent extends Component {
           </Grid>
         }
         footer={
-          <FormFooter className={classes.formFooter} summitable={this.state.name && this.state.code} cancel={e => handleModalState(false)} ok={e => ok(this.state)} />
+          <FormFooter className={classes.formFooter} summitable={this.state.name && this.state.code} cancel={e => handleModalState(false)} ok={e => ok(model._id?'edit':'add',this.state)} />
         }/>
     )
   }

@@ -85,8 +85,8 @@ class Species extends Component {
       this.notification('warning','请选择一条记录')
     }
   }
-  handleSave(model) {
-    if(this.state.model._id){
+  handleSave(type, model) {
+    if(type == 'edit'){
       model._id = this.state.model._id
       axios.put('/species/update',model).then(result => {
         this.handleSearch()
