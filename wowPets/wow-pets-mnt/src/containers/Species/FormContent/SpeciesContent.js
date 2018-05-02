@@ -16,7 +16,6 @@ class SpeciesContent extends Component {
     this.setState({...props.model})
   }
   handleValueChange(key,value) {
-    console.log(key,value)
     this.setState({[key]:value})
   }
   render() {

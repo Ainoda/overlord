@@ -33,6 +33,7 @@ class Species extends Component {
     this.handleModalState = this.handleModalState.bind(this)
     this.handleClickAdd = this.handleClickAdd.bind(this)
     this.handleClickEdit = this.handleClickEdit.bind(this)
+    this.handleClickDelete = this.handleClickDelete.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
     this.handleSave = this.handleSave.bind(this)
   }
@@ -72,14 +73,31 @@ class Species extends Component {
       this.notification('warning','请选择一条记录')
     }
   }
+  handleClickDelete() {
+    if(this.state.selected >= 0){
+      let model = this.state.tableData[this.state.selected]
+      axios.delete(`/species/delete/${model._id}`).then(result => {
+        this.handleSearch()
+        this.handleModalState(false)
+        this.notification('success','删除成功')
+      })
+    }else {
+      this.notification('warning','请选择一条记录')
+    }
+  }
   handleSave(model) {
     if(this.state.model._id){
-      this.handleModalState(false)
-      this.notification('success','修改成功')
+      model._id = this.state.model._id
+      axios.put('/species/update',model).then(result => {
+        this.handleSearch()
+        this.handleModalState(false)
+        this.notification('success','修改成功')
+      })
     }else {
       axios.post('/species/insert',model).then(result => {
         this.handleSearch()
         this.handleModalState(false)
+        this.notification('success','新增成功')
       })
     }
   }
@@ -119,7 +137,7 @@ class Species extends Component {
                 <Edit/>
                 修改
               </Button>
-              <Button variant="raised" color="secondary" className={classes.button}>
+              <Button variant="raised" color="secondary" onClick={this.handleClickDelete} className={classes.button}>
                 <Delete/>
                 删除
               </Button>
