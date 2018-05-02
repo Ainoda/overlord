@@ -15,8 +15,8 @@ class SpeciesContent extends Component {
   componentWillReceiveProps(props) {
     this.setState({...props.model})
   }
-  handleValueChange(key,value) {
-    this.setState({[key]:value})
+  handleValueChange(e) {
+    this.setState({[e.target.name]:e.target.value})
   }
   render() {
     const { classes,handleModalState,showModal,model,ok,...rest} = this.props
@@ -29,16 +29,16 @@ class SpeciesContent extends Component {
         content={
           <Grid container>
             <ItemGrid xs={12} sm={12} md={12}>
-              <CustomInput labelText="名称" inputProps={{onChange: e => this.handleValueChange("name", e.target.value),value:this.state.name}} formControlProps={{fullWidth: true}}/>
+              <CustomInput labelText="名称" inputProps={{onChange:this.handleValueChange,value:this.state.name,name:"name"}} formControlProps={{fullWidth: true}}/>
             </ItemGrid>
             <ItemGrid xs={12} sm={12} md={12}>
-              <CustomInput labelText="编码" inputProps={{onChange: e => this.handleValueChange("code", e.target.value),value:this.state.code}} formControlProps={{fullWidth: true}}/>
+              <CustomInput labelText="编码" inputProps={{onChange:this.handleValueChange,value:this.state.code,name:"code"}} formControlProps={{fullWidth: true}}/>
             </ItemGrid>
             <ItemGrid xs={12} sm={12} md={12}>
-              <CustomInput labelText="猎物" inputProps={{onChange: e => this.handleValueChange("prey", e.target.value),value:this.state.prey}} formControlProps={{fullWidth: true}}/>
+              <CustomInput labelText="猎物" inputProps={{onChange:this.handleValueChange,value:this.state.prey,name:"prey"}} formControlProps={{fullWidth: true}}/>
             </ItemGrid>
             <ItemGrid xs={12} sm={12} md={12}>
-              <CustomInput labelText="天敌" inputProps={{onChange: e => this.handleValueChange("hunter", e.target.value),value:this.state.hunter}} formControlProps={{fullWidth: true}}/>
+              <CustomInput labelText="天敌" inputProps={{onChange:this.handleValueChange,value:this.state.hunter,name:"hunter"}} formControlProps={{fullWidth: true}}/>
             </ItemGrid>
           </Grid>
         }
