@@ -10,11 +10,11 @@ const speciesService = {
     }
     return result;
   },
-  delete(where) {
-    return speciesDao.deleteOne(where);
+  delete(_id) {
+    return speciesDao.deleteOne(_id);
   },
-  update(where, update) {
-    return speciesDao.updateOne(where, update);
+  update(species) {
+    return speciesDao.updateOne(species);
   },
   find(where) {
     return speciesDao.find(where);

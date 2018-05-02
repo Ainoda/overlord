@@ -8,11 +8,10 @@ router.post('/insert', (req, res, next) => {
     res.send(result);
   });
 });
-router.delete('/delete', (req, res, next) => {
-  // speciesService.delete({name:1}).then(result => {
-  //   res.send(result);
-  // });
-  res.send({ok: 1});
+router.delete('/delete/:id', (req, res, next) => {
+  speciesService.delete(req.params.id).then(result => {
+    res.send(result);
+  });
 });
 router.put('/update', (req, res, next) => {
   speciesService.update(req.body).then(result => {
