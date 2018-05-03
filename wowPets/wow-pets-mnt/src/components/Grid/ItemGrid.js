@@ -1,9 +1,9 @@
-import React, { Component } from "react"
-import { withStyles, Grid } from "material-ui"
+import React, { Component } from 'react'
+import { withStyles, Grid } from 'material-ui'
 
 const style = {
   grid: {
-    padding: "0 15px !important"
+    padding: '0 15px !important'
   }
 }
 

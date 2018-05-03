@@ -1,8 +1,8 @@
-import React, { Component } from "react"
-import { withStyles,Slide,Modal,Grid } from "material-ui"
-import { RegularCard,ItemGrid } from "../../components"
+import React, { Component } from 'react'
+import { withStyles,Slide,Modal,Grid } from 'material-ui'
+import { RegularCard,ItemGrid } from '../../components'
 
-import modalStyle from "./modalStyle"
+import modalStyle from './modalStyle'
 
 class CustomModal extends Component {
   render() {
@@ -15,7 +15,7 @@ class CustomModal extends Component {
             <Slide direction="up" in={showModal} mountOnEnter unmountOnExit>
               <RegularCard
               cardTitle={title}
-              cardSubtitle={subTitle?subTitle:""}
+              cardSubtitle={subTitle?subTitle:''}
               headerColor={headerColor}
               content={content}
               footer={footer}

@@ -1,18 +1,18 @@
-import React,{ Component } from "react";
-import { withStyles, SnackbarContent as Snack, IconButton } from "material-ui";
-import { Close } from "material-ui-icons";
-import PropTypes from "prop-types";
-import cx from "classnames";
+import React,{ Component } from 'react'
+import { withStyles, SnackbarContent as Snack, IconButton } from 'material-ui'
+import { Close } from 'material-ui-icons'
+import PropTypes from 'prop-types'
+import cx from 'classnames'
 
-import snackbarContentStyle from "./snackbarContentStyle";
+import snackbarContentStyle from './snackbarContentStyle'
 
 class SnackbarContent extends Component {
   render() {
-    const { classes, message, color, close, icon } = this.props;
-    var action = [];
+    const { classes, message, color, close, icon } = this.props
+    var action = []
     const messageClasses = cx({
       [classes.iconMessage]: icon !== undefined
-    });
+    })
     if (close !== undefined) {
       action = [
         <IconButton
@@ -23,7 +23,7 @@ class SnackbarContent extends Component {
         >
         <Close className={classes.close} />
         </IconButton>
-      ];
+      ]
     }
     return (
       <Snack
@@ -34,21 +34,21 @@ class SnackbarContent extends Component {
         </div>
       }
       classes={{
-        root: classes.root + " " + classes[color],
+        root: classes.root + ' ' + classes[color],
         message: classes.message
       }}
       action={action}
       />
-    );
+    )
   }
 }
 
 SnackbarContent.propTypes = {
   classes: PropTypes.object.isRequired,
   message: PropTypes.node.isRequired,
-  color: PropTypes.oneOf(["info", "success", "warning", "danger", "primary"]),
+  color: PropTypes.oneOf(['info', 'success', 'warning', 'danger', 'primary']),
   close: PropTypes.bool,
   icon: PropTypes.func
-};
+}
 
-export default withStyles(snackbarContentStyle)(SnackbarContent);
+export default withStyles(snackbarContentStyle)(SnackbarContent)

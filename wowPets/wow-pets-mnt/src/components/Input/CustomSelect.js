@@ -1,10 +1,10 @@
-import React,{ Component } from "react"
-import { withStyles,FormControl,InputLabel,Select,FormHelperText,MenuItem,Input } from "material-ui"
-import { Clear, Check } from "material-ui-icons"
-import PropTypes from "prop-types"
-import cx from "classnames"
+import React,{ Component } from 'react'
+import { withStyles,FormControl,InputLabel,Select,FormHelperText,MenuItem,Input } from 'material-ui'
+import { Clear, Check } from 'material-ui-icons'
+import PropTypes from 'prop-types'
+import cx from 'classnames'
 
-import customInputStyle from "./customInputStyle"
+import customInputStyle from './customInputStyle'
 
 class CustomSelect extends Component {
   render() {

@@ -1,9 +1,9 @@
-import React, {Component} from "react"
-import {withStyles, Card, CardContent, CardHeader, CardActions} from "material-ui"
-import PropTypes from "prop-types"
-import cx from "classnames"
+import React, {Component} from 'react'
+import {withStyles, Card, CardContent, CardHeader, CardActions} from 'material-ui'
+import PropTypes from 'prop-types'
+import cx from 'classnames'
 
-import regularCardStyle from "./regularCardStyle"
+import regularCardStyle from './regularCardStyle'
 
 class RegularCard extends Component {
   render() {
@@ -25,7 +25,7 @@ class RegularCard extends Component {
     return (
       <Card className={classes.card + plainCardClasses}>
         <CardHeader classes={{
-            root: `${classes.cardHeader} ${classes[headerColor + "CardHeader"]}${cardPlainHeaderClasses}`,
+            root: `${classes.cardHeader} ${classes[headerColor + 'CardHeader']}${cardPlainHeaderClasses}`,
             title: classes.cardTitle,
             subheader: classes.cardSubtitle
           }} title={cardTitle} subheader={cardSubtitle}/>
@@ -41,13 +41,13 @@ class RegularCard extends Component {
 }
 
 RegularCard.defaultProps = {
-  headerColor: "purple"
+  headerColor: 'purple'
 }
 
 RegularCard.propTypes = {
   plainCard: PropTypes.bool,
   classes: PropTypes.object.isRequired,
-  headerColor: PropTypes.oneOf(["orange", "green", "red", "blue", "purple"]),
+  headerColor: PropTypes.oneOf(['orange', 'green', 'red', 'blue', 'purple']),
   cardTitle: PropTypes.node,
   cardSubtitle: PropTypes.node,
   content: PropTypes.node,

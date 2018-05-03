@@ -4,7 +4,7 @@ const speciesStyle = theme => ({
   },
   searchButton:{
     margin: theme.spacing.unit,
-    float: "right"
+    float: 'right'
   }
 })
 

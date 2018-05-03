@@ -1,18 +1,18 @@
-import React,{ Component } from "react";
-import { withStyles, Snackbar as Snack, IconButton } from "material-ui";
-import { Close } from "material-ui-icons";
-import PropTypes from "prop-types";
-import cx from "classnames";
+import React,{ Component } from 'react'
+import { withStyles, Snackbar as Snack, IconButton } from 'material-ui'
+import { Close } from 'material-ui-icons'
+import PropTypes from 'prop-types'
+import cx from 'classnames'
 
-import snackbarContentStyle from "./snackbarContentStyle";
+import snackbarContentStyle from './snackbarContentStyle'
 
 class Snackbar extends Component {
   render() {
-    const { classes, message, color, close, icon, place, open } = this.props;
-    var action = [];
+    const { classes, message, color, close, icon, place, open } = this.props
+    var action = []
     const messageClasses = cx({
       [classes.iconMessage]: icon !== undefined
-    });
+    })
     if (close !== undefined) {
       action = [
         <IconButton
@@ -24,16 +24,16 @@ class Snackbar extends Component {
         >
         <Close className={classes.close} />
         </IconButton>
-      ];
+      ]
     }
     return (
       <Snack
       anchorOrigin={{
-        vertical: place.indexOf("t") === -1 ? "bottom" : "top",
+        vertical: place.indexOf('t') === -1 ? 'bottom' : 'top',
         horizontal:
-        place.indexOf("l") !== -1
-        ? "left"
-        : place.indexOf("c") !== -1 ? "center" : "right"
+        place.indexOf('l') !== -1
+        ? 'left'
+        : place.indexOf('c') !== -1 ? 'center' : 'right'
       }}
       open={open}
       message={
@@ -45,23 +45,23 @@ class Snackbar extends Component {
       action={action}
       SnackbarContentProps={{
         classes: {
-          root: classes.root + " " + classes[color],
+          root: classes.root + ' ' + classes[color],
           message: classes.message
         }
       }}
       />
-    );
+    )
   }
 }
 
 Snackbar.propTypes = {
   classes: PropTypes.object.isRequired,
   message: PropTypes.node.isRequired,
-  color: PropTypes.oneOf(["info", "success", "warning", "danger", "primary"]),
+  color: PropTypes.oneOf(['info', 'success', 'warning', 'danger', 'primary']),
   close: PropTypes.bool,
   icon: PropTypes.func,
-  place: PropTypes.oneOf(["tl", "tr", "tc", "br", "bl", "bc"]),
+  place: PropTypes.oneOf(['tl', 'tr', 'tc', 'br', 'bl', 'bc']),
   open: PropTypes.bool
-};
+}
 
-export default withStyles(snackbarContentStyle)(Snackbar);
+export default withStyles(snackbarContentStyle)(Snackbar)

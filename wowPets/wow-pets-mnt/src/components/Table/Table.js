@@ -1,4 +1,4 @@
-import React, {Component} from "react"
+import React, {Component} from 'react'
 import {
   withStyles,
   Table,
@@ -8,10 +8,10 @@ import {
   TablePagination,
   TableCell,
   Checkbox
-} from "material-ui"
-import PropTypes from "prop-types"
+} from 'material-ui'
+import PropTypes from 'prop-types'
 
-import tableStyle from "./tableStyle"
+import tableStyle from './tableStyle'
 
 class CustomTable extends Component {
   render() {
@@ -87,19 +87,19 @@ class CustomTable extends Component {
 }
 
 CustomTable.defaultProps = {
-  tableHeaderColor: "gray"
+  tableHeaderColor: 'gray'
 }
 
 CustomTable.propTypes = {
   classes: PropTypes.object.isRequired,
   tableHeaderColor: PropTypes.oneOf([
-    "warning",
-    "primary",
-    "danger",
-    "success",
-    "info",
-    "rose",
-    "gray"
+    'warning',
+    'primary',
+    'danger',
+    'success',
+    'info',
+    'rose',
+    'gray'
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string))

@@ -1,13 +1,13 @@
-import React, { Component } from "react"
-import { Switch, Route, Redirect } from "react-router-dom"
-import PerfectScrollbar from "perfect-scrollbar"
+import React, { Component } from 'react'
+import { Switch, Route, Redirect } from 'react-router-dom'
+import PerfectScrollbar from 'perfect-scrollbar'
 
-import "perfect-scrollbar/css/perfect-scrollbar.css"
-import { withStyles } from "material-ui"
-import appRoutes from "../../routes/app"
-import appStyle from "./appStyle.js"
-import image from "../../asset/img/sidebar.jpg"
-import { Sidebar,Header } from "../../components"
+import 'perfect-scrollbar/css/perfect-scrollbar.css'
+import { withStyles } from 'material-ui'
+import appRoutes from '../../routes/app'
+import appStyle from './appStyle.js'
+import image from '../../asset/img/sidebar.jpg'
+import { Sidebar,Header } from '../../components'
 
 
 const switchRoutes = (
@@ -28,7 +28,7 @@ class App extends Component {
 
     this.handleDrawerToggle = this.handleDrawerToggle.bind(this)
   }
-  
+
   handleDrawerToggle() {
     this.setState({ mobileOpen: !this.state.mobileOpen })
   }
@@ -47,7 +47,7 @@ class App extends Component {
       <div className={classes.wrapper}>
         <Sidebar
           routes={appRoutes}
-          logoText={"宠物数据库"}
+          logoText="宠物数据库"
           image={image}
           handleDrawerToggle={this.handleDrawerToggle}
           open={this.state.mobileOpen}

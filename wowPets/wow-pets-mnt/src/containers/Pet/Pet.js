@@ -1,22 +1,22 @@
-import React, { Component } from "react"
-import { withStyles,Grid,Button } from "material-ui"
-import axios from "axios"
+import React, { Component } from 'react'
+import { withStyles,Grid,Button } from 'material-ui'
+import axios from 'axios'
 import {
   Add,
   Edit,
   Delete
-} from "material-ui-icons"
+} from 'material-ui-icons'
 
-import { RegularCard,Table,ItemGrid } from "../../components"
-import petStyle from "./petStyle"
+import { RegularCard,Table,ItemGrid } from '../../components'
+import petStyle from './petStyle'
 
 class Pet extends Component {
   constructor(props) {
     super(props)
     this.state = {
       tableData:[],
-      tableHead:["名称", "编码", "类型", "获取方式", "技能1", "技能2", "技能3", "技能4", "技能5", "技能6"],
-      tableDataKey:["name","code","dimension","get","firstsk","sencondsk","thirdsk","fourthsk","fifthsk","sixthsk"],
+      tableHead:['名称', '编码', '类型', '获取方式', '技能1', '技能2', '技能3', '技能4', '技能5', '技能6'],
+      tableDataKey:['name','code','dimension','get','firstsk','sencondsk','thirdsk','fourthsk','fifthsk','sixthsk'],
       page:0,
       rowsPerPage:10,
       selected:''

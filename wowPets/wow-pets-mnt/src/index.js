@@ -1,10 +1,10 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import { createBrowserHistory } from "history"
-import { Router, Route, Switch } from "react-router-dom"
-import "./asset/css/index.css"
-import indexRoutes from "./routes/index"
-import httpInterceptor from "./httpInterceptor"
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { createBrowserHistory } from 'history'
+import { Router, Route, Switch } from 'react-router-dom'
+import './asset/css/index.css'
+import indexRoutes from './routes/index'
+import httpInterceptor from './httpInterceptor'
 
 httpInterceptor.init()
 const hist = createBrowserHistory()
@@ -17,5 +17,5 @@ ReactDOM.render(
       })}
     </Switch>
   </Router>,
-  document.getElementById("root")
+  document.getElementById('root')
 )

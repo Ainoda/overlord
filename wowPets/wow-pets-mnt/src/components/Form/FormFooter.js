@@ -1,7 +1,7 @@
-import React, { Component } from "react"
-import { withStyles,Button } from "material-ui"
+import React, { Component } from 'react'
+import { withStyles,Button } from 'material-ui'
 
-import formFooterStyle from "./formFooterStyle"
+import formFooterStyle from './formFooterStyle'
 
 class FormFooter extends Component {
   render() {

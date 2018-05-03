@@ -1,16 +1,16 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
 import {
   withStyles,
   AppBar,
   Toolbar,
   Button
-} from "material-ui"
-import cx from "classnames"
-import headerStyle from "./headerStyle"
+} from 'material-ui'
+import cx from 'classnames'
+import headerStyle from './headerStyle'
 
 class Header extends Component {
   makeBrand() {
-    let name = ""
+    let name = ''
     this.props.routes.map((prop, key) => {
       if (prop.path === this.props.location.pathname) {
         name = prop.navbarName

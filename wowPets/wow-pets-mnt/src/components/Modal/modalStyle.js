@@ -1,6 +1,6 @@
 const modalStyle = theme => ({
   modal:{
-    marginTop:"15px"
+    marginTop:'15px'
   }
 })
 

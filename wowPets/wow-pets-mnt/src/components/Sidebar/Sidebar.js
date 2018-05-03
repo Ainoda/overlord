@@ -1,7 +1,7 @@
-import React, {Component} from "react"
-import {NavLink} from "react-router-dom"
-import cx from "classnames"
-import sidebarStyle from "./sidebarStyle"
+import React, {Component} from 'react'
+import {NavLink} from 'react-router-dom'
+import cx from 'classnames'
+import sidebarStyle from './sidebarStyle'
 import {
   withStyles,
   Drawer,
@@ -10,7 +10,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText
-} from "material-ui"
+} from 'material-ui'
 
 class Sidebar extends Component {
   // verifies if routeName is the one active (in browser input)
