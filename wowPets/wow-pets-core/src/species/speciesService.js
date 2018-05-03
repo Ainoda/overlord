@@ -16,8 +16,20 @@ const speciesService = {
   update(species) {
     return speciesDao.updateOne(species);
   },
-  find(where) {
-    return speciesDao.find(where);
+  async find(where) {
+    return await speciesDao.find(where).then(species => {
+      return species.map(entity => {
+        species.map(prop => {
+          if(entity.tap == prop.code){
+            entity.tapName = prop.name;
+          }
+          if(entity.hit == prop.code){
+            entity.hitName = prop.name;
+          }
+        });
+        return entity;
+      });
+    });
   }
 }
 

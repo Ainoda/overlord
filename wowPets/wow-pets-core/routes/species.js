@@ -22,7 +22,6 @@ router.get('/find', (req, res, next) => {
   speciesService.find().then(result => {
     res.send(result);
   });
-  // res.send({ok:1});
 });
 
 module.exports = router;
