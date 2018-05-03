@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { withStyles,Grid } from 'material-ui'
-import axios from 'axios'
 
 import { CustomInput as Input,CustomSelect as Select,ItemGrid,FormFooter,Modal } from '../../../components'
 import speciesContentStyle from './speciesContentStyle'
@@ -43,7 +42,7 @@ class SpeciesContent extends Component {
           </Grid>
         }
         footer={
-          <FormFooter className={classes.formFooter} summitable={this.state.name && this.state.code} cancel={e => handleModalState(false)} ok={e => ok(model._id?'edit':'add',this.state)} />
+          <FormFooter className={classes.formFooter} summitAble={this.state.name && this.state.code} cancel={e => handleModalState(false)} ok={e => ok(model._id?'edit':'add',this.state)} />
         }/>
     )
   }

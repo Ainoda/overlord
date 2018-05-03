@@ -8,7 +8,7 @@ import {
   Search
 } from 'material-ui-icons'
 
-import { RegularCard,Table,ItemGrid,Snackbar } from '../../components'
+import { RegularCard,Table,ItemGrid,Snackbar,Modal,FormFooter } from '../../components'
 import speciesStyle from './speciesStyle'
 import SpeciesContent from './FormContent/SpeciesContent'
 
@@ -23,6 +23,7 @@ class Species extends Component {
       rowsPerPage:10,
       selected:-1,
       showModal:false,
+      showDelete:false,
       model:{name:'',code:'',tap:'',hit:''},
       notification:{status:'',message:''}
     }
@@ -36,6 +37,7 @@ class Species extends Component {
     this.handleClickDelete = this.handleClickDelete.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
     this.handleSave = this.handleSave.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
   componentDidMount() {
     this.handleSearch()
@@ -75,18 +77,21 @@ class Species extends Component {
   }
   handleClickDelete() {
     if(this.state.selected >= 0){
-      let model = this.state.tableData[this.state.selected]
-      axios.delete(`/species/delete/${model._id}`).then(result => {
-        this.handleSearch()
-        this.handleModalState(false)
-        this.notification('success','删除成功')
-      })
+      this.setState({showDelete:true})
     }else {
-      this.notification('warning','请选择一条记录')
+      this.notification('warning', '请选择一条记录')
     }
   }
+  handleDelete() {
+    let model = this.state.tableData[this.state.selected]
+    axios.delete(`/species/delete/${model._id}`).then(result => {
+      this.handleSearch()
+      this.handleModalState(false)
+      this.notification('success','删除成功')
+    })
+  }
   handleSave(type, model) {
-    if(type == 'edit'){
+    if(type === 'edit'){
       model._id = this.state.model._id
       axios.put('/species/update',model).then(result => {
         this.handleSearch()
@@ -164,6 +169,17 @@ class Species extends Component {
           closeNotification={() => this.setState({ notificationOpen: false })}
           close
         />
+        <Modal
+          title="确认删除"
+          showModal={this.state.showDelete}
+          headerColor="red"
+          content={
+            <div>确认删除吗？</div>
+          }
+          footer={
+            <FormFooter className={classes.formFooter} cancel={e => this.setState({showDelete:false})} ok={this.handleDelete} />
+          }
+        ></Modal>
       </Grid>
     )
   }
