@@ -16,6 +16,8 @@ router.delete('/delete/:id', (req, res, next) => {
 router.put('/update', (req, res, next) => {
   speciesService.update(req.body).then(result => {
     res.send(result);
+  }).catch(error => {
+    res.send(error);
   });
 });
 router.get('/find', (req, res, next) => {
