@@ -17,14 +17,14 @@ class Species extends Component {
     super(props)
     this.state = {
       tableData:[],
-      tableHead:["名称", "编码", "猎物", "天敌"],
-      tableDataKey:["name","code","prey","hunter"],
+      tableHead:["名称", "编码", "轻击", "重击"],
+      tableDataKey:["name","code","tapName","hitName"],
       page:0,
       rowsPerPage:10,
       selected:-1,
       showModal:false,
-      model:{name:'',code:'',prey:'',hunter:''},
-      notification:{status:'',message:''}
+      model:{name:"",code:"",tap:"",hit:""},
+      notification:{status:"",message:""}
     }
     // This binding is necessary to make `this` work in the callback
     this.handleClick = this.handleClick.bind(this)
@@ -41,7 +41,7 @@ class Species extends Component {
     this.handleSearch()
   }
   handleSearch() {
-    axios.get('/species/find').then(result => {
+    axios.get("/species/find").then(result => {
       this.setState({tableData:result})
     })
   }
@@ -62,7 +62,7 @@ class Species extends Component {
     this.setState({showModal:state})
   }
   handleClickAdd() {
-    this.setState({model:{name:'',code:'',prey:'',hunter:''}})
+    this.setState({model:{name:"",code:"",tap:"",hit:""}})
     this.handleModalState();
   }
   handleClickEdit() {
@@ -70,7 +70,7 @@ class Species extends Component {
       this.setState({model:this.state.tableData[this.state.selected]})
       this.handleModalState();
     }else {
-      this.notification('warning','请选择一条记录')
+      this.notification("warning","请选择一条记录")
     }
   }
   handleClickDelete() {
@@ -79,25 +79,31 @@ class Species extends Component {
       axios.delete(`/species/delete/${model._id}`).then(result => {
         this.handleSearch()
         this.handleModalState(false)
-        this.notification('success','删除成功')
+        this.notification("success","删除成功")
       })
     }else {
-      this.notification('warning','请选择一条记录')
+      this.notification("warning","请选择一条记录")
     }
   }
   handleSave(type, model) {
-    if(type == 'edit'){
+    if(type == "edit"){
       model._id = this.state.model._id
-      axios.put('/species/update',model).then(result => {
+      axios.put("/species/update",model).then(result => {
         this.handleSearch()
         this.handleModalState(false)
-        this.notification('success','修改成功')
+        this.notification("success","修改成功")
       })
     }else {
-      axios.post('/species/insert',model).then(result => {
+      let obj = {
+        name:model.name,
+        code:model.code,
+        tap:model.tap,
+        hit:model.hit
+      }
+      axios.post("/species/insert",obj).then(result => {
         this.handleSearch()
         this.handleModalState(false)
-        this.notification('success','新增成功')
+        this.notification("success","新增成功")
       })
     }
   }
@@ -149,7 +155,7 @@ class Species extends Component {
           }
           />
         </ItemGrid>
-        <SpeciesContent handleModalState={this.handleModalState} showModal={this.state.showModal} model={this.state.model} ok={this.handleSave} />
+        <SpeciesContent handleModalState={this.handleModalState} showModal={this.state.showModal} model={this.state.model} ok={this.handleSave} options={this.state.tableData}/>
         <Snackbar
           place="tr"
           color={this.state.notification.status}

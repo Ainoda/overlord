@@ -1,6 +1,6 @@
 const modalStyle = theme => ({
   formFooter: {
-    textAlign: 'right',
+    textAlign: "right",
   }
 })
 
