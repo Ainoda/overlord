@@ -73,7 +73,7 @@ class CustomSelect extends Component {
 
 CustomSelect.propTypes = {
   classes: PropTypes.object.isRequired,
-  options:PropTypes.arrayOf.isRequired,
+  options:PropTypes.arrayOf(PropTypes.object).isRequired,
   labelText: PropTypes.node,
   labelProps: PropTypes.object,
   id: PropTypes.string,

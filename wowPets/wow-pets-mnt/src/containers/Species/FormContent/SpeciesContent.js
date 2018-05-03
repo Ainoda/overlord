@@ -19,13 +19,13 @@ class SpeciesContent extends Component {
     this.setState({[e.target.name]:e.target.value})
   }
   render() {
-    const { classes,handleModalState,showModal,model,ok,options,...rest} = this.props
+    const { classes,handleModalState,showModal,model,ok,options,headerColor,...rest} = this.props
     return (
       <Modal
         {...rest}
         title={model._id ? '编辑类型' : '新增类型'}
         showModal={showModal}
-        headerColor='blue'
+        headerColor={headerColor}
         content={
           <Grid container>
             <ItemGrid xs={12} sm={12} md={12}>
@@ -47,6 +47,9 @@ class SpeciesContent extends Component {
         }/>
     )
   }
+}
+SpeciesContent.defaultProps = {
+  headerColor:'blue'
 }
 
 export default withStyles(speciesContentStyle)(SpeciesContent)

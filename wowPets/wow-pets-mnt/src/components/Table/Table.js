@@ -15,8 +15,7 @@ import tableStyle from './tableStyle'
 
 class CustomTable extends Component {
   render() {
-    const { classes, tableHead, tableDataKey, tableData, tableHeaderColor, selected, handleClick, handleChangePage, handleChangeRowsPerPage, page, rowsPerPage } = this.props
-    const rowsPerPageOptions = [10,20,30]
+    const { classes, tableHead, tableDataKey, tableData, tableHeaderColor, selected, handleClick, handleChangePage, handleChangeRowsPerPage, page, rowsPerPage, rowsPerPageOptions } = this.props
     const emptyRows = rowsPerPage ? rowsPerPage - Math.min(rowsPerPage, tableData.length - page * rowsPerPage) : 0
     return (
       <div>
@@ -87,7 +86,8 @@ class CustomTable extends Component {
 }
 
 CustomTable.defaultProps = {
-  tableHeaderColor: 'gray'
+  tableHeaderColor: 'gray',
+  rowsPerPageOptions:[10,20,30]
 }
 
 CustomTable.propTypes = {
