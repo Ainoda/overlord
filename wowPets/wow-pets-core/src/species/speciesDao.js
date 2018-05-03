@@ -5,7 +5,8 @@ const SPECIES_COLLECTION = 'species';
 
 const speciesDao = {
   async insertOne(species) {
-    return await database.insertOne(SPECIES_COLLECTION, species);
+    let obj = new Species(species.name,species.code,species.tap,species.hit)
+    return await database.insertOne(SPECIES_COLLECTION, obj);
   },
   async insertMany(species) {
     return await database.insertMany(SPECIES_COLLECTION, species);
@@ -18,7 +19,7 @@ const speciesDao = {
   },
   async updateOne(species) {
     let _id = new ObjectID(species._id);
-    let update = new Species(species.name,species.code,species.prey,species.hunter);
+    let update = new Species(species.name,species.code,species.tap,species.hit);
     return await database.updateOne(SPECIES_COLLECTION, {_id:_id}, update);
   },
   async updateMany(where, update) {
