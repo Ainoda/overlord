@@ -59,7 +59,7 @@ class CustomSelect extends Component {
           />}>
           {options ? options.map((prop,key) => {
             return (
-              <MenuItem key={key} value={prop.code}>{prop.name}</MenuItem>
+              <MenuItem key={key} value={prop._id}>{prop.name}</MenuItem>
             )
           }) : null}
         </Select>
