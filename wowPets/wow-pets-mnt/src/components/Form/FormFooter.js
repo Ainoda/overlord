@@ -5,18 +5,23 @@ import formFooterStyle from './formFooterStyle'
 
 class FormFooter extends Component {
   render() {
-    const { classes, cancel, ok, summitable, ...rest} = this.props
+    const { classes, cancel, cancelText, ok, okText, summitAble, ...rest} = this.props
     return (
       <div {...rest}>
         <Button variant="raised" color="secondary" className={classes.button} onClick={cancel}>
-          取消
+          {cancelText}
         </Button>
-        <Button variant="raised" color="primary" disabled={!summitable} className={classes.button} onClick={ok}>
-          保存
+        <Button variant="raised" color="primary" disabled={!summitAble} className={classes.button} onClick={ok}>
+          {okText}
         </Button>
       </div>
     )
   }
+}
+FormFooter.defaultProps = {
+  cancelText:'取消',
+  okText:'确定',
+  summitAble:true
 }
 
 export default withStyles(formFooterStyle)(FormFooter)
