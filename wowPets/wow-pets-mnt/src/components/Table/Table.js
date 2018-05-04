@@ -14,8 +14,28 @@ import PropTypes from 'prop-types'
 import tableStyle from './tableStyle'
 
 class CustomTable extends Component {
+  constructor(props) {
+    super(props)
+
+    this.getSelected = this.getSelected.bind(this)
+  }
+  getSelected(isSelected, key) {
+    let result = this.props.mutiSelect ?[...this.props.selected] : this.props.selected;
+    if(isSelected){
+      if(this.props.mutiSelect){
+        for (let i = 0; i < this.props.selected.length; i++) {
+          this.props.selected[i]===key?result.splice(i,1):''
+        }
+      }else {
+        result = -1
+      }
+    }else {
+      this.props.mutiSelect ? result.push(key) : result = key
+    }
+    return result
+  }
   render() {
-    const { classes, tableHead, tableDataKey, tableData, tableHeaderColor, selected, handleClick, handleChangePage, handleChangeRowsPerPage, page, rowsPerPage, rowsPerPageOptions } = this.props
+    const { classes, tableHead, tableDataKey, tableData, tableHeaderColor, selected, handleClick, handleChangePage, handleChangeRowsPerPage, page, rowsPerPage, rowsPerPageOptions, mutiSelect } = this.props
     const emptyRows = rowsPerPage ? rowsPerPage - Math.min(rowsPerPage, tableData.length - page * rowsPerPage) : 0
     return (
       <div>
@@ -40,9 +60,9 @@ class CustomTable extends Component {
           ) : null}
           <TableBody>
           {tableData.slice(page*rowsPerPage,page*rowsPerPage+rowsPerPage).map((prop, key) => {
-            const isSelected = key === selected
+            const isSelected = mutiSelect ? selected.includes(key) : key === selected
             return (
-              <TableRow hover key={prop._id} onClick={e => handleClick ? handleClick(e, key) : null} aria-checked={isSelected} selected={isSelected}>
+              <TableRow hover key={prop._id} onClick={e => handleClick ? handleClick(e, this.getSelected(isSelected,key)) : null} aria-checked={isSelected} selected={isSelected}>
                 { handleClick ? <TableCell padding="checkbox">
                   <Checkbox checked={isSelected}/>
                 </TableCell> : null }
@@ -87,6 +107,7 @@ class CustomTable extends Component {
 
 CustomTable.defaultProps = {
   tableHeaderColor: 'gray',
+  mutiSelect:false,
   rowsPerPageOptions:[10,20,30]
 }
 
