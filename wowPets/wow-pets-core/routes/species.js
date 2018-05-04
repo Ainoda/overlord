@@ -6,11 +6,15 @@ const speciesService = require('../src/species/speciesService');
 router.post('/insert', (req, res, next) => {
   speciesService.insert(req.body).then(result => {
     res.send(result);
+  }).catch(error => {
+    res.send(error);
   });
 });
 router.delete('/delete/:id', (req, res, next) => {
   speciesService.delete(req.params.id).then(result => {
     res.send(result);
+  }).catch(error => {
+    res.send(error);
   });
 });
 router.put('/update', (req, res, next) => {

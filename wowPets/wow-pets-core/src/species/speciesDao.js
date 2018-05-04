@@ -5,21 +5,31 @@ const SPECIES_COLLECTION = 'species';
 
 const speciesDao = {
   async insertOne(species) {
-    let obj = new Species(species.name,species.code,species.tap,species.hit)
+    let obj = new Species(species.name,species.code,species.tap?new ObjectID(species.tap):'',species.hit?new ObjectID(species.hit):'');
     return await database.insertOne(SPECIES_COLLECTION, obj);
   },
-  async insertMany(species) {
+  async insertMany(arr) {
+    let species = arr.map((specie,index) => {
+      if(specie.tap){
+        specie.tap = new  ObjectID(specie.tap);
+      }
+      if(specie.hit){
+        specie.hit = new  ObjectID(specie.hit);
+      }
+      return specie;
+    });
     return await database.insertMany(SPECIES_COLLECTION, species);
   },
   async deleteOne(_id) {
     return await database.deleteOne(SPECIES_COLLECTION, {_id:new ObjectID(_id)});
   },
-  async deleteMany(where) {
+  async deleteMany(_ids) {
+    let where = {_id:{$in:_ids.map(_id => new ObjectID(_id))}};
     return await database.deleteMany(SPECIES_COLLECTION, where);
   },
   async updateOne(species) {
     let _id = new ObjectID(species._id);
-    let update = new Species(species.name,species.code,species.tap,species.hit);
+    let update = new Species(species.name,species.code,new ObjectID(species.tap),new ObjectID(species.hit));
     return await database.updateOne(SPECIES_COLLECTION, {_id:_id}, update);
   },
   async updateMany(where, update) {
