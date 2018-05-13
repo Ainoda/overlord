@@ -20,7 +20,7 @@ class CustomTable extends Component {
     this.getSelected = this.getSelected.bind(this)
   }
   getSelected(isSelected, key) {
-    let result = this.props.mutiSelect ?[...this.props.selected] : this.props.selected;
+    let result = this.props.mutiSelect ? [...this.props.selected] : this.props.selected
     if(isSelected){
       if(this.props.mutiSelect){
         for (let i = 0; i < this.props.selected.length; i++) {

@@ -86,8 +86,8 @@ class Species extends Component {
     let model = this.state.tableData[this.state.selected]
     axios.delete(`/species/delete/${model._id}`).then(result => {
       this.handleSearch()
-      this.handleModalState(false)
-      this.notification('success','删除成功')
+      this.setState({showDelete:false})
+      this.notification('success',result.msg)
     })
   }
   handleSave(type, model) {
