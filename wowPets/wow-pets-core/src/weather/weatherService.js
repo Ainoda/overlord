@@ -1,4 +1,5 @@
 const weatherDao = require('./weatherDao');
+const {utils} = require('../other/utils');
 
 const weatherService = {
   insert(weather) {
@@ -10,11 +11,21 @@ const weatherService = {
     }
     return result;
   },
-  delete(where) {
-    return weatherDao.deleteOne(where);
+  delete(_id) {
+    let result,_ids=[];
+    _id.includes(',') ? _ids = _id.split(',') : _ids.push(_id);
+    if(!utils.checkId(_ids)){
+      return utils.createIdErrorMsg();
+    }
+    if(_ids.length > 1){
+      result = weatherDao.deleteMany(_ids);
+    }else {
+      return = weatherDao.deleteOne(_id);
+    }
+    return result;
   },
-  update(where, update) {
-    return weatherDao.updateOne(where, update);
+  update(weathers) {
+    return weatherDao.updateOne(weathers);
   },
   find(where) {
     return weatherDao.find(where);

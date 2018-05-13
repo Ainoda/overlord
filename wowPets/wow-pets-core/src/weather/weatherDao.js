@@ -1,4 +1,6 @@
 const database = require('../../src/database');
+const ObjectID = require('mongodb').ObjectID;
+const Weather = require('./weather');
 const WEATHER_COLLECTION = 'weather';
 
 const weatherDao = {
@@ -8,14 +10,16 @@ const weatherDao = {
   async insertMany(weathers) {
     return await database.insertMany(WEATHER_COLLECTION, weathers);
   },
-  async deleteOne(where) {
-    return await database.deleteOne(WEATHER_COLLECTION, where);
+  async deleteOne(_id) {
+    return await database.deleteOne(WEATHER_COLLECTION, {_id:new ObjectID(_id)});
   },
-  async deleteMany(where) {
+  async deleteMany(_ids) {
+    let where = {_id:{$in:_ids.map(_id => new ObjectID(_id))}};
     return await database.deleteMany(WEATHER_COLLECTION, where);
   },
-  async updateOne(where, update) {
-    return await database.updateOne(WEATHER_COLLECTION, where, update);
+  async updateOne(weather) {
+    let _id = new ObjectID(weather._id);
+    return await database.updateOne(WEATHER_COLLECTION, {_id:_id}, weather);
   },
   async updateMany(where, update) {
     return await database.updateMany(WEATHER_COLLECTION, where, update);

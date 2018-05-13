@@ -25,13 +25,19 @@ const utils = {
   },
   createResMsg(status,msg,data) {
     return new Promise((resolve,reject) => {
-      let resMsg = new ResMsg(status,msg,data); 
+      let resMsg = new ResMsg(status,msg,data);
       if(status){
         resolve(resMsg);
       }else {
         reject(resMsg);
       }
     });
+  },
+  createIdErrorMsg(){
+    return new Promise((resolve,reject) => {
+      let resMsg = new ResMsg(0,'id必须是24位字符串');
+      reject(resMsg);
+    })
   },
   mongodbResMsg(type,status,res) {
     let resMsg = new ResMsg(status);

@@ -1,6 +1,6 @@
 const database = require('../../src/database');
-var ObjectID = require('mongodb').ObjectID;
-var Species = require('./species');
+const ObjectID = require('mongodb').ObjectID;
+const Species = require('./species');
 const SPECIES_COLLECTION = 'species';
 
 const speciesDao = {

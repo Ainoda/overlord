@@ -27,7 +27,7 @@ const speciesService = {
   insert(species) {
     let result;
     if(!checkSpecies(species)){
-      return utils.createResMsg(0,'id必须是24位字符串');
+      return utils.createIdErrorMsg();
     }
     if (Array.isArray(species)) {
       result = speciesDao.insertMany(species);
@@ -40,7 +40,7 @@ const speciesService = {
     let result,_ids=[];
     _id.includes(',') ? _ids = _id.split(',') : _ids.push(_id);
     if(!utils.checkId(_ids)){
-      return utils.createResMsg(0,'id必须是24位字符串');
+      return utils.createIdErrorMsg();
     }
     if(_ids.length > 1){
       result = speciesDao.deleteMany(_ids);
