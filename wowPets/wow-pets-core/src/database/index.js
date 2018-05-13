@@ -121,7 +121,7 @@ const database = {
       }
       this.db.collection(collection).find(where).toArray((err, res) => {
         if (err) throw err;
-        resolve(utils.mongodbResMsg(DB_TYPE.SELECT, RES_STATUS.SUCCESS, res.result));
+        resolve(res);
       });
     });
   }

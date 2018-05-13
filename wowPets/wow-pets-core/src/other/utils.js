@@ -14,10 +14,11 @@ const utils = {
   checkId(id) {
     if(Array.isArray(id)){
       for (let i = 0; i < id.length; i++) {
-        if(id[i].length === 24){
+        if(id[i].length !== 24){
           return false;
         }
       }
+      return true;
     }else {
       return id.length === 24;
     }
