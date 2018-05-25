@@ -20,7 +20,7 @@ const weatherService = {
     if(_ids.length > 1){
       result = weatherDao.deleteMany(_ids);
     }else {
-      return = weatherDao.deleteOne(_id);
+      result = weatherDao.deleteOne(_id);
     }
     return result;
   },
