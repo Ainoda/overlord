@@ -1,35 +1,35 @@
-const weatherDao = require('./weatherDao');
-const {utils} = require('../other/utils');
+const weatherDao = require('./weatherDao')
+const {utils} = require('../other/utils')
 
 const weatherService = {
   insert(weather) {
-    let result;
+    let result
     if (Array.isArray(weather)) {
-      result = weatherDao.insertMany(weather);
+      result = weatherDao.insertMany(weather)
     } else {
-      result = weatherDao.insertOne(weather);
+      result = weatherDao.insertOne(weather)
     }
-    return result;
+    return result
   },
   delete(_id) {
-    let result,_ids=[];
-    _id.includes(',') ? _ids = _id.split(',') : _ids.push(_id);
+    let result,_ids=[]
+    _id.includes(',') ? _ids = _id.split(',') : _ids.push(_id)
     if(!utils.checkId(_ids)){
-      return utils.createIdErrorMsg();
+      return utils.createIdErrorMsg()
     }
     if(_ids.length > 1){
-      result = weatherDao.deleteMany(_ids);
+      result = weatherDao.deleteMany(_ids)
     }else {
-      result = weatherDao.deleteOne(_id);
+      result = weatherDao.deleteOne(_id)
     }
-    return result;
+    return result
   },
   update(weathers) {
-    return weatherDao.updateOne(weathers);
+    return weatherDao.updateOne(weathers)
   },
   find(where) {
-    return weatherDao.find(where);
+    return weatherDao.find(where)
   }
 }
 
-module.exports = weatherService;
+module.exports = weatherService
