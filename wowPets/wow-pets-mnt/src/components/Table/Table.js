@@ -24,7 +24,9 @@ class CustomTable extends Component {
     if(isSelected){
       if(this.props.mutiSelect){
         for (let i = 0; i < this.props.selected.length; i++) {
-          this.props.selected[i]===key?result.splice(i,1):''
+          if(this.props.selected[i] === key) {
+            result.splice(i,1)
+          }
         }
       }else {
         result = -1

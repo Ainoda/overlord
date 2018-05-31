@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import { withStyles,Grid } from 'material-ui'
 
 import { CustomInput as Input,CustomSelect as Select,ItemGrid,FormFooter,Modal } from '../../../components'
-import speciesStyle from '../speciesStyle'
+import weatherStyle from '../weatherStyle'
 
-class SpeciesContent extends Component {
+class WeatherContent extends Component {
   constructor(props) {
     super(props)
-    this.state = {name:'',code:'',tap:'',hit:''}
+    this.state = {name:'',code:'',descriptin:'',trigger:''}
 
     this.handleValueChange = this.handleValueChange.bind(this)
   }
@@ -22,7 +22,7 @@ class SpeciesContent extends Component {
     return (
       <Modal
         {...rest}
-        title={model._id ? '编辑类型' : '新增类型'}
+        title={model._id ? '编辑天气' : '新增天气'}
         showModal={showModal}
         headerColor={headerColor}
         content={
@@ -34,10 +34,10 @@ class SpeciesContent extends Component {
               <Input labelText="编码" inputProps={{onChange:this.handleValueChange,value:this.state.code,name:'code'}} formControlProps={{fullWidth: true}}/>
             </ItemGrid>
             <ItemGrid xs={12} sm={12} md={12}>
-              <Select labelText="轻击" inputProps={{onChange:this.handleValueChange,value:this.state.tap,name:'tap'}} formControlProps={{fullWidth: true}} options={options}/>
+              <Input labelText="描述" inputProps={{onChange:this.handleValueChange,multiline:true,value:this.state.description,name:'description'}} formControlProps={{fullWidth: true}}/>
             </ItemGrid>
             <ItemGrid xs={12} sm={12} md={12}>
-              <Select labelText="重击" inputProps={{onChange:this.handleValueChange,value:this.state.hit,name:'hit'}} formControlProps={{fullWidth: true}} options={options}/>
+              <Select labelText="触发技能" inputProps={{onChange:this.handleValueChange,value:this.state.trigger,name:'trigger'}} formControlProps={{fullWidth: true}} options={options}/>
             </ItemGrid>
           </Grid>
         }
@@ -47,8 +47,8 @@ class SpeciesContent extends Component {
     )
   }
 }
-SpeciesContent.defaultProps = {
+WeatherContent.defaultProps = {
   headerColor:'blue'
 }
 
-export default withStyles(speciesStyle)(SpeciesContent)
+export default withStyles(weatherStyle)(WeatherContent)

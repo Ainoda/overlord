@@ -1,6 +1,7 @@
 import App from '../containers/App/App'
 import Pet from '../containers/Pet/Pet'
 import Species from '../containers/Species/Species'
+import Weather from '../containers/Weather/Weather'
 
 import {
   Pets,
@@ -52,7 +53,7 @@ const appRoutes = [
     sidebarName: '天气',
     navbarName: '天气',
     icon: WbSunny,
-    component: App
+    component: Weather
   },
   { redirect: true, path: '/', to: '/pet', navbarName: 'Redirect' }
 ]
