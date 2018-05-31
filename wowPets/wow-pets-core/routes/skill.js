@@ -4,28 +4,24 @@ const skillService = require('../src/skill/skillService')
 
 /* GET skill listing. */
 router.post('/insert', (req, res, next) => {
-  // skillService.insert(skill).then(result => {
-  //   res.send(result)
-  // })
-  res.send({ok: 1})
+  skillService.insert(req.body).then(result => {
+    res.send(result)
+  })
 })
-router.delete('/delete', (req, res, next) => {
-  // skillService.delete({name:1}).then(result => {
-  //   res.send(result)
-  // })
-  res.send({ok: 1})
+router.delete('/delete/:id', (req, res, next) => {
+  skillService.delete(req.params.id).then(result => {
+    res.send(result)
+  })
 })
 router.put('/update', (req, res, next) => {
-  // skillService.update({name:1},{code:2}).then(result => {
-  //   res.send(result)
-  // })
-  res.send({ok: 1})
+  skillService.update(req.body).then(result => {
+    res.send(result)
+  })
 })
 router.get('/find', (req, res, next) => {
-  // skillService.find({name:1}).then(result => {
-  //   res.send(result)
-  // })
-  res.send({ok: 1})
+  skillService.find().then(result => {
+    res.send(result)
+  })
 })
 
 module.exports = router

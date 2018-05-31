@@ -20,9 +20,6 @@ const speciesDao = {
     let update = new Species(species.name,species.code,species.tap?new ObjectID(species.tap):'',species.hit?new ObjectID(species.hit):'')
     return await database.updateOne(SPECIES_COLLECTION, {_id:_id}, update)
   },
-  async updateMany(where, update) {
-    return await database.updateMany(SPECIES_COLLECTION, where, update)
-  },
   async find(where) {
     return await database.find(SPECIES_COLLECTION, where)
   }

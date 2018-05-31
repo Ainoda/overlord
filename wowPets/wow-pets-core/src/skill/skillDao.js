@@ -1,27 +1,30 @@
 const database = require('../../src/database')
+const ObjectID = require('mongodb').ObjectID
+const Skill = require('./skill')
 const SKILL_COLLECTION = 'skill'
 
 const skillDao = {
   async insertOne(skill) {
-    return await database.insertOne(WEATHER_COLLECTION, skill)
+    let obj = new Skill(skill.name, skill.code, skill.description, skill.species ? new ObjectID(skill.species) : '')
+    return await database.insertOne(SKILL_COLLECTION, obj)
   },
-  async insertMany(skills) {
-    return await database.insertMany(WEATHER_COLLECTION, skills)
+  async insertMany(_id) {
+    return await database.insertMany(SKILL_COLLECTION, {_id:new ObjectID(_id)})
   },
-  async deleteOne(where) {
-    return await database.deleteOne(WEATHER_COLLECTION, where)
+  async deleteOne(_id) {
+    return await database.deleteOne(SKILL_COLLECTION, {_id:new ObjectID(_id)})
   },
-  async deleteMany(where) {
-    return await database.deleteMany(WEATHER_COLLECTION, where)
+  async deleteMany(_ids) {
+    let where = {_id:{$in:_ids.map(_id => new ObjectID(_id))}}
+    return await database.deleteMany(SKILL_COLLECTION, where)
   },
-  async updateOne(where, update) {
-    return await database.updateOne(WEATHER_COLLECTION, where, update)
-  },
-  async updateMany(where, update) {
-    return await database.updateMany(WEATHER_COLLECTION, where, update)
+  async updateOne(skill) {
+    let _id = new ObjectID(skill._id)
+    let update = new Skill(skill.name, skill.code, skill.description, skill.species?new ObjectID(skill.species):'')
+    return await database.updateOne(SKILL_COLLECTION, {_id:_id}, update)
   },
   async find(where) {
-    return await database.find(WEATHER_COLLECTION, where)
+    return await database.find(SKILL_COLLECTION, where)
   }
 }
 

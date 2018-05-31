@@ -5,9 +5,6 @@ const petDao = {
   async insertOne(pet) {
     return await database.insertOne(PET_COLLECTION, pet)
   },
-  async insertMany(pets) {
-    return await database.insertMany(PET_COLLECTION, pets)
-  },
   async deleteOne(where) {
     return await database.deleteOne(PET_COLLECTION, where)
   },
@@ -16,9 +13,6 @@ const petDao = {
   },
   async updateOne(where, update) {
     return await database.updateOne(PET_COLLECTION, where, update)
-  },
-  async updateMany(where, update) {
-    return await database.updateMany(PET_COLLECTION, where, update)
   },
   async find(where) {
     return await database.find(PET_COLLECTION, where)

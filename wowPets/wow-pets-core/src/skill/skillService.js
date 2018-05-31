@@ -1,13 +1,12 @@
 const skillDao = require('./skillDao')
+const {utils} = require('../other/utils')
 
 const skillService = {
   insert(skill) {
-    let result
-    if (Array.isArray(skill)) {
-      result = skillDao.insertMany(skill)
-    } else {
-      result = skillDao.insertOne(skill)
+    if(skill.species && !utils.checkId(skill.species)){
+      return utils.createIdErrorMsg()
     }
+    let result = skillDao.insertOne(skill)
     return result
   },
   delete(where) {
