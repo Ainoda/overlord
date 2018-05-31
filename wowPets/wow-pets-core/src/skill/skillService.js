@@ -1,4 +1,5 @@
 const skillDao = require('./skillDao')
+const speciesDao = require('../species/speciesDao')
 const {utils} = require('../other/utils')
 
 const skillService = {
@@ -16,7 +17,23 @@ const skillService = {
     return skillDao.updateOne(where, update)
   },
   find(where) {
-    return skillDao.find(where)
+    return
+  },
+  find(where) {
+    return speciesDao.find().then(species => {
+      return skillDao.find(where).then(skills => {
+        return skills.map(entity => {
+          species.map(prop => {
+            if(prop._id.equals(entity.species)){
+              entity.speciesName = prop.name
+            }
+          })
+          return entity
+        })
+      });
+    }).catch(error => {
+      return error
+    })
   }
 }
 

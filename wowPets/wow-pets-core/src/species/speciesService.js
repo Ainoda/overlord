@@ -35,8 +35,8 @@ const speciesService = {
   update(species) {
     return speciesDao.updateOne(species)
   },
-  async find(where) {
-    return await speciesDao.find(where).then(species => {
+  find(where) {
+    return speciesDao.find(where).then(species => {
       return species.map(entity => {
         species.map(prop => {
           if(prop._id.equals(entity.tap)){
