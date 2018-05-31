@@ -3,12 +3,10 @@ const {utils} = require('../other/utils')
 
 const weatherService = {
   insert(weather) {
-    let result
-    if (Array.isArray(weather)) {
-      result = weatherDao.insertMany(weather)
-    } else {
-      result = weatherDao.insertOne(weather)
+    if(weather.trigger && !utils.checkId(weather.trigger)){
+      return utils.createIdErrorMsg()
     }
+    let result = weatherDao.insertOne(weather)
     return result
   },
   delete(_id) {

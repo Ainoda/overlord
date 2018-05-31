@@ -5,10 +5,8 @@ const WEATHER_COLLECTION = 'weather'
 
 const weatherDao = {
   async insertOne(weather) {
-    return await database.insertOne(WEATHER_COLLECTION, weather)
-  },
-  async insertMany(weathers) {
-    return await database.insertMany(WEATHER_COLLECTION, weathers)
+    let obj = new Weather(weather.name, weather.code, weather.description, weather.trigger?new ObjectID(weather.trigger):'');
+    return await database.insertOne(WEATHER_COLLECTION, obj)
   },
   async deleteOne(_id) {
     return await database.deleteOne(WEATHER_COLLECTION, {_id:new ObjectID(_id)})
@@ -19,7 +17,7 @@ const weatherDao = {
   },
   async updateOne(weather) {
     let _id = new ObjectID(weather._id)
-    let update = new Weather(weather.name, weather.code, weather.description)
+    let update = new Weather(weather.name, weather.code, weather.description, weather.trigger?new ObjectID(weather.trigger):'')
     return await database.updateOne(WEATHER_COLLECTION, {_id:_id}, update)
   },
   async updateMany(where, update) {

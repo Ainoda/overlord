@@ -8,18 +8,6 @@ const speciesDao = {
     let obj = new Species(species.name,species.code,species.tap?new ObjectID(species.tap):'',species.hit?new ObjectID(species.hit):'')
     return await database.insertOne(SPECIES_COLLECTION, obj)
   },
-  async insertMany(arr) {
-    let species = arr.map((specie,index) => {
-      if(specie.tap){
-        specie.tap = new  ObjectID(specie.tap)
-      }
-      if(specie.hit){
-        specie.hit = new  ObjectID(specie.hit)
-      }
-      return specie
-    })
-    return await database.insertMany(SPECIES_COLLECTION, species)
-  },
   async deleteOne(_id) {
     return await database.deleteOne(SPECIES_COLLECTION, {_id:new ObjectID(_id)})
   },

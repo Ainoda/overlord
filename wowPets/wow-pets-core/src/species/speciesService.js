@@ -2,38 +2,21 @@ const speciesDao = require('./speciesDao')
 const {utils} = require('../other/utils')
 
 function checkSpecies(species){
-  if(Array.isArray(species)){
-    for (let i = 0; i < species.length; i++) {
-      const e = species[i]
-      if(e.tap && !utils.checkId(e.tap)){
-        return false
-      }
-      if(e.hit && !utils.checkId(e.hit)){
-        return false
-      }
-    }
-  }else {
-    if(species.tap && !utils.checkId(species.tap)){
-      return false
-    }
-    if(species.hit && !utils.checkId(species.hit)){
-      return false
-    }
+  if(species.tap && !utils.checkId(species.tap)){
+    return false
+  }
+  if(species.hit && !utils.checkId(species.hit)){
+    return false
   }
   return true
 }
 
 const speciesService = {
   insert(species) {
-    let result
     if(!checkSpecies(species)){
       return utils.createIdErrorMsg()
     }
-    if (Array.isArray(species)) {
-      result = speciesDao.insertMany(species)
-    } else {
-      result = speciesDao.insertOne(species)
-    }
+    let result = speciesDao.insertOne(species)
     return result
   },
   delete(_id) {
