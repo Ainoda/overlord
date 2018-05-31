@@ -9,7 +9,7 @@ import {
 } from 'material-ui-icons'
 
 import { RegularCard,Table,ItemGrid,Snackbar,Modal,FormFooter } from '../../components'
-import speciesStyle from './speciesStyle'
+import pageStyle from '../pageStyle'
 import SpeciesContent from './FormContent/SpeciesContent'
 
 class Species extends Component {
@@ -185,4 +185,4 @@ class Species extends Component {
   }
 }
 
-export default withStyles(speciesStyle)(Species)
+export default withStyles(pageStyle)(Species)

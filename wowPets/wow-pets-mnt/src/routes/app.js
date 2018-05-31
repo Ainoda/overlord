@@ -2,6 +2,7 @@ import App from '../containers/App/App'
 import Pet from '../containers/Pet/Pet'
 import Species from '../containers/Species/Species'
 import Weather from '../containers/Weather/Weather'
+import Skill from '../containers/Skill/Skill'
 
 import {
   Pets,
@@ -39,7 +40,7 @@ const appRoutes = [
     sidebarName: '技能',
     navbarName: '技能',
     icon: Build,
-    component: App
+    component: Skill
   },
   {
     path: '/species',

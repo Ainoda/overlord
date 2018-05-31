@@ -10,21 +10,22 @@ import {
 
 import { RegularCard,Table,ItemGrid,Snackbar,Modal,FormFooter } from '../../components'
 import pageStyle from '../pageStyle'
-import WeatherContent from './FormContent/WeatherContent'
+import SkillContent from './FormContent/SkillContent'
 
-class Weather extends Component {
+class Skill extends Component {
   constructor(props) {
     super(props)
     this.state = {
       tableData:[],
-      tableHead:['名称', '编码', '描述','触发技能'],
-      tableDataKey:['name','code','description','trigger'],
+      tableHead:['名称', '编码', '属性','命中率','描述'],
+      tableDataKey:['name','code','speciesName','hitRate','description'],
+      species:[],
       page:0,
       rowsPerPage:10,
       selected:-1,
       showModal:false,
       showDelete:false,
-      model:{name:'',code:'',description:'',trigger:''},
+      model:{name:'',code:'',species:'',hitRate:'',description:''},
       notification:{status:'',message:''}
     }
     // This binding is necessary to make `this` work in the callback
@@ -41,9 +42,10 @@ class Weather extends Component {
   }
   componentDidMount() {
     this.handleSearch()
+    this.getSpecies()
   }
   handleSearch() {
-    axios.get('/weather/find').then(result => {
+    axios.get('/skill/find').then(result => {
       this.setState({tableData:result})
     })
   }
@@ -64,7 +66,7 @@ class Weather extends Component {
     this.setState({showModal:state})
   }
   handleClickAdd() {
-    this.setState({model:{name:'',code:'',description:'',trigger:''}})
+    this.setState({model:{name:'',code:'',species:'',hitRate:'',description:''}})
     this.handleModalState()
   }
   handleClickEdit() {
@@ -84,7 +86,7 @@ class Weather extends Component {
   }
   handleDelete() {
     let model = this.state.tableData[this.state.selected]
-    axios.delete(`/weather/delete/${model._id}`).then(result => {
+    axios.delete(`/skill/delete/${model._id}`).then(result => {
       this.handleSearch()
       this.setState({showDelete:false})
       this.notification('success',result.msg)
@@ -93,7 +95,7 @@ class Weather extends Component {
   handleSave(type, model) {
     if(type === 'edit'){
       model._id = this.state.model._id
-      axios.put('/weather/update',model).then(result => {
+      axios.put('/skill/update',model).then(result => {
         this.handleSearch()
         this.handleModalState(false)
         this.notification('success','修改成功')
@@ -102,10 +104,11 @@ class Weather extends Component {
       let obj = {
         name:model.name,
         code:model.code,
-        description:model.description,
-        trigger:model.trigger
+        species:model.species,
+        hitRate:model.hitRate,
+        description:model.description
       }
-      axios.post('/weather/insert',obj).then(result => {
+      axios.post('/skill/insert',obj).then(result => {
         this.handleSearch()
         this.handleModalState(false)
         this.notification('success','新增成功')
@@ -119,13 +122,18 @@ class Weather extends Component {
       this.setState({notificationOpen:false})
     },6000)
   }
+  getSpecies() {
+    axios.get('/species/find').then(result => {
+      this.setState({'species':result})
+    })
+  }
   render() {
     const { classes, ...rest } = this.props
     return (
       <Grid container {...rest}>
         <ItemGrid xs={12} sm={12} md={12}>
           <RegularCard
-          cardTitle="天气列表"
+          cardTitle="技能列表"
           cardSubtitle=""
           content={
             <Table
@@ -160,7 +168,7 @@ class Weather extends Component {
           }
           />
         </ItemGrid>
-        <WeatherContent handleModalState={this.handleModalState} showModal={this.state.showModal} model={this.state.model} ok={this.handleSave} options={[]}/>
+        <SkillContent handleModalState={this.handleModalState} showModal={this.state.showModal} model={this.state.model} ok={this.handleSave} options={this.state.species}/>
         <Snackbar
           place="tr"
           color={this.state.notification.status}
@@ -185,4 +193,4 @@ class Weather extends Component {
   }
 }
 
-export default withStyles(pageStyle)(Weather)
+export default withStyles(pageStyle)(Skill)

@@ -4,10 +4,10 @@ import { withStyles,Grid } from 'material-ui'
 import { CustomInput as Input,CustomSelect as Select,ItemGrid,FormFooter,Modal } from '../../../components'
 import pageStyle from '../../pageStyle'
 
-class SpeciesContent extends Component {
+class SkillContent extends Component {
   constructor(props) {
     super(props)
-    this.state = {name:'',code:'',tap:'',hit:''}
+    this.state = {name:'',code:'',species:'',hitRate:'',descriptin:''}
 
     this.handleValueChange = this.handleValueChange.bind(this)
   }
@@ -22,7 +22,7 @@ class SpeciesContent extends Component {
     return (
       <Modal
         {...rest}
-        title={model._id ? '编辑类型' : '新增类型'}
+        title={model._id ? '编辑技能' : '新增技能'}
         showModal={showModal}
         headerColor={headerColor}
         content={
@@ -34,10 +34,13 @@ class SpeciesContent extends Component {
               <Input labelText="编码" inputProps={{onChange:this.handleValueChange,value:this.state.code,name:'code'}} formControlProps={{fullWidth: true}}/>
             </ItemGrid>
             <ItemGrid xs={12} sm={12} md={12}>
-              <Select labelText="轻击" inputProps={{onChange:this.handleValueChange,value:this.state.tap,name:'tap'}} formControlProps={{fullWidth: true}} options={options}/>
+              <Input labelText="命中率" inputProps={{onChange:this.handleValueChange,value:this.state.hitRate,name:'hitRate'}} formControlProps={{fullWidth: true}}/>
             </ItemGrid>
             <ItemGrid xs={12} sm={12} md={12}>
-              <Select labelText="重击" inputProps={{onChange:this.handleValueChange,value:this.state.hit,name:'hit'}} formControlProps={{fullWidth: true}} options={options}/>
+            <Select labelText="属性" inputProps={{onChange:this.handleValueChange,value:this.state.species,name:'species'}} formControlProps={{fullWidth: true}} options={options}/>
+            </ItemGrid>
+            <ItemGrid xs={12} sm={12} md={12}>
+              <Input labelText="描述" inputProps={{onChange:this.handleValueChange,rows:'3',multiline:true,value:this.state.description,name:'description'}} formControlProps={{fullWidth: true}}/>
             </ItemGrid>
           </Grid>
         }
@@ -47,8 +50,8 @@ class SpeciesContent extends Component {
     )
   }
 }
-SpeciesContent.defaultProps = {
+SkillContent.defaultProps = {
   headerColor:'blue'
 }
 
-export default withStyles(pageStyle)(SpeciesContent)
+export default withStyles(pageStyle)(SkillContent)

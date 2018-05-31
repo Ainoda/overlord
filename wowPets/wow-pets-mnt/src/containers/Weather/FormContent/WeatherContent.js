@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withStyles,Grid } from 'material-ui'
 
 import { CustomInput as Input,CustomSelect as Select,ItemGrid,FormFooter,Modal } from '../../../components'
-import weatherStyle from '../weatherStyle'
+import pageStyle from '../../pageStyle'
 
 class WeatherContent extends Component {
   constructor(props) {
@@ -51,4 +51,4 @@ WeatherContent.defaultProps = {
   headerColor:'blue'
 }
 
-export default withStyles(weatherStyle)(WeatherContent)
+export default withStyles(pageStyle)(WeatherContent)

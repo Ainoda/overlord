@@ -8,7 +8,7 @@ import {
 } from 'material-ui-icons'
 
 import { RegularCard,Table,ItemGrid } from '../../components'
-import petStyle from './petStyle'
+import pageStyle from '../pageStyle'
 
 class Pet extends Component {
   constructor(props) {
@@ -88,4 +88,4 @@ class Pet extends Component {
   }
 }
 
-export default withStyles(petStyle)(Pet)
+export default withStyles(pageStyle)(Pet)

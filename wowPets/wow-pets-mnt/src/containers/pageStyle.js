@@ -1,4 +1,4 @@
-const speciesStyle = theme => ({
+const pageStyle = theme => ({
   button: {
     margin: theme.spacing.unit,
   },
@@ -11,4 +11,4 @@ const speciesStyle = theme => ({
   }
 })
 
-export default speciesStyle
+export default pageStyle
