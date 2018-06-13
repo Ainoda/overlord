@@ -1,6 +1,8 @@
 # Docker安装nginx
 ## 下载nginx镜像
-> docker pull nginx
+```
+docker pull nginx
+```
 ## 启动nginx容器
 ```
 docker run

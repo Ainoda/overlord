@@ -20,46 +20,52 @@ shell> sudo docker pull jenkins/jenkins
 或者使用dockerfile创建镜像
 github: https://github.com/jenkinsci/docker.git
 ```
-shell> docker build –t=’ourbuild/jenkins’ .
+shell> docker build –t=’ourbuild/jenkins’.
 ```
 ## 查看docker镜像
 ```
 sudo docker images
 ```
+## Docker使用非root用户使用
+```
+sudo groupadd docker //创建docker组
+sudo gpasswd -a ${USER} docker //将当前用户加入docker组
+sudo systemctl restart docker //重新启动docker服务
+//当前用户退出系统重新登陆
+docker ps //运行docker命令
 
+```
 ## 启动容器
+### 创建并启动容器
 ```
-sudo docker run –-name myjenkins –p 8080:8080 –p 50000:50000 –d
-–v /home/***/Docker/jenkins_home:/var/jenkins_home jenkins/jenkins
+sudo docker run 
+  –-name myjenkins //此docker实例名字为myjenkins
+  –p 8080:8080 –p 50000:50000 //映射端口，docker的8080端口映射到host的8080端口
+  –d //docker实例作为demon在后台运行
+  –v /home/***/Docker/jenkins_home:/var/jenkins_home //目录映射将docker中的/var/jenkins_home目录映射到host中的/home/lzping/Docker/jenkins_home目录
+jenkins/jenkins //镜像名称
 ```
-解释:
---name myjenkins
->此docker实例名字为myjenkins
-
--p 8080:8080
->映射端口，docker的8080端口映射到host的8080端口
-
--v
->目录映射 将docker中的/var/jenkins_home目录映射到host中的/home/lzping/Docker/jenkins_home目录
-
--d
->docker实例作为demon在后台运行
-
---env
->环境变量
-
+### 启动终止容器
+````
+docker start 实例名称或hash值
+````
+### 终止容器
+```
+docker stop  实例名称或hash值
+```
 ## 进入容器
 ```
 sudo docker exec –it 34fa /bin/bash
 ```
--i:
->即使没有附加也保持STDIN 打开
-
--t:
->分配一个伪终端
-
+## 导出和导入容器
+```
+docker export 实例名称或hash值 > ubuntu.tar //导出镜像
+cat ubuntu.tar | sudo docker import - test/ubuntu:v1.0 //从容器快照中导入为镜像
+```
 ## 删除容器
-
+```
+docker rm 实例名称或hash值 //删除容器
+```
 
 # Docker基本概念
 ## 镜像
@@ -74,3 +80,4 @@ docker利用容器来运行应用。
 
 ## 仓库
 仓库是集中存放镜像文件的场所。
+
