@@ -122,10 +122,12 @@ docker exec -it jb-nginx /bin/bash
 ```
 进入 /etc/nginx/ 目录删除 conf.d 目录下的 default.conf 配置文件。
 
+**注意：nginx.conf 配置文件中的用户为 nginx**
 ### 重启容器
 ```
 docker restart jb-nginx
 ```
+* * *
 ## Docker安装启动Node
 ### 下载Node镜像
 ```
