@@ -45,6 +45,22 @@ sudo docker run
   –v /home/***/Docker/jenkins_home:/var/jenkins_home //目录映射将docker中的/var/jenkins_home目录映射到host中的/home/lzping/Docker/jenkins_home目录
 jenkins/jenkins //镜像名称
 ```
+#### 参数详解（重要）
+* -a stdin: 指定标准输入输出内容类型，可选 STDIN/STDOUT/STDERR 三项；
+* -d: 后台运行容器，并返回容器ID；
+* -i: 以交互模式运行容器，通常与 -t 同时使用；
+* -t: 为容器重新分配一个伪输入终端，通常与 -i 同时使用；
+* --name="nginx-lb": 为容器指定一个名称；
+* --dns 8.8.8.8: 指定容器使用的DNS服务器，默认和宿主一致；
+* --dns-search :指定容器DNS搜索域名，默认和宿主一致；
+* -h "mars": 指定容器的hostname；
+* -e username="ritchie": 设置环境变量；
+* --env-file=[]: 从指定文件读入环境变量；
+* --cpuset="0-2" or --cpuset="0,1,2": 绑定容器到指定CPU运行；
+* -m :设置容器使用内存最大值；
+* --net="bridge": 指定容器的网络连接类型，支持 bridge/host/none/container: 四种类型；
+* --link=[]: 添加链接到另一个容器；
+* -p --expose=[]: 开放一个端口或一组端口；
 ### 启动终止容器
 ````
 docker start 实例名称或hash值
@@ -81,3 +97,83 @@ docker利用容器来运行应用。
 ## 仓库
 仓库是集中存放镜像文件的场所。
 
+* * *
+# 最佳实践
+## Docker安装启动Nginx
+### 下载Nginx镜像
+```
+docker pull nginx
+```
+### 启动nginx容器
+```
+docker run
+--name jb-nginx //命名容器名称
+  -p 80:80 //映射端口
+  -v /home/lizhiping/nginx/nginx.conf:/etc/nginx/nginx.conf:ro //映射配置文件
+  -v /home/lizhiping/nginx/log:/var/log/nginx //映射nginx日志
+  -v /home/lizhiping/workspace:/home/lizhiping/workspace //映射静态文件目录
+  -v /home/lizhiping/nginx/sites-available:/etc/nginx/sites-available //映射配置文件
+  -d //后台启动
+nginx //nginx 镜像
+```
+### 进入容器(有坑-解决配置文件被覆盖)
+```
+docker exec -it jb-nginx /bin/bash
+```
+进入 /etc/nginx/ 目录删除 conf.d 目录下的 default.conf 配置文件。
+
+### 重启容器
+```
+docker restart jb-nginx
+```
+## Docker安装启动Node
+### 下载Node镜像
+```
+docker pull node
+docker pull node:version
+```
+### 创建镜像（可以直接创建镜像）
+1. 在项目根目录创建 `Dockerfile` 文件
+2. 输入以下代码
+```
+ # 指定我们的基础镜像是node，版本是v8.0.0
+ FROM node:8
+
+ # 将根目录下的文件都copy到container（运行此镜像的容器）文件系统的app文件夹下
+
+ ADD . /app/
+ # cd到app文件夹下
+ WORKDIR /app
+
+ # 配置环境变量
+ ENV HOST 0.0.0.0
+ ENV PORT 3000
+
+ # 容器对外暴露的端口号
+ EXPOSE 3000
+
+ # 容器启动时执行的命令，类似npm run start
+ CMD ["npm", "start"]
+```
+### 启动容器（不创建镜像则跳过）
+```
+docker run 
+  --rm
+  --name jb-node 
+  -p 3000:3000 
+  --net="host" //为了访问宿主机上的mongodb
+  -d 
+wow-pets-core
+```
+### 直接启动容器（不创建镜像）
+```
+docker run 
+  --rm 
+  --name jb-node 
+  -v "$(pwd)":/home/node/app //"$(pwd)"当前所在项目路径也可写为绝对路径
+  -w /home/node/app //设置工作目录
+  --net="host" //为了访问宿主机上的mongodb
+  -d
+  node:8
+  npm start
+```
