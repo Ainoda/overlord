@@ -18,14 +18,15 @@ class Weather extends Component {
     this.state = {
       tableData:[],
       tableHead:['名称', '编码', '描述','触发技能'],
-      tableDataKey:['name','code','description','trigger'],
+      tableDataKey:['name','code','description','triggerName'],
       page:0,
       rowsPerPage:10,
       selected:-1,
       showModal:false,
       showDelete:false,
       model:{name:'',code:'',description:'',trigger:''},
-      notification:{status:'',message:''}
+      notification:{status:'',message:''},
+      skills:[]
     }
     // This binding is necessary to make `this` work in the callback
     this.handleClick = this.handleClick.bind(this)
@@ -41,6 +42,7 @@ class Weather extends Component {
   }
   componentDidMount() {
     this.handleSearch()
+    this.getSkills()
   }
   handleSearch() {
     axios.get('/weather/find').then(result => {
@@ -120,6 +122,11 @@ class Weather extends Component {
       this.setState({notificationOpen:false})
     },6000)
   }
+  getSkills(){
+    axios.get('/skill/find').then(result => {
+      this.setState({skills:result})
+    })
+  }
   render() {
     const { classes, ...rest } = this.props
     return (
@@ -161,7 +168,7 @@ class Weather extends Component {
           }
           />
         </ItemGrid>
-        <WeatherContent handleModalState={this.handleModalState} showModal={this.state.showModal} model={this.state.model} ok={this.handleSave} options={[]}/>
+        <WeatherContent handleModalState={this.handleModalState} showModal={this.state.showModal} model={this.state.model} ok={this.handleSave} options={this.state.skills}/>
         <Snackbar
           place="tr"
           color={this.state.notification.status}

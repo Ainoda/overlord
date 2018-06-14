@@ -14,7 +14,13 @@ import RegularCard from './Cards/RegularCard.js'
 
 import CustomInput from './Input/CustomInput.js'
 import CustomSelect from './Input/CustomSelect.js'
+import CustomInputSelect from './Input/CustomInputSelect.js'
+// ##############################
+// // // CustomInput
+// #############################
 
+import CustomReactSelect from './Select/CustomReactSelect.js'
+import CustomOption from './Select/CustomOption.js'
 // ##############################
 // // // Footer
 // #############################
@@ -76,6 +82,10 @@ export {
   // CustomInput
   CustomInput,
   CustomSelect,
+  CustomInputSelect,
+  // Select
+  CustomReactSelect,
+  CustomOption,
   // Footer
   // Grid
   ItemGrid,

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withStyles,Grid } from 'material-ui'
 
-import { CustomInput as Input,CustomSelect as Select,ItemGrid,FormFooter,Modal } from '../../../components'
+import { CustomInput as Input,CustomInputSelect as InputSelect,ItemGrid,FormFooter,Modal } from '../../../components'
 import pageStyle from '../../pageStyle'
 
 class WeatherContent extends Component {
@@ -10,12 +10,16 @@ class WeatherContent extends Component {
     this.state = {name:'',code:'',descriptin:'',trigger:''}
 
     this.handleValueChange = this.handleValueChange.bind(this)
+    this.handleTriggerChange = this.handleTriggerChange.bind(this)
   }
   componentWillReceiveProps(props) {
     this.setState({...props.model})
   }
   handleValueChange(e) {
     this.setState({[e.target.name]:e.target.value})
+  }
+  handleTriggerChange(v){
+    this.setState({trigger:v})
   }
   render() {
     const { classes,handleModalState,showModal,model,ok,options,headerColor,...rest} = this.props
@@ -37,7 +41,7 @@ class WeatherContent extends Component {
               <Input labelText="描述" inputProps={{onChange:this.handleValueChange,multiline:true,value:this.state.description,name:'description'}} formControlProps={{fullWidth: true}}/>
             </ItemGrid>
             <ItemGrid xs={12} sm={12} md={12}>
-              <Select labelText="触发技能" inputProps={{onChange:this.handleValueChange,value:this.state.trigger,name:'trigger'}} formControlProps={{fullWidth: true}} options={options}/>
+              <InputSelect labelText="触发技能" inputProps={{onChange:this.handleTriggerChange,value:this.state.trigger,name:'trigger'}} selectProps={{options:options,labelKey:'name',valueKey:'_id',simpleValue:true}} formControlProps={{fullWidth: true}}/>
             </ItemGrid>
           </Grid>
         }

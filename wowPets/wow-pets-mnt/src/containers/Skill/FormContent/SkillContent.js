@@ -7,7 +7,7 @@ import pageStyle from '../../pageStyle'
 class SkillContent extends Component {
   constructor(props) {
     super(props)
-    this.state = {name:'',code:'',species:'',hitRate:'',descriptin:''}
+    this.state = {name:'',code:'',species:'',hitRate:'',description:''}
 
     this.handleValueChange = this.handleValueChange.bind(this)
   }

@@ -5,7 +5,7 @@ import { Router, Route, Switch } from 'react-router-dom'
 import './asset/css/index.css'
 import indexRoutes from './routes/index'
 import httpInterceptor from './httpInterceptor'
-
+// add http interceptor
 httpInterceptor.init()
 const hist = createBrowserHistory()
 
