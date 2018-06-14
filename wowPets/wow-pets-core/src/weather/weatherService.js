@@ -1,4 +1,5 @@
 const weatherDao = require('./weatherDao')
+const skillDao = require('../skill/skillDao')
 const {utils} = require('../other/utils')
 
 const weatherService = {
@@ -26,7 +27,20 @@ const weatherService = {
     return weatherDao.updateOne(weathers)
   },
   find(where) {
-    return weatherDao.find(where)
+    return skillDao.find().then(skills => {
+      return weatherDao.find(where).then(weathers => {
+        return weathers.map(weather => {
+          skills.map(skill => {
+            if(skill._id.equals(weather.trigger)){
+              weather.triggerName = skill.name
+            }
+          })
+          return weather
+        })
+      })
+    }).catch(error => {
+      return error
+    })
   }
 }
 
