@@ -83,7 +83,8 @@ class Species extends Component {
     }
   }
   handleDelete() {
-    let model = this.state.tableData[this.state.selected]
+    // 获取当前选中的数据
+    let model = this.state.tableData[this.state.selected+this.state.page*this.state.rowsPerPage]
     axios.delete(`/species/delete/${model._id}`).then(result => {
       this.handleSearch()
       this.setState({showDelete:false})
