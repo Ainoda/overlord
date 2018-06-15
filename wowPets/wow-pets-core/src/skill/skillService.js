@@ -10,14 +10,11 @@ const skillService = {
     let result = skillDao.insertOne(skill)
     return result
   },
-  delete(where) {
-    return skillDao.deleteOne(where)
+  delete(_id) {
+    return skillDao.deleteOne(_id)
   },
-  update(where, update) {
-    return skillDao.updateOne(where, update)
-  },
-  find(where) {
-    return
+  update(skill) {
+    return skillDao.updateOne(skill)
   },
   find(where) {
     return speciesDao.find().then(species => {

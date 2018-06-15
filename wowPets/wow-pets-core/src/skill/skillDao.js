@@ -8,9 +8,6 @@ const skillDao = {
     let obj = new Skill(skill.name, skill.code, skill.description, skill.cooling ? skill.cooling : 0, skill.useRounds ? skill.useRounds : 1, skill.lastRounds ? skill.lastRounds : 0, skill.species ? new ObjectID(skill.species) : '', skill.hitRate ? skill.hitRate : 100)
     return await database.insertOne(SKILL_COLLECTION, obj)
   },
-  async insertMany(_id) {
-    return await database.insertMany(SKILL_COLLECTION, {_id:new ObjectID(_id)})
-  },
   async deleteOne(_id) {
     return await database.deleteOne(SKILL_COLLECTION, {_id:new ObjectID(_id)})
   },
