@@ -24,7 +24,7 @@ class Weather extends Component {
       selected:-1,
       showModal:false,
       showDelete:false,
-      model:{name:'',code:'',description:'',trigger:''},
+      model:{name:'',code:'',description:'',trigger:[]},
       notification:{status:'',message:''},
       skills:[]
     }
@@ -66,7 +66,7 @@ class Weather extends Component {
     this.setState({showModal:state})
   }
   handleClickAdd() {
-    this.setState({model:{name:'',code:'',description:'',trigger:''}})
+    this.setState({model:{name:'',code:'',description:'',trigger:[]}})
     this.handleModalState()
   }
   handleClickEdit() {

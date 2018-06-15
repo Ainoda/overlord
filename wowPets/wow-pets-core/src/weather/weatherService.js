@@ -30,11 +30,13 @@ const weatherService = {
     return skillDao.find().then(skills => {
       return weatherDao.find(where).then(weathers => {
         return weathers.map(weather => {
+          let triggerName = []
           skills.map(skill => {
-            if(skill._id.equals(weather.trigger)){
-              weather.triggerName = skill.name
+            if(weather.trigger && weather.trigger.includes(skill._id)){
+              triggerName.push(skill.name)
             }
           })
+          weather.triggerName = triggerName.join()
           return weather
         })
       })

@@ -7,7 +7,7 @@ import pageStyle from '../../pageStyle'
 class WeatherContent extends Component {
   constructor(props) {
     super(props)
-    this.state = {name:'',code:'',descriptin:'',trigger:''}
+    this.state = {name:'',code:'',descriptin:'',trigger:[]}
 
     this.handleValueChange = this.handleValueChange.bind(this)
     this.handleTriggerChange = this.handleTriggerChange.bind(this)
@@ -41,7 +41,7 @@ class WeatherContent extends Component {
               <Input labelText="描述" inputProps={{onChange:this.handleValueChange,multiline:true,value:this.state.description,name:'description'}} formControlProps={{fullWidth: true}}/>
             </ItemGrid>
             <ItemGrid xs={12} sm={12} md={12}>
-              <InputSelect labelText="触发技能" inputProps={{onChange:this.handleTriggerChange,value:this.state.trigger,name:'trigger'}} selectProps={{options:options,labelKey:'name',valueKey:'_id',simpleValue:true}} formControlProps={{fullWidth: true}}/>
+              <InputSelect labelText="触发技能" inputProps={{onChange:this.handleTriggerChange,value:this.state.trigger,name:'trigger'}} selectProps={{options:options,labelKey:'name',valueKey:'_id',simpleValue:true,multi:true}} formControlProps={{fullWidth: true}}/>
             </ItemGrid>
           </Grid>
         }
