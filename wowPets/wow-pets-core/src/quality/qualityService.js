@@ -2,19 +2,14 @@ const qualityDao = require('./qualityDao')
 
 const qualityService = {
   insert(quality) {
-    let result
-    if (Array.isArray(quality)) {
-      result = qualityDao.insertMany(quality)
-    } else {
-      result = qualityDao.insertOne(quality)
-    }
+    let result = qualityDao.insertOne(quality)
     return result
   },
-  delete(where) {
-    return qualityDao.deleteOne(where)
+  delete(_id) {
+    return qualityDao.deleteOne(_id)
   },
-  update(where, update) {
-    return qualityDao.updateOne(where, update)
+  update(quality) {
+    return qualityDao.updateOne(quality)
   },
   find(where) {
     return qualityDao.find(where)
