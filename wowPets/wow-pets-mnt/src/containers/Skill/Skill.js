@@ -17,15 +17,15 @@ class Skill extends Component {
     super(props)
     this.state = {
       tableData:[],
-      tableHead:['名称', '编码', '属性','命中率','描述'],
-      tableDataKey:['name','code','speciesName','hitRate','description'],
+      tableHead:['名称','编码','属性','命中率','冷却','描述'],
+      tableDataKey:['name','code','speciesName','hitRate','cooling','description'],
       species:[],
       page:0,
       rowsPerPage:10,
       selected:-1,
       showModal:false,
       showDelete:false,
-      model:{name:'',code:'',species:'',hitRate:'',description:''},
+      model:{name:'',code:'',species:'',hitRate:'',cooling:'',description:''},
       notification:{status:'',message:''}
     }
     // This binding is necessary to make `this` work in the callback
@@ -66,7 +66,7 @@ class Skill extends Component {
     this.setState({showModal:state})
   }
   handleClickAdd() {
-    this.setState({model:{name:'',code:'',species:'',hitRate:'',description:''}})
+    this.setState({model:{name:'',code:'',species:'',hitRate:'',cooling:'',description:''}})
     this.handleModalState()
   }
   handleClickEdit() {
@@ -107,6 +107,7 @@ class Skill extends Component {
         code:model.code,
         species:model.species,
         hitRate:model.hitRate,
+        cooling:model.cooling,
         description:model.description
       }
       axios.post('/skill/insert',obj).then(result => {
