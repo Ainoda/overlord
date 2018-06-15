@@ -28,6 +28,8 @@ const skillService = {
               entity.speciesName = prop.name
             }
           })
+          // 方便前端展示
+          entity.title = entity.description
           return entity
         })
       });

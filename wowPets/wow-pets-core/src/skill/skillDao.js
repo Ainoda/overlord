@@ -5,7 +5,7 @@ const SKILL_COLLECTION = 'skill'
 
 const skillDao = {
   async insertOne(skill) {
-    let obj = new Skill(skill.name, skill.code, skill.description, skill.cooling, skill.species ? new ObjectID(skill.species) : '', skill.hitRate)
+    let obj = new Skill(skill.name, skill.code, skill.description, skill.cooling ? skill.cooling : 0, skill.useRounds ? skill.useRounds : 1, skill.lastRounds ? skill.lastRounds : 0, skill.species ? new ObjectID(skill.species) : '', skill.hitRate ? skill.hitRate : 100)
     return await database.insertOne(SKILL_COLLECTION, obj)
   },
   async insertMany(_id) {
@@ -20,7 +20,7 @@ const skillDao = {
   },
   async updateOne(skill) {
     let _id = new ObjectID(skill._id)
-    let update = new Skill(skill.name, skill.code, skill.description, skill.cooling, skill.species?new ObjectID(skill.species):'',skill.hitRate)
+    let update = new Skill(skill.name, skill.code, skill.description, skill.cooling ? skill.cooling : 0, skill.useRounds ? skill.useRounds : 1, skill.lastRounds ? skill.lastRounds : 0, skill.species ? new ObjectID(skill.species) : '', skill.hitRate ? skill.hitRate : 100)
     return await database.updateOne(SKILL_COLLECTION, {_id:_id}, update)
   },
   async find(where) {
