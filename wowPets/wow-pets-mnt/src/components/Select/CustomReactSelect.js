@@ -14,7 +14,7 @@ class CustomReactSelect extends Component {
     return (
       <Select
         optionComponent={Option}
-        noResultsText={<Typography>{'No results found'}</Typography>}
+        noResultsText={<Typography>{'没有找到该技能'}</Typography>}
         arrowRenderer={arrowProps => {
           return arrowProps.isOpen ? <ArrowDropUp /> : <ArrowDropDown />;
         }}

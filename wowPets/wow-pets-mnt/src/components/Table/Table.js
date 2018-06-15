@@ -37,7 +37,7 @@ class CustomTable extends Component {
     return result
   }
   render() {
-    const { classes, tableHead, tableDataKey, tableData, tableHeaderColor, selected, handleClick, handleChangePage, handleChangeRowsPerPage, page, rowsPerPage, rowsPerPageOptions, mutiSelect } = this.props
+    const { classes, tableHead, tableDataKey, tableData, tableHeaderColor, selected, handleClick, handleChangePage, handleChangeRowsPerPage, page, rowsPerPage, rowsPerPageOptions, mutiSelect, cellTip} = this.props
     const emptyRows = rowsPerPage ? rowsPerPage - Math.min(rowsPerPage, tableData.length - page * rowsPerPage) : 0
     return (
       <div>
@@ -70,7 +70,7 @@ class CustomTable extends Component {
                 </TableCell> : null }
                 {tableDataKey.map((attr,key) => {
                   return (
-                    <TableCell className={classes.tableCell} key={key}>
+                    <TableCell title={cellTip ? prop[attr] : ''} className={classes.tableCell} key={key}>
                       {prop[attr]}
                     </TableCell>
                   )

@@ -8,13 +8,14 @@ class CustomOption extends Component {
     this.props.onSelect(this.props.option, event);
   };
   render() {
-    const { children, isFocused, isSelected, onFocus } = this.props;
+    const { children, isFocused, isSelected, onFocus, option } = this.props;
     return (
       <MenuItem
         onFocus={onFocus}
         selected={isFocused}
         onClick={this.handleClick}
         component="div"
+        title={option.title}
         style={{
           fontWeight: isSelected ? 500 : 400,
         }}
