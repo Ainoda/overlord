@@ -17,8 +17,8 @@ class Weather extends Component {
     super(props)
     this.state = {
       tableData:[],
-      tableHead:['名称', '编码', '描述','触发技能'],
-      tableDataKey:['name','code','description','triggerName'],
+      tableHead:['名称','编码','触发技能','描述'],
+      tableDataKey:['name','code','triggerName','description'],
       page:0,
       rowsPerPage:10,
       selected:-1,

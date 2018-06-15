@@ -7,7 +7,7 @@ import pageStyle from '../../pageStyle'
 class SkillContent extends Component {
   constructor(props) {
     super(props)
-    this.state = {name:'',code:'',species:'',hitRate:'',description:''}
+    this.state = {name:'',code:'',species:'',hitRate:'',cooling:'',description:''}
 
     this.handleValueChange = this.handleValueChange.bind(this)
   }
@@ -35,6 +35,9 @@ class SkillContent extends Component {
             </ItemGrid>
             <ItemGrid xs={12} sm={12} md={12}>
               <Input labelText="命中率" inputProps={{onChange:this.handleValueChange,value:this.state.hitRate,name:'hitRate'}} formControlProps={{fullWidth: true}}/>
+            </ItemGrid>
+            <ItemGrid xs={12} sm={12} md={12}>
+              <Input labelText="冷却" inputProps={{onChange:this.handleValueChange,value:this.state.cooling,name:'cooling'}} formControlProps={{fullWidth: true}}/>
             </ItemGrid>
             <ItemGrid xs={12} sm={12} md={12}>
             <Select labelText="属性" inputProps={{onChange:this.handleValueChange,value:this.state.species,name:'species'}} formControlProps={{fullWidth: true}} options={options}/>

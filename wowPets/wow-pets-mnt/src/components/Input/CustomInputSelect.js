@@ -19,8 +19,7 @@ class CustomInputSelect extends Component {
       selectProps,
       error,
       success,
-      errorText,
-      options
+      errorText
     } = this.props
 
     const labelClasses = cx({
