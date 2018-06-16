@@ -4,6 +4,7 @@ import Species from '../containers/Species/Species'
 import Weather from '../containers/Weather/Weather'
 import Skill from '../containers/Skill/Skill'
 import Quality from '../containers/Quality/Quality'
+import PetDimension from '../containers/PetDimension/PetDimension'
 
 import {
   Pets,
@@ -27,7 +28,7 @@ const appRoutes = [
     sidebarName: '属性',
     navbarName: '属性',
     icon: Accessibility,
-    component: App
+    component: PetDimension
   },
   {
     path: '/quality',

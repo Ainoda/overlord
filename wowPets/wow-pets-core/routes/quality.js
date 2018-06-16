@@ -10,7 +10,7 @@ router.post('/insert', (req, res, next) => {
     res.send(error)
   })
 })
-router.delete('/delete', (req, res, next) => {
+router.delete('/delete/:id', (req, res, next) => {
   qualityService.delete(req.params.id).then(result => {
     res.send(result)
   }).catch(error => {

@@ -1,6 +1,7 @@
 class petDimension {
   // pet三维
-  constructor(code, hp, attack, speed) {
+  constructor(name, code, hp, attack, speed) {
+    this.name = name
     this.code = code
     this.hp = hp
     this.attack = attack

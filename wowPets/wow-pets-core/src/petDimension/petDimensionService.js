@@ -2,19 +2,14 @@ const petDimensionDao = require('./petDimensionDao')
 
 const petDimensionService = {
   insert(petDimension) {
-    let result
-    if (Array.isArray(petDimension)) {
-      result = petDimensionDao.insertMany(petDimension)
-    } else {
-      result = petDimensionDao.insertOne(petDimension)
-    }
+    let result = petDimensionDao.insertOne(petDimension)
     return result
   },
-  delete(where) {
-    return petDimensionDao.deleteOne(where)
+  delete(_id) {
+    return petDimensionDao.deleteOne(_id)
   },
-  update(where, update) {
-    return petDimensionDao.updateOne(where, update)
+  update(petDimension) {
+    return petDimensionDao.updateOne(petDimension)
   },
   find(where) {
     return petDimensionDao.find(where)
