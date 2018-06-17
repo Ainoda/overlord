@@ -1,4 +1,3 @@
-import App from '../containers/App/App'
 import Pet from '../containers/Pet/Pet'
 import Species from '../containers/Species/Species'
 import Weather from '../containers/Weather/Weather'
@@ -22,36 +21,31 @@ const appRoutes = [
     navbarName: '宠物',
     icon: Pets,
     component: Pet
-  },
-  {
+  },{
     path: '/dimension',
     sidebarName: '属性',
     navbarName: '属性',
     icon: Accessibility,
     component: PetDimension
-  },
-  {
+  },{
     path: '/quality',
     sidebarName: '品质',
     navbarName: '品质',
     icon: Grade,
     component: Quality
-  },
-  {
+  },{
     path: '/skill',
     sidebarName: '技能',
     navbarName: '技能',
     icon: Build,
     component: Skill
-  },
-  {
+  },{
     path: '/species',
     sidebarName: '类型',
     navbarName: '类型',
     icon: Extension,
     component: Species
-  },
-  {
+  },{
     path: '/weather',
     sidebarName: '天气',
     navbarName: '天气',

@@ -17,7 +17,8 @@ class CustomInput extends Component {
       inputProps,
       error,
       success,
-      errorText
+      errorText,
+      multiStyle
     } = this.props
 
     const labelClasses = cx({
@@ -39,7 +40,7 @@ class CustomInput extends Component {
       >
         {labelText !== undefined ? (
           <InputLabel
-            className={classes.labelRoot + labelClasses}
+            className={`${classes.labelRoot + labelClasses} ${multiStyle ? classes.multiLabel : ''}`}
             htmlFor={id}
             {...labelProps}
           >
@@ -51,7 +52,8 @@ class CustomInput extends Component {
             root: marginTop,
             disabled: classes.disabled,
             underline: classes.underline,
-            inkbar: inkbarClasses
+            inkbar: inkbarClasses,
+            input: multiStyle ? classes.multiInput : ''
           }}
           id={id}
           {...inputProps}

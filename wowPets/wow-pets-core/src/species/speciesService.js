@@ -3,10 +3,10 @@ const {utils} = require('../other/utils')
 
 function checkSpecies(species){
   if(species.tap && !utils.checkId(species.tap)){
-    return false
+    return utils.createIdErrorMsg()
   }
   if(species.hit && !utils.checkId(species.hit)){
-    return false
+    return utils.createIdErrorMsg()
   }
   return true
 }

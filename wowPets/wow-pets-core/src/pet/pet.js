@@ -1,35 +1,15 @@
 class pet {
-  constructor(name, code, firstsk = null, sencondsk = null, thirdsk = null, fourthsk = null, fifthsk = null, sixthsk = null, dimension = null) {
+  constructor(name, code, species,firstSk = '', secondSk = '', thirdSk = '', fourthSk = '', fifthSk = '', sixthSk = '', dimension = '') {
     this.name = name //名称
     this.code = code //编码
-    this.firstsk = firstsk //第一个skill
-    this.sencondsk = sencondsk //第二个skill
-    this.thirdsk = thirdsk //第三个skill
-    this.fourthsk = fourthsk //第四个skill
-    this.fifthsk = fifthsk //第五个skill
-    this.sixthsk = sixthsk //第六个skill
+    this.species = species //类型
+    this.firstSk = firstSk //第一个Skill
+    this.secondSk = secondSk //第二个Skill
+    this.thirdSk = thirdSk //第三个Skill
+    this.fourthSk = fourthSk //第四个Skill
+    this.fifthSk = fifthSk //第五个Skill
+    this.sixthSk = sixthSk //第六个Skill
     this.dimension = dimension //所有三维
-  }
-  setFirstsk(skill) {
-    this.firstsk = skill
-  }
-  setSencondsk(skill) {
-    this.sencondsk = skill
-  }
-  setThirdsk(skill) {
-    this.thirdsk = skill
-  }
-  setFourthsk(skill) {
-    this.fourthsk = skill
-  }
-  setFifthsk(skill) {
-    this.fifthsk = skill
-  }
-  setSixsk(skill) {
-    this.sixthsk = skill
-  }
-  setDimension(dimension) {
-    this.dimension = dimension
   }
 }
 

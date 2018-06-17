@@ -17,7 +17,8 @@ class CustomSelect extends Component {
       error,
       success,
       errorText,
-      options
+      options,
+      multiStyle
     } = this.props
 
     const labelClasses = cx({
@@ -39,7 +40,7 @@ class CustomSelect extends Component {
       >
         {labelText !== undefined ? (
           <InputLabel
-            className={classes.labelRoot + labelClasses}
+            className={`${classes.labelRoot + labelClasses} ${multiStyle ? classes.multiLabel : ''}`}
             htmlFor={id}
             {...labelProps}
           >
@@ -51,14 +52,15 @@ class CustomSelect extends Component {
             root: marginTop,
             disabled: classes.disabled,
             underline: classes.underline,
-            inkbar: inkbarClasses
+            inkbar: inkbarClasses,
+            input: multiStyle ? classes.multiInput : ''
           }}
           id={id}
           {...inputProps}
           />}>
           {options ? options.map((prop,key) => {
             return (
-              <MenuItem key={key} value={prop._id}>{prop.name}</MenuItem>
+              <MenuItem key={key} value={prop._id} title={prop.title}>{prop.name}</MenuItem>
             )
           }) : null}
         </Select>

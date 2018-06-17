@@ -14,7 +14,7 @@ class CustomReactSelect extends Component {
     return (
       <Select
         optionComponent={Option}
-        noResultsText={<Typography>{'没有找到该技能'}</Typography>}
+        noResultsText={<Typography>{'没有找到选项'}</Typography>}
         arrowRenderer={arrowProps => {
           return arrowProps.isOpen ? <ArrowDropUp /> : <ArrowDropDown />;
         }}
@@ -40,6 +40,7 @@ class CustomReactSelect extends Component {
           return <div className="Select-value">{children}</div>;
         }}
         {...other}
+        inputProps={{className:{height:'36px'}}}
       />
     );
   }

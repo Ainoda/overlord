@@ -4,47 +4,148 @@ import axios from 'axios'
 import {
   Add,
   Edit,
-  Delete
+  Delete,
+  Search
 } from 'material-ui-icons'
 
-import { RegularCard,Table,ItemGrid } from '../../components'
+import { RegularCard,Table,ItemGrid,Snackbar,Modal,FormFooter } from '../../components'
 import pageStyle from '../pageStyle'
+import PetContent from './FormContent/PetContent'
 
 class Pet extends Component {
   constructor(props) {
     super(props)
     this.state = {
       tableData:[],
-      tableHead:['名称', '编码', '类型', '获取方式', '技能1', '技能2', '技能3', '技能4', '技能5', '技能6'],
-      tableDataKey:['name','code','dimension','get','firstsk','sencondsk','thirdsk','fourthsk','fifthsk','sixthsk'],
+      tableHead:['名称','编码','类型','属性','一技能','二技能','三技能','四技能','五技能','六技能'],
+      tableDataKey:['name','code','speciesName','dimensionName','firstSkName','secondSkName','thirdSkName','fourthSkName','fifthSkName','sixthSkName'],
+      species:[],
+      dimensions:[],
+      skills:[],
       page:0,
       rowsPerPage:10,
-      selected:''
+      selected:-1,
+      showModal:false,
+      showDelete:false,
+      model:{name:'',code:'',species:'',dimension:'',firstSk:'',secondSk:'',thirdSk:'',fourthSk:'',fifthSk:'',sixthSk:''},
+      notification:{status:'',message:''}
     }
-
     // This binding is necessary to make `this` work in the callback
     this.handleClick = this.handleClick.bind(this)
     this.handleChangePage = this.handleChangePage.bind(this)
     this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this)
+    this.handleModalState = this.handleModalState.bind(this)
+    this.handleClickAdd = this.handleClickAdd.bind(this)
+    this.handleClickEdit = this.handleClickEdit.bind(this)
+    this.handleClickDelete = this.handleClickDelete.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
+    this.handleSave = this.handleSave.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
-
   componentDidMount() {
+    this.handleSearch()
+    this.getSpecies()
+    this.getDimensions()
+    this.getSkills()
+  }
+  handleSearch() {
     axios.get('/pet/find').then(result => {
       this.setState({tableData:result})
     })
   }
-  handleClick(e, id, index) {
-    if(this.state.selected !== id){
-      this.setState({selected:id})
+  handleClick(e, index) {
+    if(this.state.selected === index){
+      this.setState({selected:-1})
     }else {
-      this.setState({selected:''})
+      this.setState({selected:index})
     }
   }
-  handleChangePage(e, page){
+  handleChangePage(e, page) {
     this.setState({page})
   }
-  handleChangeRowsPerPage(e){
+  handleChangeRowsPerPage(e) {
     this.setState({rowsPerPage:e.target.value})
+  }
+  handleModalState(state=true) {
+    this.setState({showModal:state})
+  }
+  handleClickAdd() {
+    this.setState({model:{name:'',code:'',species:'',dimension:'',firstSk:'',secondSk:'',thirdSk:'',fourthSk:'',fifthSk:'',sixthSk:''}})
+    this.handleModalState()
+  }
+  handleClickEdit() {
+    if(this.state.selected >= 0){
+      this.setState({model:this.state.tableData[this.state.selected]})
+      this.handleModalState()
+    }else {
+      this.notification('warning','请选择一条记录')
+    }
+  }
+  handleClickDelete() {
+    if(this.state.selected >= 0){
+      this.setState({showDelete:true})
+    }else {
+      this.notification('warning', '请选择一条记录')
+    }
+  }
+  handleDelete() {
+    // 获取当前选中的数据
+    let model = this.state.tableData[this.state.selected+this.state.page*this.state.rowsPerPage]
+    axios.delete(`/pet/delete/${model._id}`).then(result => {
+      this.handleSearch()
+      this.setState({showDelete:false})
+      this.notification('success',result.msg)
+    })
+  }
+  handleSave(type, model) {
+    if(type === 'edit'){
+      model._id = this.state.model._id
+      axios.put('/pet/update',model).then(result => {
+        this.handleSearch()
+        this.handleModalState(false)
+        this.notification('success','修改成功')
+      })
+    }else {
+      let obj = {
+        name:model.name,
+        code:model.code,
+        species:model.species,
+        dimension:model.dimension,
+        firstSk:model.firstSk,
+        secondSk:model.secondSk,
+        thirdSk:model.thirdSk,
+        fourthSk:model.fourthSk,
+        fifthSk:model.fifthSk,
+        sixthSk:model.sixthSk
+      }
+      axios.post('/pet/insert',obj).then(result => {
+        this.handleSearch()
+        this.handleModalState(false)
+        this.notification('success','新增成功')
+      })
+    }
+  }
+  notification(status,message) {
+    this.setState({notificationOpen:true})
+    this.setState({notification:{status,message}})
+    setTimeout(()=>{
+      this.setState({notificationOpen:false})
+    },6000)
+  }
+  getSpecies() {
+    axios.get('/species/find').then(result => {
+      this.setState({'species':result})
+    })
+  }
+  getDimensions() {
+    axios.get('/petDimension/find').then(result => {
+      this.setState({'dimensions':result})
+    })
+  }
+  getSkills() {
+    axios.get('/skill/find').then(result => {
+      this.setState({'skills':result})
+    })
   }
   render() {
     const { classes, ...rest } = this.props
@@ -57,32 +158,56 @@ class Pet extends Component {
           content={
             <Table
             tableHeaderColor="primary"
-            tableHead={ this.state.tableHead }
-            tableDataKey={ this.state.tableDataKey }
-            tableData={ this.state.tableData }
-            selected={ this.state.selected }
-            handleClick={ this.handleClick }
-            handleChangePage={ this.handleChangePage }
-            handleChangeRowsPerPage={ this.handleChangeRowsPerPage }
+            tableHead={this.state.tableHead}
+            tableDataKey={this.state.tableDataKey}
+            tableData={this.state.tableData}
+            selected={this.state.selected}
+            handleClick={this.handleClick}
+            handleChangePage={this.handleChangePage}
+            handleChangeRowsPerPage={this.handleChangeRowsPerPage}
             page={this.state.page}
             rowsPerPage={this.state.rowsPerPage}
             >
-              <Button variant="raised" className={classes.button}>
+              <Button variant="raised" className={classes.button} onClick={this.handleClickAdd}>
                 <Add/>
                 新增
               </Button>
-              <Button variant="raised" color="primary" className={classes.button}>
+              <Button variant="raised" color="primary" onClick={this.handleClickEdit} className={classes.button}>
                 <Edit/>
                 修改
               </Button>
-              <Button variant="raised" color="secondary" className={classes.button}>
+              <Button variant="raised" color="secondary" onClick={this.handleClickDelete} className={classes.button}>
                 <Delete/>
                 删除
+              </Button>
+              <Button variant="raised" color="primary" onClick={this.handleSearch} className={classes.searchButton}>
+                <Search/>
+                搜索
               </Button>
             </Table>
           }
           />
         </ItemGrid>
+        <PetContent handleModalState={this.handleModalState} showModal={this.state.showModal} model={this.state.model} ok={this.handleSave} speciesOption={this.state.species} dimensionOption={this.state.dimensions} skillOption={this.state.skills}/>
+        <Snackbar
+          place="tr"
+          color={this.state.notification.status}
+          message={this.state.notification.message}
+          open={this.state.notificationOpen}
+          closeNotification={() => this.setState({ notificationOpen: false })}
+          close
+        />
+        <Modal
+          title="确认删除"
+          showModal={this.state.showDelete}
+          headerColor="red"
+          content={
+            <div>确认删除吗？</div>
+          }
+          footer={
+            <FormFooter className={classes.formFooter} cancel={e => this.setState({showDelete:false})} ok={this.handleDelete} />
+          }
+        ></Modal>
       </Grid>
     )
   }

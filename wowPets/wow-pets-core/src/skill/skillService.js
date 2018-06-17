@@ -11,7 +11,17 @@ const skillService = {
     return result
   },
   delete(_id) {
-    return skillDao.deleteOne(_id)
+    let result,_ids=[]
+    _id.includes(',') ? _ids = _id.split(',') : _ids.push(_id)
+    if(!utils.checkId(_ids)){
+      return utils.createIdErrorMsg()
+    }
+    if(_ids.length > 1){
+      result = skillDao.deleteMany(_ids)
+    }else {
+      result = skillDao.deleteOne(_id)
+    }
+    return result
   },
   update(skill) {
     return skillDao.updateOne(skill)

@@ -26,19 +26,18 @@ const weatherService = {
   update(weathers) {
     return weatherDao.updateOne(weathers)
   },
-  find(where) {
-    return skillDao.find().then(skills => {
-      return weatherDao.find(where).then(weathers => {
-        return weathers.map(weather => {
-          let triggerName = []
-          skills.map(skill => {
-            if(weather.trigger && weather.trigger.includes(skill._id)){
-              triggerName.push(skill.name)
-            }
-          })
-          weather.triggerName = triggerName.join()
-          return weather
+  async find(where) {
+    let skills = await skillDao.find();
+    return weatherDao.find(where).then(weathers => {
+      return weathers.map(weather => {
+        let triggerName = []
+        skills.map(skill => {
+          if(weather.trigger && weather.trigger.includes(skill._id)){
+            triggerName.push(skill.name)
+          }
         })
+        weather.triggerName = triggerName.join()
+        return weather
       })
     }).catch(error => {
       return error
