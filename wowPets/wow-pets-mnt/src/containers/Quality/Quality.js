@@ -69,7 +69,7 @@ class Quality extends Component {
   }
   handleClickEdit() {
     if(this.state.selected >= 0){
-      this.setState({model:this.state.tableData[this.state.selected]})
+      this.setState({model:this.state.tableData[this.state.selected+this.state.page*this.state.rowsPerPage]})
       this.handleModalState()
     }else {
       this.notification('warning','请选择一条记录')

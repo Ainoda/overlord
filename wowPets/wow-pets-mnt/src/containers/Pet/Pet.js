@@ -27,7 +27,7 @@ class Pet extends Component {
       selected:-1,
       showModal:false,
       showDelete:false,
-      model:{name:'',code:'',species:'',dimension:'',firstSk:'',secondSk:'',thirdSk:'',fourthSk:'',fifthSk:'',sixthSk:''},
+      model:{name:'',code:'',species:'',dimension:'',firstSk:'',secondSk:'',thirdSk:'',fourthSk:'',fifthSk:'',sixthSk:'',description:''},
       notification:{status:'',message:''}
     }
     // This binding is necessary to make `this` work in the callback
@@ -70,12 +70,12 @@ class Pet extends Component {
     this.setState({showModal:state})
   }
   handleClickAdd() {
-    this.setState({model:{name:'',code:'',species:'',dimension:'',firstSk:'',secondSk:'',thirdSk:'',fourthSk:'',fifthSk:'',sixthSk:''}})
+    this.setState({model:{name:'',code:'',species:'',dimension:'',firstSk:'',secondSk:'',thirdSk:'',fourthSk:'',fifthSk:'',sixthSk:'',description:''}})
     this.handleModalState()
   }
   handleClickEdit() {
     if(this.state.selected >= 0){
-      this.setState({model:this.state.tableData[this.state.selected]})
+      this.setState({model:this.state.tableData[this.state.selected+this.state.page*this.state.rowsPerPage]})
       this.handleModalState()
     }else {
       this.notification('warning','请选择一条记录')
@@ -116,7 +116,8 @@ class Pet extends Component {
         thirdSk:model.thirdSk,
         fourthSk:model.fourthSk,
         fifthSk:model.fifthSk,
-        sixthSk:model.sixthSk
+        sixthSk:model.sixthSk,
+        description:model.description
       }
       axios.post('/pet/insert',obj).then(result => {
         this.handleSearch()

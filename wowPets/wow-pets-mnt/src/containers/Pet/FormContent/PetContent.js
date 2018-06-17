@@ -7,7 +7,7 @@ import pageStyle from '../../pageStyle'
 class PetContent extends Component {
   constructor(props) {
     super(props)
-    this.state = {name:'',code:'',species:'',dimension:'',firstSk:'',secondSk:'',thirdSk:'',fourthSk:'',fifthSk:'',sixthSk:''}
+    this.state = {name:'',code:'',species:'',dimension:'',firstSk:'',secondSk:'',thirdSk:'',fourthSk:'',fifthSk:'',sixthSk:'',description:''}
 
     this.handleValueChange = this.handleValueChange.bind(this)
     this.handleSelectValueChange = this.handleSelectValueChange.bind(this)
@@ -60,6 +60,9 @@ class PetContent extends Component {
             </ItemGrid>
             <ItemGrid xs={6} sm={6} md={6}>
               <InputSelect labelText="六技能" inputProps={{onChange:v=>this.handleSelectValueChange('sixthSk',v),value:this.state.sixthSk,name:'sixthSk'}} selectProps={{options:skillOption,labelKey:'name',valueKey:'_id',simpleValue:true}} formControlProps={{fullWidth: true}}/>
+            </ItemGrid>
+            <ItemGrid xs={12} sm={12} md={12}>
+              <Input labelText="描述" inputProps={{onChange:this.handleValueChange,value:this.state.description,name:'description',multiline:true}} formControlProps={{fullWidth: true}}/>
             </ItemGrid>
           </Grid>
         }
