@@ -2,6 +2,7 @@ const petDao = require('./petDao')
 const skillDao = require('../skill/skillDao')
 const petDimensionDao = require('../petDimension/petDimensionDao')
 const speciesDao = require('../species/speciesDao')
+const {utils} = require('../other/utils')
 
 const petService = {
   insert(pet) {
@@ -32,7 +33,7 @@ const petService = {
     let result = petDao.insertOne(pet)
     return result
   },
-  delete(_ids) {
+  delete(_id) {
     let result,_ids=[]
     _id.includes(',') ? _ids = _id.split(',') : _ids.push(_id)
     if(!utils.checkId(_ids)){
@@ -56,22 +57,22 @@ const petService = {
       return pets.map(pet => {
         skills.map(skill => {
           if(skill._id.equals(pet.firstSk)){
-            pet.firstSkSkName = skill.name
+            pet.firstSkName = skill.name
           }
           if(skill._id.equals(pet.secondSk)){
             pet.secondSkName = skill.name
           }
           if(skill._id.equals(pet.thirdSk)){
-            pet.thirdSkkName = skill.name
+            pet.thirdSkName = skill.name
           }
           if(skill._id.equals(pet.fourthSk)){
             pet.fourthSkName = skill.name
           }
           if(skill._id.equals(pet.fifthSk)){
-            pet.fifthSkSkName = skill.name
+            pet.fifthSkName = skill.name
           }
           if(skill._id.equals(pet.sixthSk)){
-            pet.sixthSkSkName = skill.name
+            pet.sixthSkName = skill.name
           }
         })
         let petDimensionNames = []

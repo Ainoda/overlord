@@ -52,7 +52,7 @@ const appRoutes = [
     icon: WbSunny,
     component: Weather
   },
-  { redirect: true, path: '/', to: '/pet', navbarName: 'Redirect' }
+  { redirect: true, path: '*', to: '/pet', navbarName: 'Redirect' }
 ]
 
 export default appRoutes

@@ -23,7 +23,12 @@ const petDimensionService = {
     return petDimensionDao.updateOne(petDimension)
   },
   find(where) {
-    return petDimensionDao.find(where)
+    return petDimensionDao.find(where).then(petDimensions => {
+      return petDimensions.map(petDimension => {
+        petDimension.title = petDimension.hp+'/'+petDimension.attack+'/'+petDimension.speed
+        return petDimension
+      })
+    })
   }
 }
 

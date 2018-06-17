@@ -10,7 +10,7 @@ class PetContent extends Component {
     this.state = {name:'',code:'',species:'',dimension:'',firstSk:'',secondSk:'',thirdSk:'',fourthSk:'',fifthSk:'',sixthSk:''}
 
     this.handleValueChange = this.handleValueChange.bind(this)
-    this.handleDimensionChange = this.handleDimensionChange.bind(this)
+    this.handleSelectValueChange = this.handleSelectValueChange.bind(this)
   }
   componentWillReceiveProps(props) {
     this.setState({...props.model})
@@ -18,8 +18,8 @@ class PetContent extends Component {
   handleValueChange(e) {
     this.setState({[e.target.name]:e.target.value})
   }
-  handleDimensionChange(v){
-    this.setState({dimension:v})
+  handleSelectValueChange(k,v){
+    this.setState({[k]:v})
   }
   render() {
     const { classes,handleModalState,showModal,model,speciesOption,dimensionOption,skillOption,ok,headerColor,...rest} = this.props
@@ -38,28 +38,28 @@ class PetContent extends Component {
               <Input labelText="编码" inputProps={{onChange:this.handleValueChange,value:this.state.code,name:'code'}} formControlProps={{fullWidth: true}}/>
             </ItemGrid>
             <ItemGrid xs={6} sm={6} md={6}>
-              <InputSelect labelText="属性" inputProps={{onChange:this.handleDimensionChange,value:this.state.dimension,name:'dimension'}} selectProps={{options:dimensionOption,labelKey:'name',valueKey:'_id',simpleValue:true,multi:true}} formControlProps={{fullWidth: true}}/>
+              <InputSelect labelText="属性" inputProps={{onChange:v=>this.handleSelectValueChange('dimension',v),value:this.state.dimension,name:'dimension'}} selectProps={{options:dimensionOption,labelKey:'name',valueKey:'_id',simpleValue:true,multi:true}} formControlProps={{fullWidth: true}}/>
             </ItemGrid>
             <ItemGrid xs={6} sm={6} md={6}>
               <Select labelText="类型" multiStyle={true} inputProps={{onChange:this.handleValueChange,value:this.state.species,name:'species'}} formControlProps={{fullWidth: true}} options={speciesOption}/>
             </ItemGrid>
             <ItemGrid xs={6} sm={6} md={6}>
-              <Select labelText="一技能" inputProps={{onChange:this.handleValueChange,value:this.state.firstSk,name:'firstSk'}} formControlProps={{fullWidth: true}} options={skillOption}/>
+              <InputSelect labelText="一技能" inputProps={{onChange:v=>this.handleSelectValueChange('firstSk',v),value:this.state.firstSk,name:'firstSk'}} selectProps={{options:skillOption,labelKey:'name',valueKey:'_id',simpleValue:true}} formControlProps={{fullWidth: true}}/>
             </ItemGrid>
             <ItemGrid xs={6} sm={6} md={6}>
-              <Select labelText="二技能" inputProps={{onChange:this.handleValueChange,value:this.state.secondSk,name:'secondSk'}} formControlProps={{fullWidth: true}} options={skillOption}/>
+              <InputSelect labelText="二技能" inputProps={{onChange:v=>this.handleSelectValueChange('secondSk',v),value:this.state.secondSk,name:'secondSk'}} selectProps={{options:skillOption,labelKey:'name',valueKey:'_id',simpleValue:true}} formControlProps={{fullWidth: true}}/>
             </ItemGrid>
             <ItemGrid xs={6} sm={6} md={6}>
-              <Select labelText="三技能" inputProps={{onChange:this.handleValueChange,value:this.state.thirdSk,name:'thirdSk'}} formControlProps={{fullWidth: true}} options={skillOption}/>
+              <InputSelect labelText="三技能" inputProps={{onChange:v=>this.handleSelectValueChange('thirdSk',v),value:this.state.thirdSk,name:'thirdSk'}} selectProps={{options:skillOption,labelKey:'name',valueKey:'_id',simpleValue:true}}  formControlProps={{fullWidth: true}}/>
             </ItemGrid>
             <ItemGrid xs={6} sm={6} md={6}>
-              <Select labelText="四技能" inputProps={{onChange:this.handleValueChange,value:this.state.fourthSk,name:'fourthSk'}} formControlProps={{fullWidth: true}} options={skillOption}/>
+              <InputSelect labelText="四技能" inputProps={{onChange:v=>this.handleSelectValueChange('fourthSk',v),value:this.state.fourthSk,name:'fourthSk'}} selectProps={{options:skillOption,labelKey:'name',valueKey:'_id',simpleValue:true}} formControlProps={{fullWidth: true}}/>
             </ItemGrid>
             <ItemGrid xs={6} sm={6} md={6}>
-              <Select labelText="五技能" inputProps={{onChange:this.handleValueChange,value:this.state.fifthSk,name:'fifthSk'}} formControlProps={{fullWidth: true}} options={skillOption}/>
+              <InputSelect labelText="五技能" inputProps={{onChange:v=>this.handleSelectValueChange('fifthSk',v),value:this.state.fifthSk,name:'fifthSk'}} selectProps={{options:skillOption,labelKey:'name',valueKey:'_id',simpleValue:true}} formControlProps={{fullWidth: true}}/>
             </ItemGrid>
             <ItemGrid xs={6} sm={6} md={6}>
-              <Select labelText="六技能" inputProps={{onChange:this.handleValueChange,value:this.state.sixthSk,name:'sixthSk'}} formControlProps={{fullWidth: true}} options={skillOption}/>
+              <InputSelect labelText="六技能" inputProps={{onChange:v=>this.handleSelectValueChange('sixthSk',v),value:this.state.sixthSk,name:'sixthSk'}} selectProps={{options:skillOption,labelKey:'name',valueKey:'_id',simpleValue:true}} formControlProps={{fullWidth: true}}/>
             </ItemGrid>
           </Grid>
         }
