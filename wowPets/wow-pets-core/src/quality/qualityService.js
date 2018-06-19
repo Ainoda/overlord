@@ -23,7 +23,11 @@ const qualityService = {
     }
     return result
   },
-  update(quality) {
+  async update(quality) {
+    let qualityArr = await this.findQuality({code:quality.code});
+    if(qualityArr.length > 0 && qualityArr[0]._id.equals(quality._id)){
+      return utils.createResMsg(RES_STATUS.FAILURE,'该品质已经存在！')
+    }
     return qualityDao.updateOne(quality)
   },
   find(where) {

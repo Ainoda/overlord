@@ -27,7 +27,11 @@ const weatherService = {
     }
     return result
   },
-  update(weathers) {
+  async update(weathers) {
+    let weatcherArr = await this.findWeather({code:weathers.code});
+    if(weatcherArr.length > 0 && !weatcherArr[0]._id.equals(weathers._id)){
+      return utils.createResMsg(RES_STATUS.FAILURE,'该天气已经存在！')
+    }
     return weatherDao.updateOne(weathers)
   },
   async find(where) {

@@ -27,7 +27,11 @@ const skillService = {
     }
     return result
   },
-  update(skill) {
+  async update(skill) {
+    let skillArr = await this.findSkills({code:skill.code});
+    if(skillArr.length > 0 && skillArr[0]._id.equals(skill._id)){
+      return utils.createResMsg(RES_STATUS.FAILURE,'该技能已经存在！')
+    }
     return skillDao.updateOne(skill)
   },
   find(where) {

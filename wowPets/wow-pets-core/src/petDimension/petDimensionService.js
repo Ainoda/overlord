@@ -23,7 +23,11 @@ const petDimensionService = {
     }
     return result
   },
-  update(petDimension) {
+  async update(petDimension) {
+    let petDimensionArr = await this.findPetDimension({hp:petDimension.hp,attack:petDimension.attack,speed:petDimension.speed});
+    if(petDimensionArr.length > 0 && petDimensionArr[0]._id.equals(petDimension._id)){
+      return utils.createResMsg(RES_STATUS.FAILURE,'该属性已经存在！')
+    }
     return petDimensionDao.updateOne(petDimension)
   },
   find(where) {
