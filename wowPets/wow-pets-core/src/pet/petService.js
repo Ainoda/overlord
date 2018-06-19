@@ -2,10 +2,10 @@ const petDao = require('./petDao')
 const skillDao = require('../skill/skillDao')
 const petDimensionDao = require('../petDimension/petDimensionDao')
 const speciesDao = require('../species/speciesDao')
-const {utils} = require('../other/utils')
+const {utils,RES_STATUS} = require('../other/utils')
 
 const petService = {
-  insert(pet) {
+  async insert(pet) {
     if(pet.firstSk && !utils.checkId(pet.firstSk)){
       return utils.createIdErrorMsg()
     }
@@ -29,6 +29,10 @@ const petService = {
     }
     if(pet.species && !utils.checkId(pet.species)){
       return utils.createIdErrorMsg()
+    }
+    let petArr = await this.findPet({code:pet.code});
+    if(petArr.length > 0){
+      return utils.createResMsg(RES_STATUS.FAILURE,'该宠物已经存在！')
     }
     let result = petDao.insertOne(pet)
     return result
@@ -92,6 +96,9 @@ const petService = {
     }).catch(error => {
       return error
     })
+  },
+  findPet(where) {
+    return petDao.find(where)
   }
 }
 

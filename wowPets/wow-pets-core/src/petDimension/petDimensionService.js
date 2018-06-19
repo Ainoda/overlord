@@ -1,8 +1,12 @@
 const petDimensionDao = require('./petDimensionDao')
-const {utils} = require('../other/utils')
+const {utils,RES_STATUS} = require('../other/utils')
 
 const petDimensionService = {
-  insert(petDimension) {
+  async insert(petDimension) {
+    let petDimensionArr = await this.findPetDimension({hp:petDimension.hp,attack:petDimension.attack,speed:petDimension.speed});
+    if(petDimensionArr.length > 0){
+      return utils.createResMsg(RES_STATUS.FAILURE,'该属性已经存在！')
+    }
     let result = petDimensionDao.insertOne(petDimension)
     return result
   },
@@ -29,6 +33,9 @@ const petDimensionService = {
         return petDimension
       })
     })
+  },
+  findPetDimension(where) {
+    return petDimensionDao.find(where)
   }
 }
 

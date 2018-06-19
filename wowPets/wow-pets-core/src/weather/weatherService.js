@@ -1,11 +1,15 @@
 const weatherDao = require('./weatherDao')
 const skillDao = require('../skill/skillDao')
-const {utils} = require('../other/utils')
+const {utils,RES_STATUS} = require('../other/utils')
 
 const weatherService = {
-  insert(weather) {
+  async insert(weather) {
     if(weather.trigger && !utils.checkId(weather.trigger)){
       return utils.createIdErrorMsg()
+    }
+    let weatcherArr = await this.findWeather({code:weather.code});
+    if(weatcherArr.length > 0){
+      return utils.createResMsg(RES_STATUS.FAILURE,'该天气已经存在！')
     }
     let result = weatherDao.insertOne(weather)
     return result
@@ -42,6 +46,9 @@ const weatherService = {
     }).catch(error => {
       return error
     })
+  },
+  findWeather(where) {
+    return weatherDao.find(where);
   }
 }
 

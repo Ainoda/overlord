@@ -1,11 +1,15 @@
 const skillDao = require('./skillDao')
 const speciesDao = require('../species/speciesDao')
-const {utils} = require('../other/utils')
+const {utils,RES_STATUS} = require('../other/utils')
 
 const skillService = {
-  insert(skill) {
+  async insert(skill) {
     if(skill.species && !utils.checkId(skill.species)){
       return utils.createIdErrorMsg()
+    }
+    let skillArr = await this.findSkills({code:skill.code});
+    if(skillArr.length > 0){
+      return utils.createResMsg(RES_STATUS.FAILURE,'该技能已经存在！')
     }
     let result = skillDao.insertOne(skill)
     return result
@@ -43,6 +47,9 @@ const skillService = {
     }).catch(error => {
       return error
     })
+  },
+  findSkills(where) {
+    return skillDao.find(where);
   }
 }
 

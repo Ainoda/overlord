@@ -86,7 +86,7 @@ const database = {
       }
       this.db.collection(collection).updateOne(where, updateStr, (err, res) => {
         if (err) throw err
-        if(res.result.ok === 1 && res.result.nModified > 0){
+        if(res.result.ok === 1 && res.result.nModified >= 0){
           resolve(utils.mongodbResMsg(DB_TYPE.UPDATE, RES_STATUS.SUCCESS, res.result))
         }else {
           reject(utils.mongodbResMsg(DB_TYPE.UPDATE, RES_STATUS.FAILURE, res.result))

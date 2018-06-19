@@ -35,7 +35,7 @@ const utils = {
   },
   createIdErrorMsg(){
     return new Promise((resolve,reject) => {
-      let resMsg = new ResMsg(0,'id必须是24位字符串')
+      let resMsg = new ResMsg(RES_STATUS.FAILURE,'id必须是24位字符串')
       reject(resMsg)
     })
   },

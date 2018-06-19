@@ -1,8 +1,12 @@
 const qualityDao = require('./qualityDao')
-const {utils} = require('../other/utils')
+const {utils,RES_STATUS} = require('../other/utils')
 
 const qualityService = {
-  insert(quality) {
+  async insert(quality) {
+    let qualityArr = await this.findQuality({code:quality.code});
+    if(qualityArr.length > 0){
+      return utils.createResMsg(RES_STATUS.FAILURE,'该品质已经存在！')
+    }
     let result = qualityDao.insertOne(quality)
     return result
   },
@@ -24,6 +28,9 @@ const qualityService = {
   },
   find(where) {
     return qualityDao.find(where)
+  },
+  findQuality(where) {
+    return qualityDao.find(where);
   }
 }
 

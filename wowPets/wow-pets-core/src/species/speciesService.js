@@ -1,5 +1,5 @@
 const speciesDao = require('./speciesDao')
-const {utils} = require('../other/utils')
+const {utils,RES_STATUS} = require('../other/utils')
 
 function checkSpecies(species){
   if(species.tap && !utils.checkId(species.tap)){
@@ -12,9 +12,13 @@ function checkSpecies(species){
 }
 
 const speciesService = {
-  insert(species) {
+  async insert(species) {
     if(!checkSpecies(species)){
       return utils.createIdErrorMsg()
+    }
+    let speciesArr = await this.findSpecies({code:species.code});
+    if(speciesArr.length > 0){
+      return utils.createResMsg(RES_STATUS.FAILURE,'该类型已经存在！')
     }
     let result = speciesDao.insertOne(species)
     return result
@@ -51,6 +55,9 @@ const speciesService = {
     }).catch(error => {
       return error
     })
+  },
+  findSpecies(where) {
+    return speciesDao.find(where);
   }
 }
 
