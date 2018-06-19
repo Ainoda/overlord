@@ -52,7 +52,7 @@ const petService = {
   },
   async update(pet) {
     let petArr = await this.findPet({code:pet.code});
-    if(petArr.length > 0 && petArr[0]._id.equals(pet._id)){
+    if(petArr.length > 0 && !petArr[0]._id.equals(pet._id)){
       return utils.createResMsg(RES_STATUS.FAILURE,'该宠物已经存在！')
     }
     return petDao.updateOne(pet)

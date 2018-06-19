@@ -38,7 +38,7 @@ const speciesService = {
   },
   async update(species) {
     let speciesArr = await this.findSpecies({code:species.code});
-    if(speciesArr.length > 0 && speciesArr[0]._id.equals(species._id)){
+    if(speciesArr.length > 0 && !speciesArr[0]._id.equals(species._id)){
       return utils.createResMsg(RES_STATUS.FAILURE,'该类型已经存在！')
     }
     return speciesDao.updateOne(species)
