@@ -7,7 +7,7 @@ import { withStyles } from 'material-ui'
 import appRoutes from '../../routes/app'
 import appStyle from './appStyle.js'
 import image from '../../asset/img/sidebar.jpg'
-import { Sidebar,Header,Snackbar } from '../../components'
+import { Sidebar,Header,Snackbar,Loading } from '../../components'
 
 
 class App extends Component {
@@ -16,11 +16,13 @@ class App extends Component {
     this.state = {
       mobileOpen:false,
       notification:{status:'',message:''},
-      notificationOpen:false
+      notificationOpen:false,
+      loading:false
     }
 
     this.handleDrawerToggle = this.handleDrawerToggle.bind(this)
     this.handleNotification = this.handleNotification.bind(this)
+    this.handleLoading = this.handleLoading.bind(this)
   }
 
   handleDrawerToggle() {
@@ -31,7 +33,10 @@ class App extends Component {
     this.setState({notification:{status,message}})
     setTimeout(()=>{
       this.setState({notificationOpen:false})
-    },6000)
+    },3000)
+  }
+  handleLoading(v){
+    this.setState({loading:v})
   }
   componentDidMount() {
     if(navigator.platform.indexOf('Win') > -1){
@@ -65,9 +70,10 @@ class App extends Component {
             <div className={classes.container}>
               <Switch>
                 {appRoutes.map((prop, key) => {
-                  if (prop.redirect)
+                  if (prop.redirect){
                     return <Redirect from={prop.path} to={prop.to} key={key} />
-                  return <Route path={prop.path} render={(props) => <prop.component {...props} notification={this.handleNotification}/>} key={key} />
+                  }
+                  return <Route path={prop.path} render={(props) => <prop.component {...props} notification={this.handleNotification} loading={this.handleLoading}/>} key={key} />
                 })}
               </Switch>
             </div>
@@ -80,6 +86,7 @@ class App extends Component {
             closeNotification={() => this.setState({ notificationOpen: false })}
             close
           />
+          <Loading loading={this.state.loading}/>
         </div>
       </div>
     )

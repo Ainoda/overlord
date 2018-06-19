@@ -37,14 +37,30 @@ class Species extends Component {
     this.handleSearch = this.handleSearch.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
+    // simple implement
+    this.httpRequest = 0;
   }
   componentDidMount() {
     this.handleSearch()
   }
+  loading(boolean) {
+    if(boolean){
+      this.httpRequest += 1
+      this.props.loading(true)
+    }else {
+      this.httpRequest -= 1
+      if(this.httpRequest === 0){
+        this.props.loading(false)
+      }
+    }
+  }
   handleSearch() {
+    this.loading(true)
     axios.get('/species/find').then(result => {
+    this.loading(false)
       this.setState({tableData:result})
     }).catch(error => {
+    this.loading(false)
       this.props.notification('danger',error)
     })
   }
@@ -86,22 +102,28 @@ class Species extends Component {
   handleDelete() {
     // 获取当前选中的数据
     let model = this.state.tableData[this.state.selected]
+    this.loading(true)
     axios.delete(`/species/delete/${model._id}`).then(result => {
+      this.loading(false)
       this.handleSearch()
       this.setState({showDelete:false})
       this.props.notification('success',result.msg)
     }).catch(error => {
+      this.loading(false)
       this.props.notification('danger',error)
     })
   }
   handleSave(type, model) {
+    this.loading(true)
     if(type === 'edit'){
       model._id = this.state.model._id
       axios.put('/species/update',model).then(result => {
+        this.loading(false)
         this.handleSearch()
         this.handleModalState(false)
         this.props.notification('success','修改成功')
       }).catch(error => {
+        this.loading(false)
         this.props.notification('danger',error)
       })
     }else {
@@ -113,10 +135,12 @@ class Species extends Component {
       }
       this.setState({model:obj})
       axios.post('/species/insert',obj).then(result => {
+        this.loading(false)
         this.handleSearch()
         this.handleModalState(false)
         this.props.notification('success','新增成功')
       }).catch(error => {
+        this.loading(false)
         this.props.notification('danger',error)
       })
     }

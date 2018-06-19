@@ -68,6 +68,7 @@ import Table from './Table/Table.js'
 // #############################
 
 import Modal from './Modal/Modal.js'
+import Loading from './Modal/Loading.js'
 
 // ##############################
 // // // form
@@ -101,6 +102,7 @@ export {
   // Typography
   // Modal
   Modal,
+  Loading,
   // Form
   FormFooter,
 }
