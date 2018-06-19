@@ -12,7 +12,10 @@ class SpeciesContent extends Component {
     this.handleValueChange = this.handleValueChange.bind(this)
   }
   componentWillReceiveProps(props) {
-    this.setState({...props.model})
+    // 防止props多次渲染导致输入内容被覆盖
+    if (!Object.is(this.props.model,props.model)){
+      this.setState({...props.model})
+    }
   }
   handleValueChange(e) {
     this.setState({[e.target.name]:e.target.value})
