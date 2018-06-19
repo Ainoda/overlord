@@ -7,30 +7,31 @@ import { withStyles } from 'material-ui'
 import appRoutes from '../../routes/app'
 import appStyle from './appStyle.js'
 import image from '../../asset/img/sidebar.jpg'
-import { Sidebar,Header } from '../../components'
+import { Sidebar,Header,Snackbar } from '../../components'
 
 
-const switchRoutes = (
-  <Switch>
-    {appRoutes.map((prop, key) => {
-      if (prop.redirect)
-        return <Redirect from={prop.path} to={prop.to} key={key} />
-      return <Route path={prop.path} component={prop.component} key={key} />
-    })}
-  </Switch>
-)
 class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      mobileOpen:false
+      mobileOpen:false,
+      notification:{status:'',message:''},
+      notificationOpen:false
     }
 
     this.handleDrawerToggle = this.handleDrawerToggle.bind(this)
+    this.handleNotification = this.handleNotification.bind(this)
   }
 
   handleDrawerToggle() {
     this.setState({ mobileOpen: !this.state.mobileOpen })
+  }
+  handleNotification(status,message) {
+    this.setState({notificationOpen:true})
+    this.setState({notification:{status,message}})
+    setTimeout(()=>{
+      this.setState({notificationOpen:false})
+    },6000)
   }
   componentDidMount() {
     if(navigator.platform.indexOf('Win') > -1){
@@ -61,8 +62,24 @@ class App extends Component {
             {...rest}
           />
           <div className={classes.content}>
-            <div className={classes.container}>{switchRoutes}</div>
+            <div className={classes.container}>
+              <Switch>
+                {appRoutes.map((prop, key) => {
+                  if (prop.redirect)
+                    return <Redirect from={prop.path} to={prop.to} key={key} />
+                  return <Route path={prop.path} render={(props) => <prop.component {...props} notification={this.handleNotification}/>} key={key} />
+                })}
+              </Switch>
+            </div>
           </div>
+          <Snackbar
+            place="tr"
+            color={this.state.notification.status}
+            message={this.state.notification.message}
+            open={this.state.notificationOpen}
+            closeNotification={() => this.setState({ notificationOpen: false })}
+            close
+          />
         </div>
       </div>
     )

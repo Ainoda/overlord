@@ -8,7 +8,7 @@ import {
   Search
 } from 'material-ui-icons'
 
-import { RegularCard,Table,ItemGrid,Snackbar,Modal,FormFooter } from '../../components'
+import { RegularCard,Table,ItemGrid,Modal,FormFooter } from '../../components'
 import pageStyle from '../pageStyle'
 import WeatherContent from './FormContent/WeatherContent'
 
@@ -25,7 +25,6 @@ class Weather extends Component {
       showModal:false,
       showDelete:false,
       model:{name:'',code:'',description:'',trigger:[]},
-      notification:{status:'',message:''},
       skills:[]
     }
     // This binding is necessary to make `this` work in the callback
@@ -47,6 +46,8 @@ class Weather extends Component {
   handleSearch() {
     axios.get('/weather/find').then(result => {
       this.setState({tableData:result})
+    }).catch(error => {
+      this.props.notification('danger',error)
     })
   }
   handleClick(e, index) {
@@ -71,26 +72,28 @@ class Weather extends Component {
   }
   handleClickEdit() {
     if(this.state.selected >= 0){
-      this.setState({model:this.state.tableData[this.state.selected+this.state.page*this.state.rowsPerPage]})
+      this.setState({model:this.state.tableData[this.state.selected]})
       this.handleModalState()
     }else {
-      this.notification('warning','请选择一条记录')
+      this.props.notification('warning','请选择一条记录')
     }
   }
   handleClickDelete() {
     if(this.state.selected >= 0){
       this.setState({showDelete:true})
     }else {
-      this.notification('warning', '请选择一条记录')
+      this.props.notification('warning', '请选择一条记录')
     }
   }
   handleDelete() {
     // 获取当前选中的数据
-    let model = this.state.tableData[this.state.selected+this.state.page*this.state.rowsPerPage]
+    let model = this.state.tableData[this.state.selected]
     axios.delete(`/weather/delete/${model._id}`).then(result => {
       this.handleSearch()
       this.setState({showDelete:false})
-      this.notification('success',result.msg)
+      this.props.notification('success',result.msg)
+    }).catch(error => {
+      this.props.notification('danger',error)
     })
   }
   handleSave(type, model) {
@@ -99,7 +102,9 @@ class Weather extends Component {
       axios.put('/weather/update',model).then(result => {
         this.handleSearch()
         this.handleModalState(false)
-        this.notification('success','修改成功')
+        this.props.notification('success','修改成功')
+      }).catch(error => {
+        this.props.notification('danger',error)
       })
     }else {
       let obj = {
@@ -108,23 +113,21 @@ class Weather extends Component {
         description:model.description,
         trigger:model.trigger
       }
+      this.setState({model:obj})
       axios.post('/weather/insert',obj).then(result => {
         this.handleSearch()
         this.handleModalState(false)
-        this.notification('success','新增成功')
+        this.props.notification('success','新增成功')
+      }).catch(error => {
+        this.props.notification('danger',error)
       })
     }
-  }
-  notification(status,message) {
-    this.setState({notificationOpen:true})
-    this.setState({notification:{status,message}})
-    setTimeout(()=>{
-      this.setState({notificationOpen:false})
-    },6000)
   }
   getSkills(){
     axios.get('/skill/find').then(result => {
       this.setState({skills:result})
+    }).catch(error => {
+      this.props.notification('danger',error)
     })
   }
   render() {
@@ -169,14 +172,6 @@ class Weather extends Component {
           />
         </ItemGrid>
         <WeatherContent handleModalState={this.handleModalState} showModal={this.state.showModal} model={this.state.model} ok={this.handleSave} options={this.state.skills}/>
-        <Snackbar
-          place="tr"
-          color={this.state.notification.status}
-          message={this.state.notification.message}
-          open={this.state.notificationOpen}
-          closeNotification={() => this.setState({ notificationOpen: false })}
-          close
-        />
         <Modal
           title="确认删除"
           showModal={this.state.showDelete}

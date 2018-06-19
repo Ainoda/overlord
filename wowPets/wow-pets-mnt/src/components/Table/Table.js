@@ -24,7 +24,7 @@ class CustomTable extends Component {
     if(isSelected){
       if(this.props.mutiSelect){
         for (let i = 0; i < this.props.selected.length; i++) {
-          if(this.props.selected[i] === key) {
+          if(this.props.selected[i] === key+this.props.page*this.props.rowsPerPage) {
             result.splice(i,1)
           }
         }
@@ -32,7 +32,7 @@ class CustomTable extends Component {
         result = -1
       }
     }else {
-      this.props.mutiSelect ? result.push(key) : result = key
+      this.props.mutiSelect ? result.push(key) : result = key+this.props.page*this.props.rowsPerPage
     }
     return result
   }
@@ -62,7 +62,7 @@ class CustomTable extends Component {
           ) : null}
           <TableBody>
           {tableData.slice(page*rowsPerPage,page*rowsPerPage+rowsPerPage).map((prop, key) => {
-            const isSelected = mutiSelect ? selected.includes(key) : key === selected
+            const isSelected = mutiSelect ? selected.includes(key) : key+page*rowsPerPage === selected
             return (
               <TableRow hover key={prop._id} onClick={e => handleClick ? handleClick(e, this.getSelected(isSelected,key)) : null} aria-checked={isSelected} selected={isSelected}>
                 { handleClick ? <TableCell padding="checkbox">

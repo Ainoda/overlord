@@ -8,7 +8,7 @@ import {
   Search
 } from 'material-ui-icons'
 
-import { RegularCard,Table,ItemGrid,Snackbar,Modal,FormFooter } from '../../components'
+import { RegularCard,Table,ItemGrid,Modal,FormFooter } from '../../components'
 import pageStyle from '../pageStyle'
 import SkillContent from './FormContent/SkillContent'
 
@@ -25,8 +25,7 @@ class Skill extends Component {
       selected:-1,
       showModal:false,
       showDelete:false,
-      model:{name:'',code:'',species:'',hitRate:'',cooling:'',useRounds:'',lastRounds:'',description:''},
-      notification:{status:'',message:''}
+      model:{name:'',code:'',species:'',hitRate:'',cooling:'',useRounds:'',lastRounds:'',description:''}
     }
     // This binding is necessary to make `this` work in the callback
     this.handleClick = this.handleClick.bind(this)
@@ -47,6 +46,8 @@ class Skill extends Component {
   handleSearch() {
     axios.get('/skill/find').then(result => {
       this.setState({tableData:result})
+    }).catch(error => {
+      this.props.notification('danger',error)
     })
   }
   handleClick(e, index) {
@@ -71,26 +72,28 @@ class Skill extends Component {
   }
   handleClickEdit() {
     if(this.state.selected >= 0){
-      this.setState({model:this.state.tableData[this.state.selected+this.state.page*this.state.rowsPerPage]})
+      this.setState({model:this.state.tableData[this.state.selected]})
       this.handleModalState()
     }else {
-      this.notification('warning','请选择一条记录')
+      this.props.notification('warning','请选择一条记录')
     }
   }
   handleClickDelete() {
     if(this.state.selected >= 0){
       this.setState({showDelete:true})
     }else {
-      this.notification('warning', '请选择一条记录')
+      this.props.notification('warning', '请选择一条记录')
     }
   }
   handleDelete() {
     // 获取当前选中的数据
-    let model = this.state.tableData[this.state.selected+this.state.page*this.state.rowsPerPage]
+    let model = this.state.tableData[this.state.selected]
     axios.delete(`/skill/delete/${model._id}`).then(result => {
       this.handleSearch()
       this.setState({showDelete:false})
-      this.notification('success',result.msg)
+      this.props.notification('success',result.msg)
+    }).catch(error => {
+      this.props.notification('danger',error)
     })
   }
   handleSave(type, model) {
@@ -99,7 +102,9 @@ class Skill extends Component {
       axios.put('/skill/update',model).then(result => {
         this.handleSearch()
         this.handleModalState(false)
-        this.notification('success','修改成功')
+        this.props.notification('success','修改成功')
+      }).catch(error => {
+        this.props.notification('danger',error)
       })
     }else {
       let obj = {
@@ -112,23 +117,21 @@ class Skill extends Component {
         lastRounds:model.lastRounds,
         description:model.description
       }
+      this.setState({model:obj})
       axios.post('/skill/insert',obj).then(result => {
         this.handleSearch()
         this.handleModalState(false)
-        this.notification('success','新增成功')
+        this.props.notification('success','新增成功')
+      }).catch(error => {
+        this.props.notification('danger',error)
       })
     }
-  }
-  notification(status,message) {
-    this.setState({notificationOpen:true})
-    this.setState({notification:{status,message}})
-    setTimeout(()=>{
-      this.setState({notificationOpen:false})
-    },6000)
   }
   getSpecies() {
     axios.get('/species/find').then(result => {
       this.setState({'species':result})
+    }).catch(error => {
+      this.props.notification('danger',error)
     })
   }
   render() {
@@ -173,14 +176,6 @@ class Skill extends Component {
           />
         </ItemGrid>
         <SkillContent handleModalState={this.handleModalState} showModal={this.state.showModal} model={this.state.model} ok={this.handleSave} options={this.state.species}/>
-        <Snackbar
-          place="tr"
-          color={this.state.notification.status}
-          message={this.state.notification.message}
-          open={this.state.notificationOpen}
-          closeNotification={() => this.setState({ notificationOpen: false })}
-          close
-        />
         <Modal
           title="确认删除"
           showModal={this.state.showDelete}

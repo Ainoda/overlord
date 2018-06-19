@@ -8,7 +8,7 @@ import {
   Search
 } from 'material-ui-icons'
 
-import { RegularCard,Table,ItemGrid,Snackbar,Modal,FormFooter } from '../../components'
+import { RegularCard,Table,ItemGrid,Modal,FormFooter } from '../../components'
 import pageStyle from '../pageStyle'
 import PetContent from './FormContent/PetContent'
 
@@ -27,8 +27,7 @@ class Pet extends Component {
       selected:-1,
       showModal:false,
       showDelete:false,
-      model:{name:'',code:'',species:'',dimension:'',firstSk:'',secondSk:'',thirdSk:'',fourthSk:'',fifthSk:'',sixthSk:'',description:''},
-      notification:{status:'',message:''}
+      model:{name:'',code:'',species:'',dimension:'',firstSk:'',secondSk:'',thirdSk:'',fourthSk:'',fifthSk:'',sixthSk:'',description:''}
     }
     // This binding is necessary to make `this` work in the callback
     this.handleClick = this.handleClick.bind(this)
@@ -51,6 +50,8 @@ class Pet extends Component {
   handleSearch() {
     axios.get('/pet/find').then(result => {
       this.setState({tableData:result})
+    }).catch(error => {
+      this.props.notification('danger',error)
     })
   }
   handleClick(e, index) {
@@ -75,26 +76,28 @@ class Pet extends Component {
   }
   handleClickEdit() {
     if(this.state.selected >= 0){
-      this.setState({model:this.state.tableData[this.state.selected+this.state.page*this.state.rowsPerPage]})
+      this.setState({model:this.state.tableData[this.state.selected]})
       this.handleModalState()
     }else {
-      this.notification('warning','请选择一条记录')
+      this.props.notification('warning','请选择一条记录')
     }
   }
   handleClickDelete() {
     if(this.state.selected >= 0){
       this.setState({showDelete:true})
     }else {
-      this.notification('warning', '请选择一条记录')
+      this.props.notification('warning', '请选择一条记录')
     }
   }
   handleDelete() {
     // 获取当前选中的数据
-    let model = this.state.tableData[this.state.selected+this.state.page*this.state.rowsPerPage]
+    let model = this.state.tableData[this.state.selected]
     axios.delete(`/pet/delete/${model._id}`).then(result => {
       this.handleSearch()
       this.setState({showDelete:false})
-      this.notification('success',result.msg)
+      this.props.notification('success',result.msg)
+    }).catch(error => {
+      this.props.notification('danger',error)
     })
   }
   handleSave(type, model) {
@@ -103,7 +106,9 @@ class Pet extends Component {
       axios.put('/pet/update',model).then(result => {
         this.handleSearch()
         this.handleModalState(false)
-        this.notification('success','修改成功')
+        this.props.notification('success','修改成功')
+      }).catch(error => {
+        this.props.notification('danger',error)
       })
     }else {
       let obj = {
@@ -119,19 +124,15 @@ class Pet extends Component {
         sixthSk:model.sixthSk,
         description:model.description
       }
+      this.setState({model:obj})
       axios.post('/pet/insert',obj).then(result => {
         this.handleSearch()
         this.handleModalState(false)
-        this.notification('success','新增成功')
+        this.props.notification('success','新增成功')
+      }).catch(error => {
+        this.props.notification('danger',error)
       })
     }
-  }
-  notification(status,message) {
-    this.setState({notificationOpen:true})
-    this.setState({notification:{status,message}})
-    setTimeout(()=>{
-      this.setState({notificationOpen:false})
-    },6000)
   }
   getSpecies() {
     axios.get('/species/find').then(result => {
@@ -190,14 +191,6 @@ class Pet extends Component {
           />
         </ItemGrid>
         <PetContent handleModalState={this.handleModalState} showModal={this.state.showModal} model={this.state.model} ok={this.handleSave} speciesOption={this.state.species} dimensionOption={this.state.dimensions} skillOption={this.state.skills}/>
-        <Snackbar
-          place="tr"
-          color={this.state.notification.status}
-          message={this.state.notification.message}
-          open={this.state.notificationOpen}
-          closeNotification={() => this.setState({ notificationOpen: false })}
-          close
-        />
         <Modal
           title="确认删除"
           showModal={this.state.showDelete}

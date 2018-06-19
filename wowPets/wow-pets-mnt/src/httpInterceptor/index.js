@@ -14,6 +14,9 @@ function init() {
   // Add a response interceptor
   axios.interceptors.response.use(function(response) {
     if (response.status === 200) {
+      if(response.data.hasOwnProperty('status') && response.data.status === 0){
+        return Promise.reject(response.data.msg)
+      }
       return response.data
     }else {
       return Promise.reject(response)
