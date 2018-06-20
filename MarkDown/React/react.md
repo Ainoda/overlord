@@ -37,7 +37,7 @@ const element = <h1>Hello, world</h1>
 ```
 <div id="root"></div>
 -------------------------------------
-const element = <h1>Hello, world</h1>;
+const element = <h1>Hello, world</h1>
 ReactDOM.render(
   element,
   document.getElementById('root')
@@ -52,7 +52,7 @@ function tick() {
       <h1>Hello, world!</h1>
       <h2>It is {new Date().toLocaleTimeString()}.</h2>
     </div>
-  );
+  )
   ReactDOM.render(element, document.getElementById('root'))
 }
 setInterval(tick, 1000)
@@ -83,14 +83,14 @@ class Welcome extends React.Component {
 #### Rendering a Component
 ```
 function Welcome(props) {
-  return <h1>Hello, {props.name}</h1>;
+  return <h1>Hello, {props.name}</h1>
 }
 //const element = <div />
-const element = <Welcome name="Sara" />;
+const element = <Welcome name="Sara" />
 ReactDOM.render(
   element,
   document.getElementById('root')
-);
+)
 //一个 element 即可以是 DOM 元素，也可以是一个 Component。
 //如果是一个 Component，React 会 JSX 的属性以一个对象的形式传递给 Component，即 props 对象。
 ```
@@ -105,3 +105,117 @@ props 是只读的，不允许修改。(可以理解为单向数据流）。
 
 props 主要用于向其子 Components 传递参数或回调函数。
 ### State and Lifecycle
+State 类 Component 的专有特性，用于记录保存局部状态。
+```
+class Clock extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {date: new Date()}
+  }
+  render() {
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+      </div>
+    )
+  }
+}
+```
+在 constructor 构造函数中定义 state 对象。
+
+**ps**:不同与 **vue**, state 对象中的属性在构造函数定义后仍然可以新增。
+#### Do Not Modify State Directly
+修改 State 的唯一正确方式是使用 `setState` 方法。
+```
+// 错误
+this.state.comment = 'Hello'
+// 正确
+this.setState({comment: 'Hello'})
+```
+#### State Updates May Be Asynchronous
+React 会将多个 `setState` 合并为一个单个更新，用以提高更新。所以 State的更新可能是异步的（Props可能是异步更新）。因此，不能依赖他们的值来计算下一个 State。如果想要避免出现这样的问题，可以调用 `setState` 时传递一个函数，而不是一个对象。
+```
+this.setState((prevState, props) => ({
+  //prevStaet:the previous state
+  //props:the props at the time the update
+  counter: prevState.counter + props.increment
+}))
+```
+#### State Updates are Merged
+调用 `setState` 会合并 State 对象，合并是浅合并，可以只更新部分属性。
+#### The Data Flows Down
+Component 只关心自己的 State，不需要关心其他 Component 的 State。父 Component 的 State 可以作为其子 Component 的 Props，因此他只会影响其子 Component 的表现。
+
+这中由上至下的数据传输，可以理解为“单向数据流”。
+#### [Lifecycle](https://reactjs.org/docs/react-component.html)
+一个 React 的 Component 一共有三种状态，Mounting(装载)、Updating(更新)、Unmounting(卸载)。
+* Mounting
+
+  当组件实例被创建并将其插入 DOM 时，这些方法将被调用：
+  * constructor()
+  * componentWillMount()
+  * render()
+  * componentDidMount()
+* Updating
+
+  改变 Props 或 State 可以触发更新事件。 在重新渲染组件时，这些方法将被调用：
+  * componentWillReceiveProps()
+  * shouldComponentUpdate()
+  * componentWillUpdate()
+  * render()
+  * componentDidUpdate()
+* Unmounting
+
+  当一个组件从 DOM 中删除时，这个方法将被调用：
+  * componentWillUnmount()
+### Handling Events
+React 中 element 处理事件与 DOM 类似。
+* 事件名称采用驼峰命名
+* 传递值为**处理函数**而非**字符串**
+```
+//HTML
+<button onclick="activateLasers()">
+  Activate Lasers
+</button>
+//React
+<button onClick={activateLasers}>
+  Activate Lasers
+</button>
+```
+需要注意的是在一个 Component 中事件的处理
+```
+class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {isToggleOn: true};
+    // 这个绑定是必要的，使`this`在回调中起作用
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    this.setState(prevState => ({
+      isToggleOn: !prevState.isToggleOn
+    }));
+  }
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+        {this.state.isToggleOn ? 'ON' : 'OFF'}
+      </button>
+    );
+  }
+}
+```
+另一种可以不需要绑定 this 的写法。
+```
+  handleClick = () => {
+    console.log('this is:', this);
+  }
+```
+这样的实现的一个问题是：每次都会重新创建一个新的回调函数来执行，如果这个回调被作为 Props 传递给子 Component，这些 Components 可能需要额外的重复渲染。
+
+当需要传递额外的参数时，下面两种方法是等价的。
+```
+<button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>
+<button onClick={this.deleteRow.bind(this, id)}>Delete Row</button>
+```
