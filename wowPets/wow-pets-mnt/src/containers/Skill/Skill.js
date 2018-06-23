@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withStyles,Grid,Button } from 'material-ui'
+import { withStyles,Grid,Button,Input } from 'material-ui'
 import axios from 'axios'
 import {
   Add,
@@ -25,6 +25,7 @@ class Skill extends Component {
       selected:-1,
       showModal:false,
       showDelete:false,
+      searchName:'',
       model:{name:'',code:'',species:'',hitRate:'',cooling:'',useRounds:'',lastRounds:'',description:''}
     }
     // This binding is necessary to make `this` work in the callback
@@ -57,8 +58,12 @@ class Skill extends Component {
     }
   }
   handleSearch() {
+    let params = {}
+    if(this.state.searchName){
+      params.name = this.state.searchName
+    }
     this.loading(true)
-    axios.get('/skill/find').then(result => {
+    axios.get('/skill/find',{params:params}).then(result => {
       this.loading(false)
       this.setState({tableData:result})
     }).catch(error => {
@@ -198,6 +203,7 @@ class Skill extends Component {
                 <Search/>
                 搜索
               </Button>
+              <Input className={classes.searchButton} value={this.state.searchName} onChange={this.handleSearchChange} name='searchName'/>
             </Table>
           }
           />

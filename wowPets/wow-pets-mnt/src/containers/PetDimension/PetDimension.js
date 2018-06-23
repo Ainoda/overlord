@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withStyles,Grid,Button } from 'material-ui'
+import { withStyles,Grid,Button,Input } from 'material-ui'
 import axios from 'axios'
 import {
   Add,
@@ -24,6 +24,7 @@ class PetDimension extends Component {
       selected:-1,
       showModal:false,
       showDelete:false,
+      searchName:'',
       model:{name:'',code:'',hp:'',attack:'',speed:''}
     }
     // This binding is necessary to make `this` work in the callback
@@ -37,14 +38,34 @@ class PetDimension extends Component {
     this.handleSearch = this.handleSearch.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
+    // simple implement
+    this.httpRequest = 0;
   }
   componentDidMount() {
     this.handleSearch()
   }
+  loading(boolean) {
+    if(boolean){
+      this.httpRequest += 1
+      this.props.loading(true)
+    }else {
+      this.httpRequest -= 1
+      if(this.httpRequest === 0){
+        this.props.loading(false)
+      }
+    }
+  }
   handleSearch() {
-    axios.get('/petDimension/find').then(result => {
+    let params = {}
+    if(this.state.searchName){
+      params.name = this.state.searchName
+    }
+    this.loading(true)
+    axios.get('/petDimension/find',{params:params}).then(result => {
+      this.loading(false)
       this.setState({tableData:result})
     }).catch(error => {
+      this.loading(false)
       this.props.notification('danger',error)
     })
   }
@@ -86,22 +107,28 @@ class PetDimension extends Component {
   handleDelete() {
     // 获取当前选中的数据
     let model = this.state.tableData[this.state.selected]
+    this.loading(true)
     axios.delete(`/petDimension/delete/${model._id}`).then(result => {
+      this.loading(false)
       this.handleSearch()
       this.setState({showDelete:false})
       this.props.notification('success',result.msg)
     }).catch(error => {
+      this.loading(false)
       this.props.notification('danger',error)
     })
   }
   handleSave(type, model) {
+    this.loading(true)
     if(type === 'edit'){
       model._id = this.state.model._id
       axios.put('/petDimension/update',model).then(result => {
+        this.loading(false)
         this.handleSearch()
         this.handleModalState(false)
         this.props.notification('success','修改成功')
       }).catch(error => {
+        this.loading(false)
         this.props.notification('danger',error)
       })
     }else {
@@ -114,10 +141,12 @@ class PetDimension extends Component {
       }
       this.setState({model:obj})
       axios.post('/petDimension/insert',obj).then(result => {
+        this.loading(false)
         this.handleSearch()
         this.handleModalState(false)
         this.props.notification('success','新增成功')
       }).catch(error => {
+        this.loading(false)
         this.props.notification('danger',error)
       })
     }
@@ -159,6 +188,7 @@ class PetDimension extends Component {
                 <Search/>
                 搜索
               </Button>
+              <Input className={classes.searchButton} value={this.state.searchName} onChange={this.handleSearchChange} name='searchName'/>
             </Table>
           }
           />

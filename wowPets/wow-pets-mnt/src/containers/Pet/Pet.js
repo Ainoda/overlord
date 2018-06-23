@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withStyles,Grid,Button } from 'material-ui'
+import { withStyles,Grid,Button,Input } from 'material-ui'
 import axios from 'axios'
 import {
   Add,
@@ -27,6 +27,7 @@ class Pet extends Component {
       selected:-1,
       showModal:false,
       showDelete:false,
+      searchName:'',
       model:{name:'',code:'',species:'',dimension:'',firstSk:'',secondSk:'',thirdSk:'',fourthSk:'',fifthSk:'',sixthSk:'',description:''}
     }
     // This binding is necessary to make `this` work in the callback
@@ -40,6 +41,9 @@ class Pet extends Component {
     this.handleSearch = this.handleSearch.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
+    this.handleSearchChange = this.handleSearchChange.bind(this)
+    // simple implement
+    this.httpRequest = 0;
   }
   componentDidMount() {
     this.handleSearch()
@@ -47,12 +51,33 @@ class Pet extends Component {
     this.getDimensions()
     this.getSkills()
   }
+  loading(boolean) {
+    if(boolean){
+      this.httpRequest += 1
+      this.props.loading(true)
+    }else {
+      this.httpRequest -= 1
+      if(this.httpRequest === 0){
+        this.props.loading(false)
+      }
+    }
+  }
   handleSearch() {
-    axios.get('/pet/find').then(result => {
+    let params = {}
+    if(this.state.searchName){
+      params.name = this.state.searchName
+    }
+    this.loading(true)
+    axios.get('/pet/find',{params:params}).then(result => {
+      this.loading(false)
       this.setState({tableData:result})
     }).catch(error => {
+      this.loading(false)
       this.props.notification('danger',error)
     })
+  }
+  handleSearchChange(e) {
+    this.setState({[e.target.name]:e.target.value})
   }
   handleClick(e, index) {
     if(this.state.selected === index){
@@ -92,22 +117,28 @@ class Pet extends Component {
   handleDelete() {
     // 获取当前选中的数据
     let model = this.state.tableData[this.state.selected]
+    this.loading(true)
     axios.delete(`/pet/delete/${model._id}`).then(result => {
+      this.loading(false)
       this.handleSearch()
       this.setState({showDelete:false})
       this.props.notification('success',result.msg)
     }).catch(error => {
+      this.loading(false)
       this.props.notification('danger',error)
     })
   }
   handleSave(type, model) {
+    this.loading(true)
     if(type === 'edit'){
       model._id = this.state.model._id
       axios.put('/pet/update',model).then(result => {
+        this.loading(false)
         this.handleSearch()
         this.handleModalState(false)
         this.props.notification('success','修改成功')
       }).catch(error => {
+        this.loading(false)
         this.props.notification('danger',error)
       })
     }else {
@@ -126,27 +157,44 @@ class Pet extends Component {
       }
       this.setState({model:obj})
       axios.post('/pet/insert',obj).then(result => {
+        this.loading(false)
         this.handleSearch()
         this.handleModalState(false)
         this.props.notification('success','新增成功')
       }).catch(error => {
+        this.loading(false)
         this.props.notification('danger',error)
       })
     }
   }
   getSpecies() {
+    this.loading(true)
     axios.get('/species/find').then(result => {
+      this.loading(false)
       this.setState({'species':result})
+    }).catch(error => {
+      this.loading(false)
+      this.props.notification('danger',error)
     })
   }
   getDimensions() {
+    this.loading(true)
     axios.get('/petDimension/find').then(result => {
+      this.loading(false)
       this.setState({'dimensions':result})
+    }).catch(error => {
+      this.loading(false)
+      this.props.notification('danger',error)
     })
   }
   getSkills() {
+    this.loading(true)
     axios.get('/skill/find').then(result => {
+      this.loading(false)
       this.setState({'skills':result})
+    }).catch(error => {
+      this.loading(false)
+      this.props.notification('danger',error)
     })
   }
   render() {
@@ -186,6 +234,7 @@ class Pet extends Component {
                 <Search/>
                 搜索
               </Button>
+              <Input className={classes.searchButton} value={this.state.searchName} onChange={this.handleSearchChange} name='searchName'/>
             </Table>
           }
           />

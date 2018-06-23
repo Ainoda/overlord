@@ -61,7 +61,7 @@ const petService = {
     let skills = await skillDao.find();
     let petDimensions = await petDimensionDao.find()
     let species = await speciesDao.find()
-    return petDao.find().then(pets => {
+    return petDao.find(where).then(pets => {
       return pets.map(pet => {
         skills.map(skill => {
           if(skill._id.equals(pet.firstSk)){
