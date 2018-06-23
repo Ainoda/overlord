@@ -25,7 +25,7 @@ router.put('/update', (req, res, next) => {
   })
 })
 router.get('/find', (req, res, next) => {
-  weatherService.find().then(result => {
+  weatherService.find(req.query).then(result => {
     res.send(result)
   })
 })

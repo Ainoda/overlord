@@ -25,7 +25,7 @@ router.put('/update', (req, res, next) => {
   })
 })
 router.get('/find', (req, res, next) => {
-  skillService.find().then(result => {
+  skillService.find(req.query).then(result => {
     res.send(result)
   }).catch(error => {
     res.send(error)

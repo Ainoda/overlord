@@ -25,7 +25,7 @@ router.put('/update', (req, res, next) => {
   })
 })
 router.get('/find', (req, res, next) => {
-  petService.find().then(result => {
+  petService.find(req.query).then(result => {
     res.send(result)
   }).catch(error => {
     res.send(error)
