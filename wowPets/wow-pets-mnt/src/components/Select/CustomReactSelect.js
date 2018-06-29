@@ -10,7 +10,7 @@ class CustomReactSelect extends Component {
 
   render() {
     const { classes, ...other } = this.props;
-  
+
     return (
       <Select
         optionComponent={Option}
@@ -19,28 +19,27 @@ class CustomReactSelect extends Component {
           return arrowProps.isOpen ? <ArrowDropUp /> : <ArrowDropDown />;
         }}
         clearRenderer={() => <Clear />}
-        valueComponent={valueProps => {
-          const { value, children, onRemove } = valueProps;
-          const onDelete = event => {
-            event.preventDefault();
-            event.stopPropagation();
-            onRemove(value);
-          };
-          if (onRemove) {
-            return (
-              <Chip
-                tabIndex={-1}
-                label={children}
-                className={classes.chip}
-                deleteIcon={<Cancel onTouchEnd={onDelete} />}
-                onDelete={onDelete}
-              />
-            );
-          }
-          return <div className="Select-value">{children}</div>;
-        }}
+        // valueComponent={valueProps => {
+        //   const { value, children, onRemove } = valueProps;
+        //   const onDelete = event => {
+        //     event.preventDefault();
+        //     event.stopPropagation();
+        //     onRemove(value);
+        //   };
+        //   if (onRemove) {
+        //     return (
+        //       <Chip
+        //         tabIndex={-1}
+        //         label={children}
+        //         className={classes.chip}
+        //         deleteIcon={<Cancel onTouchEnd={onDelete} />}
+        //         onDelete={onDelete}
+        //       />
+        //     );
+        //   }
+        //   return <div className="Select-value">{children}</div>;
+        // }}
         {...other}
-        inputProps={{className:{height:'36px'}}}
       />
     );
   }

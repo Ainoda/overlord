@@ -41,7 +41,7 @@ class PetContent extends Component {
               <Input labelText="编码" inputProps={{onChange:this.handleValueChange,value:this.state.code,name:'code'}} formControlProps={{fullWidth: true}}/>
             </ItemGrid>
             <ItemGrid xs={6} sm={6} md={6}>
-              <InputSelect labelText="属性" inputProps={{onChange:v=>this.handleSelectValueChange('dimension',v),value:this.state.dimension,name:'dimension'}} selectProps={{options:dimensionOption,labelKey:'name',valueKey:'_id',simpleValue:true,multi:true}} formControlProps={{fullWidth: true}}/>
+              <InputSelect labelText="属性" inputProps={{onChange:v=>this.handleSelectValueChange('dimension',v),value:this.state.dimension,name:'dimension'}} selectProps={{options:dimensionOption,labelKey:'name',valueKey:'_id',simpleValue:true,multi:true,closeOnSelect:false}} formControlProps={{fullWidth: true}}/>
             </ItemGrid>
             <ItemGrid xs={6} sm={6} md={6}>
               <Select labelText="类型" multiStyle={true} inputProps={{onChange:this.handleValueChange,value:this.state.species,name:'species'}} formControlProps={{fullWidth: true}} options={speciesOption}/>

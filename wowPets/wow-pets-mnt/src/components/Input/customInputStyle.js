@@ -65,11 +65,7 @@ const customInputStyle = {
     position: 'relative'
   },
   multiInput: {
-    height:'36px',
-    lineHeight:'36px'
-  },
-  multiLabel:{
-    lineHeight:'36px'
+    marginTop:'5px'
   }
 }
 

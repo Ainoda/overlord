@@ -38,6 +38,7 @@ class PetDimension extends Component {
     this.handleSearch = this.handleSearch.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
+    this.handleSearchChange = this.handleSearchChange.bind(this)
     // simple implement
     this.httpRequest = 0;
   }
@@ -68,6 +69,9 @@ class PetDimension extends Component {
       this.loading(false)
       this.props.notification('danger',error)
     })
+  }
+  handleSearchChange(e) {
+    this.setState({[e.target.name]:e.target.value})
   }
   handleClick(e, index) {
     if(this.state.selected === index){

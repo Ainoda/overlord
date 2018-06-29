@@ -17,7 +17,7 @@ const customReactSelectStyle = theme => ({
       display: 'flex',
       alignItems: 'center',
       border: 0,
-      height: 'inherit',
+      height: '24px',
       background: 'transparent',
       '&:hover': {
         boxShadow: 'none',

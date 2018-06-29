@@ -41,7 +41,7 @@ class CustomInputSelect extends Component {
       >
         {labelText !== undefined ? (
           <InputLabel
-            className={`${classes.labelRoot + labelClasses} ${selectProps.multi ? classes.multiLabel : ''}`}
+            className={`${classes.labelRoot + labelClasses}`}
             htmlFor={id}
             {...labelProps}
           >
@@ -53,8 +53,7 @@ class CustomInputSelect extends Component {
             root: marginTop,
             disabled: classes.disabled,
             underline: classes.underline,
-            inkbar: inkbarClasses,
-            input: selectProps.multi ? classes.multiInput : ''
+            inkbar: inkbarClasses
           }}
           placeholder=""
           inputComponent={Select}
