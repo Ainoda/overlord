@@ -1,5 +1,5 @@
 # Browserify
-Browserify 可以让你使用类似于 node 的 require() 的方式来组织浏览器端的 Javascript 代码，通过预编译让前端 Javascript 可以直接使用 Node NPM 安装的一些库。（ES6自带模块化方案）  
+Browserify 可以让你使用类似于 node 的 require() 的方式来组织浏览器端的 ECMAScript 代码，通过预编译让前端 ECMAScript 可以直接使用 Node NPM 安装的一些库。（ES6自带模块化方案）  
 
 ## 安装
 ```
@@ -76,7 +76,7 @@ shell> npm install --save-dev gulp-browserify
 // Basic usage
 gulp.task('browserify', function() {
   // Single entry point to browserify
-  gulp.src('public/javascripts/index.js')
+  gulp.src('public/ECMAScripts/index.js')
     .pipe(browserify())
     .pipe(gulp.dest('public/dist'))
 });
@@ -89,13 +89,13 @@ gulp.task('browserify', function() {
 3. 添加 Expires 头(或者 Cache-control )		server
 4. Gzip 组件										server
 5. 将 CSS 样式放在页面的上方					css
-6. 将脚本移动到底部（包括内联的）				javascript
+6. 将脚本移动到底部（包括内联的）				ECMAScript
 7. 避免使用 CSS 中的 Expressions				css
-8. 将 JavaScript 和 CSS 独立成外部文件		javascript css
+8. 将 ECMAScript 和 CSS 独立成外部文件		ECMAScript css
 9. 减少 DNS 查询									content
-10. 压缩 JavaScript 和 CSS (包括内联的)		javascript css
+10. 压缩 ECMAScript 和 CSS (包括内联的)		ECMAScript css
 11. 避免重定向									server
-12. 移除重复的脚本								javascript
+12. 移除重复的脚本								ECMAScript
 13. 配置实体标签（ETags）						css
 14. 使 AJAX 缓存
 

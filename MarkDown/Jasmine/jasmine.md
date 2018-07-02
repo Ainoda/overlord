@@ -1,6 +1,6 @@
 # Jasmine
-[Jasmine](https://jasmine.github.io/index.html)是一个用于测试JavaScript代码的行为驱动开发框架。  
-它不依赖于任何其他的JavaScript框架。  
+[Jasmine](https://jasmine.github.io/index.html)是一个用于测试ECMAScript代码的行为驱动开发框架。  
+它不依赖于任何其他的ECMAScript框架。  
 它不需要DOM。  
 它有一个干净，明显的语法，以便您可以轻松编写测试。
 

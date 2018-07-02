@@ -1,5 +1,5 @@
 # React
-React 起源于 Facebook 的内部项目，因为该公司对市场上所有 JavaScript MVC 框架，都不满意，就决定自己写一套，用来架设Instagram 的网站。做出来以后，发现这套东西很好用，就在2013年5月开源了。
+React 起源于 Facebook 的内部项目，因为该公司对市场上所有 ECMAScript MVC 框架，都不满意，就决定自己写一套，用来架设Instagram 的网站。做出来以后，发现这套东西很好用，就在2013年5月开源了。
 ## 使用 React 场景
 * 将 React 添加到新的 APP 中
   * Create React App
@@ -63,7 +63,7 @@ React DOM 会将元素及其子元素与之前版本逐一对比, 并只对有�
 
 即使每隔 1 秒都重建了整个元素, 但实际上 React DOM 只更新了修改过的文本节点。
 ### Components and Props
-Components 就像 JavaScript 的函数或者类。组件可以接收任意输入(称为”props”)，并返回 React 元素，用以描述屏幕显示内容。
+Components 就像 ECMAScript 的函数或者类。组件可以接收任意输入(称为”props”)，并返回 React 元素，用以描述屏幕显示内容。
 #### Functional and Class Components
 ```
 function Welcome(props) {
@@ -219,3 +219,8 @@ class Toggle extends React.Component {
 <button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>
 <button onClick={this.deleteRow.bind(this, id)}>Delete Row</button>
 ```
+### Conditional Rendering
+React 中可以像 ECMAScript 一样使用条件判断语句，根据状态渲染 element。
+如果想要不渲染 element 只需要返回 null 即可。
+### Lists and Keys
+React 列表通过循环数组来返回需要渲染的 element。

@@ -7,16 +7,16 @@
 >单元测试是最微小规模的测试;以测试某个功能或代码块。典型地由程序员而非测试员来做，因为它需要知道内部程序设计和编码的细节知识。这个工作不容易做好，除非应用系统有一个设计很好的体系结构; 还可能需要开发测试驱动器模块或测试套具。
 
 * [karma](http://karma-runner.github.io/1.0/index.html):（测试管理工具）
->Karma是一个基于Node.js的JavaScript测试执行过程管理工具（Test Runner）。该工具可用于测试所有主流Web浏览器，也可集成到CI（Continuous integration）工具，也可和其他代码编辑器一起使用。这个测试工具的一个强大特性就是，它可以监控(Watch)文件的变化，然后自行执行，通过console.log显示测试结果。
+>Karma是一个基于Node.js的ECMAScript测试执行过程管理工具（Test Runner）。该工具可用于测试所有主流Web浏览器，也可集成到CI（Continuous integration）工具，也可和其他代码编辑器一起使用。这个测试工具的一个强大特性就是，它可以监控(Watch)文件的变化，然后自行执行，通过console.log显示测试结果。
 
 * [jasmine](https://jasmine.github.io/):（测试库）
->Jasmine是一个用于测试JavaScript代码的行为驱动开发框架。 它不依赖于任何其他JavaScript框架。 它不需要DOM。
+>Jasmine是一个用于测试ECMAScript代码的行为驱动开发框架。 它不依赖于任何其他ECMAScript框架。 它不需要DOM。
 
 * [mocha](http://mochajs.org/):（测试库）
->mocha是一个基于nodejs和浏览器集合的各种特性的javascript测试库，并且让异步测试变得简单，支持TDD(测试驱动开发)和BDD(行为驱动开发)，在测试中捕获到异常时，会给出灵活准确的报告。
+>mocha是一个基于nodejs和浏览器集合的各种特性的ECMAScript测试库，并且让异步测试变得简单，支持TDD(测试驱动开发)和BDD(行为驱动开发)，在测试中捕获到异常时，会给出灵活准确的报告。
 
 * [chai](http://chaijs.com/):(断言库）
->chai是一个基于nodejs的断言库，并且完美支持各种主流的JavaScript测试框架。
+>chai是一个基于nodejs的断言库，并且完美支持各种主流的ECMAScript测试框架。
 
 * [protractor](http://www.protractortest.org/):
 >angular的端到端测试工具。
