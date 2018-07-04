@@ -222,5 +222,72 @@ class Toggle extends React.Component {
 ### Conditional Rendering
 React 中可以像 ECMAScript 一样使用条件判断语句，根据状态渲染 element。
 如果想要不渲染 element 只需要返回 null 即可。
+```
+function Greeting(props) {
+  const isLoggedIn = props.isLoggedIn;
+  if (isLoggedIn) {
+    return <UserGreeting />;
+  }
+  return <GuestGreeting />;
+}
+class LoginControl extends React.Component {
+  constructor(props) {
+    ...
+    this.state = {isLoggedIn: false};
+  }
+  ...
+  render() {
+    ...
+    const isLoggedIn = this.state.isLoggedIn;
+    return (
+      <div>
+        <Greeting isLoggedIn={isLoggedIn} />
+        {isLoggedIn ? (
+          <LogoutButton onClick={this.handleLogoutClick} />
+        ) : (
+          <LoginButton onClick={this.handleLoginClick} />
+        )} 
+      </div>
+    );
+  }
+}
+///////////////////////////////////////////
+
+```
 ### Lists and Keys
 React 列表通过循环数组来返回需要渲染的 element。
+```
+function NumberList(props) {
+  const numbers = props.numbers;
+  return (
+    <ul>
+      {numbers.map((number) =>
+        <ListItem key={number.toString()} value={number} />
+      )}
+    </ul>
+  );
+}
+```
+### Forms
+在 HTML 中，表单的元素 input select textarea 等通常保持自己的状态，并根据用户的输入来更新状态。而在 React 中可变状态通常是由 state 属性来管理，并由 setState 方法来更新状态。React 使 state 成为 "单一数据源" 原则。
+```
+<input type="text" value={this.state.value} onChange={this.handleChange} />
+//受控组件 通过监听事件来更新 元素状态（值）
+```
+### Lifting State Up
+基于 "单一数据源原则"，当一个组件中存在子组件并且子组件中存在共用的状态时，需要将 state 提升到父组件中，数据流遵守"由上至下"的流向，不要试图去同步子组件的状态。
+### Composition vs Inheritance
+在 React 中不建议使用继承来创建组件，使用组合来创建组件，子组件的初始值使用 props 传递。
+### Thinking in React
+创建一个 React 应用程度，分为 5 步。
+
+#### Step 1: Break The UI Into A Component Hierarchy
+将 UI 拆解为单个的 Component，拆解过程中尽量不要重复创建相同的 Component。
+#### Step 2: Build A Static Version in React
+使用 Component 创建一个静态的页面，数据流向保证 "单一数据源" 原则。
+#### Step 3: Identify The Minimal (but complete) Representation Of UI State
+考虑 UI 交互，定义最小并且完整的 state 集合。
+#### Step 4: Identify Where Your State Should Live
+保证单向数据流，确认 state 定义的位置。
+#### Step 5: Add Inverse Data Flow
+添加反向数据流，保证 Form 表单的数据更新
