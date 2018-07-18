@@ -6,7 +6,34 @@ const customReactSelectStyle = theme => ({
     height: 250,
   },
   chip: {
-    margin: theme.spacing.unit / 4,
+    color:'#232323',
+    textAlign: 'center',
+    marginRight: theme.spacing.unit,
+    border: '1px solid #d2d2d2',
+    width: '46px',
+    height: '21px',
+    lineHeight: '21px',
+    borderRadius: '5px',
+  },
+  label:{
+    width:'28px',
+    padding: '0 1px',
+    display:'inline-block',
+  },
+  icon:{
+    borderLeft: '1px solid #d2d2d2',
+    display:'inline-block',
+    width: '15px',
+    cursor: 'pointer',
+    textAlign: 'center',
+    '&:hover':{
+      background:'#dfdfdf',
+    },
+  },
+  cancel: {
+    height: '21px',
+    lineHeight: '21px',
+    width: '21px',
   },
   // We had to use a lot of global selectors in order to style react-select.
   // We are waiting on https://github.com/JedWatson/react-select/issues/1679
