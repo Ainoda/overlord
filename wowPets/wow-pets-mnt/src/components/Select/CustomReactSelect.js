@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Select from 'react-select'
-import { withStyles, Typography, Chip } from 'material-ui'
-import { ArrowDropUp, ArrowDropDown, Clear, Cancel } from 'material-ui-icons'
+import { withStyles, Typography } from 'material-ui'
+import { ArrowDropUp, ArrowDropDown, Clear } from 'material-ui-icons'
 
 import { CustomOption as Option } from '../../components'
 import customReactSelectStyle from './customReactSelectStyle'
