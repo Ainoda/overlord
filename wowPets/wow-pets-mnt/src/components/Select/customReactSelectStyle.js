@@ -10,14 +10,12 @@ const customReactSelectStyle = theme => ({
     textAlign: 'center',
     marginRight: theme.spacing.unit,
     border: '1px solid #d2d2d2',
-    width: '46px',
     height: '21px',
     lineHeight: '21px',
     borderRadius: '5px',
   },
   label:{
-    width:'28px',
-    padding: '0 1px',
+    padding: '0 4px',
     display:'inline-block',
   },
   icon:{
