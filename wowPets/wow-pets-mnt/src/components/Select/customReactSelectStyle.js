@@ -8,7 +8,7 @@ const customReactSelectStyle = theme => ({
   chip: {
     color:'#232323',
     textAlign: 'center',
-    marginRight: theme.spacing.unit,
+    marginRight: '2px',
     border: '1px solid #d2d2d2',
     height: '21px',
     lineHeight: '21px',
@@ -27,11 +27,6 @@ const customReactSelectStyle = theme => ({
     '&:hover':{
       background:'#dfdfdf',
     },
-  },
-  cancel: {
-    height: '21px',
-    lineHeight: '21px',
-    width: '21px',
   },
   // We had to use a lot of global selectors in order to style react-select.
   // We are waiting on https://github.com/JedWatson/react-select/issues/1679
